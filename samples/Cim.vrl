@@ -1,0 +1,11 @@
+Create Cim(irSzam, Utca, hSz)
+	
+	Funct createString()
+	    irSzam + Utca + hSz
+		
+	Funct feltDecrIncr()
+		If hSz > 20
+			hSz = hSz + 1
+		ElIf hSz < 20
+			hSz = hSz - 1
+
