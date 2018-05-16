@@ -1,17 +1,484 @@
 \Chapter{Célnyelvre fordítás}
 
-Ezt már csak a közbülső reprezentáció és az adott nyelvek viszonyában kell megnézni.
+% Ezt már csak a közbülső reprezentáció és az adott nyelvek viszonyában kell megnézni.
 
-Itt kellhet majd pretty printer féle. (Elegáns úgy megoldani, hogy opcióként választható legyen.)
+% Itt kellhet majd pretty printer féle. (Elegáns úgy megoldani, hogy opcióként választható legyen.)
 
-% TODO: Konkrét nyelvek implementációját bemutatni akár külön-külön szakaszokban.
+Az alábbi részben a tervezett célnyelvek szintaxisának, elemeinek áttekintése történik.
+
+% TODO: A hasonlóságokat és a különbségeket kell hangsúlyozni. Az azonos jellegű részeket nem kell benne ismételni.
+
+% TODO: A típusokat érdemes egy táblázatba összeszedni, hogy látszódjon, hogy melyek és milyen formában fordulnak elő bennük gyakrabban.
 
 \section{C}
 
+A C szintaxisa az alábbiak szerint vizsgálható:
+A C forráskódban minden utasítássor végét ;-vel kell jelölni, alapértelmezetten szekvenciálisan végrehajtódó kód, melyben a végrehajtás sorrendjének módosítására a szelekció, iteráció használható.
+
+C nyelven az értékadás a változó típusmegjelölésével kezdődik majd a változó neve kell, hogy megadásra kerüljön, ezután egyenlőségjellel következik a változó értéke. A C nyelvben nincs láthatósági módosító, tehát ilyet nem kell megadni.
+
+\begin{cpp}
+int valtozo = 12;
+\end{cpp}
+
+A C nyelvben a leggyakrabban használt típusok az alábbiak:
+\begin{itemize}
+\item \texttt{int}: előjeles egész szám típus
+\item \texttt{char}: karakter típus
+\item \texttt{float}: lebegőpontos 
+\item \texttt{double}: duplapontosságú lebegőpontos
+\item \texttt{void}: a típus nélküli típust jelöli ez
+\item \texttt{array}: tömb típus, általában \texttt{[]}-ban adható meg, például \texttt{char szoveg[]} változóban tudunk szöveget tárolni
+\item pointer változó: egy adott változó címére mutat, melyen keresztül a változó értéke módosítható, címszerinti átadás elvégezhető, például
+\begin{cpp}
+int var = 10;
+int *alma = &var;
+\end{cpp}
+\item structure: struktúra típusú változó
+\end{itemize}
+
+A nyelvben összeszervezhetjük a többször lefuttatandó kódrészeket különféle függvényekbe, melyek esetében a visszatérési értéket kell megadni, majd a függvény nevét, végül zárójelben a paraméterlistát, ezután a függvénytörzsben ezen paramterek használhatók, módosíthatók, illetve új változók is létrehozhatók és használhatók. C nyelvben a függvényekből másik függvényt is meghívhatunk. A függvények megírásakor ügyelni kell rá, hogy a C a programkód sorrendjében fogja lefordítani és lefuttatni a programot, azaz, ha a kiemelt indító függvényben, a main függvényben olyan függvényhívást talál amit nem ismer, akkor fordításkor hibaüzenetet ad. Tehát a függvényeket vagy meg kell írni a main függvény előtt, vagy legalábbis egy függvény prototípust kell megadni. A függvény meghívásakor a paramétereket át lehet adni érték és cím szerint is, előbbi esetben a függvény lefutása után a paraméterül kapott változó értéke nem változik meg még akkor sem, ha azt a függvényen belül módosítottuk, utóbbi esetben viszont egy a változó címére mutató pointer kerül átadásra, melyen keresztül ténylegesen módosításra kerül a változó értéke.
+
+Például egy függvény lehet az alábbi:
+\begin{cpp}
+int osszeAd(int a, int b) {
+	return a+b;
+}
+\end{cpp}
+
+Függvény prototípusnál csak a következőt kell megadni:
+\begin{cpp}
+int osszeAd(int, int);
+\end{cpp}
+
+A C programnak van egy kiemelt függvénye, ez a main függvény, általában int visszatérési értékkel kell megadni, a legegyszerűbb programokban paramétere sincs, de megadható neki, hogy milyen paramétert várjon és azt a program indításakor szintén meg kell adni.
+Minden C program egy main függvényt tartalmazhat és ez lesz a program belépési pontja, innen fog indulni a program.
+
+A C nyelv ismeri a szelekció és iteráció vezérlési szerkezeteit. A szelekciót az if kulcsszóval, majd egy feltételvizsgálattal kell bevezetni, mely esetben az if utáni blokkban található kód vagy lefut, vagy nem annak függvényében, hogy a feltételvizsgálat milyen eredményt hoz. Megadható több ág is, az else if, kulcsszó segítségével, illetve ha egyik ágra sem tud belépni a program a feltételvizsgálatok miatt, megadható egy alapértelmezett else ág is. A szelekció másik formája a switch, mely szintén megtalálható a C nyelvben. Itt a switch után kell egy kifejezést megadni, melyet megpróbál ráilleszteni az egyes megadott elemekre, és az a kódrész fog lefutni ahol az illesztés sikeres volt. Ha sehol nem volt az, akkor megadható egy default kulcsszóval egy olyan kódrész mely mindenképpen lefut ha más kódrész nem tudott lefutni.
+\begin{cpp}
+int a = 50;
+if (a < 30) {
+}
+else if (a > 30 && a <50) {
+}
+else {
+}
+\end{cpp}
+
+A fenti kódrészben sem az \texttt{if}, sem az \texttt{else if} ágra nem tud belépni a program, ezért az else ágban definiált utasítások fognak lefutni. If szelekció esetében több else if ág is megadható.
+\begin{cpp}
+int a = 40;
+switch(a) {
+	case 10:
+		break;
+	case 20:
+		break;
+	case 40:
+		break;
+	default:
+}
+\end{cpp}
+
+A fenti kódban a \texttt{switch} elágazásra láthatunk egy példát, itt az első két ágra nem tud belépni a kód, de a harmadikra igen. Ilyen esetben a default ág felesleges is lehet, de általában előre nem tudjuk milyen kifejezést fogunk kapni. Az egyes blokkokban található break utasítás arra szolgál, hogy ha az adott ágban található kód lefutott, akkor lépjen ki a szelekcióból, más ágra már ne fusson rá.
+
+A C nyelvben egy adott programkód többszöri egymás utáni ismétlése is megoldható az iteráció segítségével, az adott programkódot cilkusba szervezve.
+
+A C nyelvben háromféle ilyen ciklusszervezési módszerrel találkozhatunk a while, a for és a do while. Előbbi kettő elöltesztelő, utóbbi hátultesztelő. Ez annyit jelent, az első két ciklus esetében azonnal megvizsgálja a program, hogy az adott feltételt elérte-e már a ciklus és ha igen akkor egyszer sem fog lefutni, a hátultesztelő ezzel szemben egyszer biztos lefut és csak utána tesztel.
+
+A while ciklus:
+\begin{cpp}
+int a = 10;
+while (a > 0) {
+	a--;
+}
+\end{cpp}
+
+A for ciklus:
+\begin{cpp}
+for (int i = 10; i > 0; i--) {
+}
+\end{cpp}
+
+és a do while ciklus:
+\begin{cpp}
+int a = 10;
+do {
+	a--;
+} while(a > 0);
+\end{cpp}
+
+A C nyelv nem objektum orientált nyelv, azaz nincs kifejezetten osztály deklarációra lehetőség. A C nyelvben struktúrát lehet deklarálni, melynek lehetnek adattagjai, azaz benne definiált változók, de ezt nem definiálható benne függvény, csak függvénypointer adható meg benne.
+\begin{cpp}
+struct StrukturaNev {
+	int a;
+	char b[];
+} str;
+str.a = 10;
+\end{cpp}
+
 \section{Java}
+
+A Java nyelv egyike azon nyelveknek melyre nagy hatása volt a C nyelvnek, azonban a Java nyelv már a kezdetektől objektum orientált nyelvként került megalkotásra.
+
+A Java kódban is az utasítássor végét \texttt{;}-vel kell jelölni, valamint szintén szekvenciálisan végrehajtódó kód, melyben a végrehajtás sorrendjének módosítására a szelekció, iteráció használható.
+
+Java nyelven is típusmegjelöléssel kezdődik a változó deklaráció majd a változó neve jön és végül a változó értéke következik.
+
+A Java nyelvben már megjelenik a láthatósági módosít, tehát ezt is meg kell, illetve lehet adni. A Java nyelv 4 féle láthatósági módosítót különböztet meg, félnyilvános, protected, private és public. Mivel a Java nyelv osztályokra épül, alapértelmezetten is osztályokban írjuk a kódot. Ezeket az osztályokat csomagokba szervezzük, így a láthatósági módosítók az alábbiak alapján működnek:
+\begin{itemize}
+\item \texttt{public}: az adott változót bárhonnan el lehet érni és módosítani
+\item \texttt{private}: csak az adott osztályon belül lehet elérni a változót és módosítani is onnan lehet
+\item \texttt{protected}: az adott változókat a csomagon belül, illetve a leszármazott osztályokból lehet elérni
+\item \textit{félnyilvános}: ilyenkor nem kell megadni semmilyen módosítót a változóhoz, a változó pedig a csomagon belül érhető el, tehát ez az alapértelmezett beállítás.
+\end{itemize}
+
+Emellett olyan módosítók is léteznek a nyelvben mely nem a láthatóságot módosítják, hanem más funkciókat lehet velük beállítani:
+\begin{itemize}
+\item \texttt{static}: az adott változókat osztályszintű változó lesz
+\item \texttt{final}: az adott változók és metódusok, valamint osztályok melyek final metódussal vannak megjelölve, ezek értéke nem módosítható lesz
+\item \texttt{abstract}: metódusok és osztályok kaphatják ezt, ezek absztrakt
+\item \texttt{synchronized}: a szálkezeléskor alkalmazott módosítók
+például
+\begin{java}
+private int valtozo = 12;
+public static final String STATIC_VAR = "STRING";
+\end{java}
+\end{itemize}
+
+A Java nyelvben a leggyakrabban használt típusok az alábbiak:
+\begin{itemize}
+\item \texttt{int}: 32 bites szám típusú változó
+\item \texttt{char}: karakter típus
+\item \texttt{float}: lebegőpontos 
+\item \texttt{double}: duplapontosságú lebegőpontos
+\item \texttt{void}: a típus nélküli típust jelöli ez
+\item \texttt{String}: szöveg típusú változó
+\item \textit{array}: tömb típus, általában []-ban adható meg, például int[] numbers
+\end{itemize}
+
+A Java nyelvben is összeszervezhetjük a többször lefuttatandó kódrészeket különféle függvényekbe, melyek esetében a visszatérési értéket kell megadni, majd a függvény nevét, végül zárójelben a paraméterlistát, ezután a függvénytörzsben ezen paramterek használhatók, módosíthatók, illetve új változók is létrehozhatók és használhatók.
+
+A C nyelvhez hasonlóan itt is a függvényekből másik függvényt is meghívhatunk. Ellentétben a feljebb tárgyalt nyelvvel, mivel a kód osztályokba van szervezve és ezen osztályok kerülnek példányosításra, ezért a függvényeket tetszőleges sorrendben megírhatók, ám az osztályban először a változókat kell megadni konvenció szerint.
+
+C nyelvhez képest, Java nyelvben nincs pointer, így nincs cím szerinti átadás, érték szerint történnek ezek.
+
+Egy függvény megadása Java nyelven is lehet az alábbi:
+\begin{java}
+int osszeAd(int a, int b) {
+	return a + b;
+}
+\end{java}
+
+A Java nyelvben is van egy kiemelt függvénye, a program belépési pontja. Ezt a függvényt is külön osztályban kell megírni, és ezt is main függvénynek adjuk meg.
+\begin{java}
+public static void main(String[] args) {
+}
+\end{java}
+
+A függvény mindenképpen osztály szintű metódus, tehát static módosítóval kell megadni és public a láthatósági köre. Emellett visszatérési értéke nincs, tehát void, valamint megadható paraméter indításkor, ezek az args nevű String tömbből lehet kiolvasni.
+A Java nyelvben a C nyelvhez hasonló módon meg lehet adni szelekciót és iterációt, melyeket itt is az if, switch, illetve az iterációkat while, for és do while kulcsszavakkal lehet megadni, melyek után a programkód lefutása a C nyelven ismertekkel azonos. Az alább látható példa Java nyelvű szelekcióra.
+
+\begin{java}
+private int a = 50;
+if (a < 30) {
+}
+else if (a > 30 && a <50) {
+}
+else {
+}
+a = 40;
+switch(a) {
+	case 10:
+		break;
+	case 20:
+		break;
+	case 40:
+		break;
+	default:
+}
+\end{java}
+
+Itt is megtalálható szintén a break, mely utasítás arra szolgál, hogy ha az adott ágban található kód lefutott, akkor lépjen ki a szelekcióból.
+Java nyelven is megtalálhatók a ciklusok melyek segítségével itt is adott kódrészek többször lefuttathatók. A ciklusok itt is a C nyelvhez hasonló működéssel rendelkeznek.
+\begin{java}
+A while ciklus:
+public int a = 10;
+while (a > 0) {
+	a--;
+}
+\end{java}
+A for ciklus:
+\begin{java}
+private int i;
+for (i = 10; i > 0; i--) {
+}
+\end{java}
+és a do while ciklus:
+\begin{java}
+int a = 10;
+do {
+	a--;
+} while(a > 0);
+\end{java}
+
+A Java nyelv objektum orientáltságának köszönhetően osztályokba szervezzük a kódot. Az osztályokat a class kulcsszóval kell bevezetni. Emellett az osztályoknál is meg lehet adni módosítókat. Osztályokat lehet interfészként is definiálni, ilyen osztályokban metódus prototípusok vannak definiálva. Ezeket az interfészeket be lehet implementálni az osztályokba.
+
+Ezen felül az osztályok egymásból leszármaztathatók, a leszármazott osztályok öröklik a szülők adattagjait és metódusait. A Java nyelv az egyszeres öröklődést támogatja.
+\begin{java}
+public class ElsoOsztaly {
+	int elso; int masodik; int harmadik = 0;
+	ElsoOsztaly(int elsoParam, int masodikParam) {
+		this.elso = elsoParam;
+		this.masodik = masodik Param;
+	}
+	int AddAll() {
+		return elso + masodik + harmadik;
+	}
+}
+public class Masodik extends ElsoOsztaly {
+	Masodik(int egy, int ketto) {
+		super(egy, ketto);
+	}
+}
+
+Masodik second = new Masodik(1, 3);
+System.out.println(second.AddAll());
+\end{java}
+
+A fenti kódban az első osztályban lett megírva az összeadó függvény, majd az a második osztályon keresztül lett meghívva, és a második osztály lett leszármaztatva az első osztályból, erre az extends utasítást kell használni.
+
+Emellett a fenti példában látható az osztály létrehozásának egyik fontos eleme, a konstruktor. A konstruktor egy kitüntetett függvény az osztályban, mely az osztály inicializálásakor mindig automatikusan lefut. Ebben lehet az elemeket inicializálni.
+
+A Java nyelv megvalósítása alapján a konstruktor minden esetben lefut kivéve a private módosítóval ellátott konstruktor. Ha nincs megírva konstruktor akkor egy default konstruktor fut le. A konstruktor első utasítása minden esetben az ősosztály konstruktorának meghívása, akkor is ha nincs az kijelezve. Az ősosztály konstruktorának meghívása a super() metódussal történik. Ha nincs konkrétan megadott ősosztály, akkor az Object osztály konstruktora hívódik meg, mely minden osztály ősosztálya.
 
 \section{PHP}
 
+A PHP nyelv egy szerveroldali scriptnyelv, mely az egyik legelterjedtebb nyelv, legfrissebb változatai pedig már objektum orientáltan is lehet programozni.
+A PHP kód minden esetben <?php és ?> tagek között kell megírni, .php fájlban kell a szerveroldalra feltölteni. A kódot html kódba lehet ágyazni, illetve fordítva is megtehető, hogy html kódba kerül beágyazásraa PHP kód.
+
+PHP kódban szintén ;-vel kell jelölni az utasítások lezárását. Itt it megtalálható a szelekció és iteráció. A PHP gyengén típusos nyelv, azaz a változó deklarációkor nem kell megadni a változó típusát, csak a nevét és az értékét.
+
+Láthatóság szerint public, private és protected módosítókat ismer a nyelv. A nyelv nem csomagokra épül, így a private adattagok csak az adott osztályban elérhetőek, a public mindenhol, a protected pedig az adott osztályban, valamint a leszármazottban és a szülőben érhető el.
+
+A változókat a \$ szimbólummal vezetjük be, ezután következik a változó neve, valamint az értéke:
+\begin{java}
+$valtozo = 12;
+\end{java}
+% $
+
+Bár nem kell a típusokat kiírni a változókhoz, a háttérben természetesen van típusa az elemeknek. Ezek a típusok az alábbiak lehetnek:
+\begin{itemize}
+\item \texttt{Integer}: egész szám típusú változó
+\item \texttt{Double}: decimális számok
+\item \texttt{Boolean}: kétértékű típus, lehet igaz vagy hamis
+\item \texttt{String}: szöveg típus
+\item \texttt{NULL}: egyedi típus, aminek csak egy értéke van a NULL
+\item \texttt{String}: szöveg típusú változó
+\item \texttt{Array}: tömb típus
+\item \texttt{Objects}: osztályok példányának típusa
+\end{itemize}
+
+A PHP nyelvben is megtalálható a függvénydefiniálás lehetősége, mely a function kulcsszóval kerül bevezetésre, majd a függvény neve, végül zárójelben a paraméterlista kerül megadásra. Ezután a függvénytörzsben ezen paramterek használhatók, módosíthatók, illetve új változók is létrehozhatók és használhatók.
+
+Az előző nyelvekhez hasonlóan itt is a függvényekből másik függvényt is meghívhatunk.
+Általánosságban a PHP érték szerinti átadást végez, tehát az átadott paraméterek eredeti értékei nem változnak meg a függvényeken belüli módosítások hatására. Emellett a PHPban ismert a cím szerinti átadás is, mely esetben az átadott paraméter eredeti értéke is megváltozik a módosítás hatására. A cím szerinti átadást a C nyelvhez hasonlóan \& jellel kell jelezni.
+
+Egy függvény megadása PHP nyelven az alábbi lehet:
+\begin{java}
+<?php
+function novel($a) {
+$a += 8;
+}
+function cimNovel(&$a) {
+	$a += 8;
+}
+$num = 10;
+novel($num);
+echo $num;
+cimNovel($num);
+echo $num;
+?>
+\end{java}
+% $
+
+A fenti kódban az első függvény érték szerinti átadás után végez műveletet, a második függvény pedig cím szerint. Így a kód lefutása során az első kiírás 10 lesz, míg a második 18.
+
+A PHP kódban nincs kiemelt függvény, a belépési pont az első kódsor, és utána szekvenciálisan fut le a kód.
+
+Ezt a lefutást lehet befolyásolni a Java és C nyelvhez hasonló módon szelekcióval és iterációval, melyeket itt is az if, switch, illetve az iterációkat while, for és do while kulcsszavakkal lehet megadni, melyek után a programkód lefutása a C és Java nyelven ismertekkel azonos. Az alább látható példa Java nyelvű szelekcióra.
+\begin{java}
+$a = 50;
+if ($a < 30) {
+}
+else if ($a > 30 && $a <50) {
+}
+else {
+}
+$a = 40;
+switch($a) {
+	case 10:
+		break;
+	case 20:
+		break;
+	case 40:
+		break;
+	default:
+}
+\end{java}
+
+Itt is megtalálható szintén a break, mely utasítás arra szolgál, hogy ha az adott ágban található kód lefutott, akkor lépjen ki a szelekcióból.
+A while ciklus:
+\begin{java}
+$a = 10;
+while ($a > 0) {
+	$a--;
+}
+\end{java}
+A for ciklus:
+\begin{java}
+for ($i = 10; $i > 0; $i--) {
+}
+\end{java}
+és a do while ciklus:
+\begin{java}
+$a = 10;
+do {
+	$a--;
+} while($a > 0);
+\end{java}
+
+A PHP nyelv megalkotásakor nem volt objektum orientált a nyelv, később azonban bevezették az osztálydefiníciót a nyelvbe. Az osztályokat a class kulcsszóval kell bevezetni, ezután kell megadni az osztály nevét.
+
+Az osztály törzsében lehet adattagokat és metódusokat is definiálni. A PHPben a Java nyelvhez hasonlóan lehet megadni öröklődést is, mely esetben szintén a leszármazott osztályok öröklik a szülők adattagjait és metódusait.
+\begin{java}
+<?php
+class Elso {
+	var $elso;
+	function __construct($el) {
+		$this->elso = $el;
+	}
+	function getElso() {
+		return $this->elso;
+	}
+}
+class Masodik extends Elso {
+	function __construct($el) {
+		parent::__construct($el);
+	}
+}
+
+$obj = new Masodik(5);
+$obj->getElso();
+?>
+\end{java}
+
+A fenti kódban az első osztályban lett megírva a lekérdező függvényt, de az a második osztályon keresztül lesz meghívva, mivel a második osztály lett leszármaztatva az első osztályból, erre az extends utasítást kell használni.
+
+A fenti példában szintén megtalálható a konstruktor metódus is, mely a Java nyelvhez hasonlóan egy kitüntetett függvény, mely az osztály példányosításakor fut le és ebben lehet az elemeket inicializálni. Az ősosztály konstruktorát is meg lehet hívni a \texttt{parent::\_\_construct()} hívással.
+
 \section{Python}
 
+A Python nyelv egy egyszerűen és rugalmasan programozható objektum orientált nyelv.
+Az adott nyelvben nem kell az utasítások sorát \texttt{;}-vel lezárni, a sor vége jelzi az utasítás végét. Emellett a blokkokat jelző \texttt{\{} és \texttt{\}} is hiányzik, ezeket a tabulátorok jelzik.
+
+A nyelv gyengén típusos, nem kell típust megadni a változók deklarálásakor.
+\begin{python}
+elso = 55
+\end{python}
+
+A Python nyelvben is megtalálható a függvénydefiniálás lehetősége, mely a def kulcsszóval kerül bevezetésre, majd a függvény neve, végül zárójelben a paraméterlista kerül megadásra. Ezután \texttt{:} következik, majd új sorban tabulátorral kezdődik a függvénytörzs, ebben paramterek használhatók, módosíthatók, illetve új változók is létrehozhatók és használhatók.
+\begin{python}
+def valtozas(parameter):
+	utasitas
+\end{python}
+
+A Python referencia szerinti átadást végez, tehát az eredeti változó is változni fog a metódusokon belüli módosítás hatására.
+
+A program lefutását ezen nyelvben is lehet befolyásolni az előző nyelvekhez hasonló módon szelekcióval és iterációval, melyeket itt is az if, illetve az iterációkat while, for és kulcsszavakkal lehet megadni, amint az látható az alább példában.
+\begin{python}
+var = 50
+if var < 30:
+
+elif var < 40:
+
+else:
+
+A while ciklus:
+var = 0
+while (var < 10):
+	var = var + 1
+
+A for ciklus:
+for num in range(10,20):
+	print num
+\end{python}
+
+Python nyelven definiálhatunk osztályokat is melyet az alábbi példa mutat be
+\begin{python}
+class Elso:
+	count = 0
+	def __init__(self, name):
+		self.name = name
+
+	def displayCount(self):
+		print self.count
+\end{python}
+
+Az osztályban Pyhton nyelven is van kiemelt metódus, az \texttt{\_\_init\_\_} névvel jelzett konstruktor, mely az adattagokat inicializálja. Látható, hogy mindegyik metódus a def kulcsszóval kezdődik és mindegyik paraméterlistájában megtalálható a self kulcsszó. Ezt a self-et a függvényhíváskor nem kell kiírni, ez automatikusan hozzáadásra kerül. Úgyszintén nem kell előre deklarálni a változókat melyeket a konstruktorban inicializálunk.
+
 \section{JavaScript}
+
+A JavaScript egy szkriptnyelv, mely leggyakrabban a böngészőkben használható, nyílt és platformfüggetlen nyelv.
+
+Az adott nyelvben mindenképpen kell az utasítások sorának végére a ; az utasítások lezárása végett, valamint a Pythonnal ellentétben a \texttt{\{} és \texttt{\}} is kell mely a blokkok kezdetét és végét jelzi.
+
+Emellett azonban a nyelv gyengén típusos, nem kell típust megadni a változók deklarálásakor, viszont kell egy var kulcsszó, mely a változókat bevezeti.
+\begin{java}
+var elso = 55
+\end{java}
+Ebben a nyelvben a függvénydefiniálás szintén lehetséges, JavaScriptben a function kulcsszóval kell bevezetni. majd a függvény neve, végül zárójelben a paraméterlista kerül megadásra.
+\begin{java}
+function valtozas(parameter) {
+	utasitas
+}
+\end{java}
+
+A JavaScript alapértelmezetten érték szerinti átadást végez, tehát az eredeti változó ezen a módon nem fog módosulni. Ha szeretnénk a változó értékét mindenképpen módosítani akkor referenciaként kell átadni a változót, ahogy ezt az objektum orientált JavaScript részben látható.
+
+A program lefutását ezen nyelvben is lehet befolyásolni az előző nyelvekhez hasonló módon szelekcióval és iterációval, melyeket itt is az if és switch illetve az iterációkat while, for és kulcsszavakkal lehet megadni, amint az látható az alább példában.
+
+\begin{java}
+var = 50
+if (var < 30) {
+}
+else if (var < 40) {
+}
+else {
+}
+\end{java}
+
+A while ciklus:
+\begin{java}
+var szam = 0
+while (szam < 10) {
+	szam = szam + 1;
+}
+A for ciklus:
+var count
+for (count = 0; count < 10; count++){
+	document.write(count);
+}
+\end{java}
+
+A JavaScript objektum orientált része olyan módon alakítható ki, hogy függvényeket írhatunk, melyben adattagokat és további függvényeket definiálhatunk.
+\begin{java}
+class Elso(nev, mail, szoveg) {
+	this.nev = nev;
+	this.mail = mail;
+	this.szoveg = szoveg;
+
+	this.writeThis = function() {
+		console.log(this.nev + "" + this.mail);
+}
+}
+\end{java}

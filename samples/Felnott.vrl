@@ -1,0 +1,20 @@
+Create Felnott Ex Ember
+	
+	Felnott(irSzam, Utca, hSz)
+		@cim = Cim(irSzam, Utca, hSz)
+		
+	Funct increaseKor()
+		@kor = @kor + 1
+		
+	Funct retKorStr()
+		Switch @kor
+			14:
+				str = "Kis kor"
+			23:
+				str = "Nagy kor"
+			Def:
+				str = "Nem tudni"
+	
+	Funct createString()
+		nev + kor + munka + @cim.createString
+
