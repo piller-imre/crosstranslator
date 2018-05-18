@@ -2,14 +2,23 @@
 
 \section{Formális nyelvek}
 
-A programozási nyelvek formális nyelvek.
+Általánosan formális nyelveknek nevezünk minden olyan nyelvet, melyekben véges hosszúságú szavak generálhatók véges ábécékből. Az informatikához kapcsolódóan az ilyen leírást a formális nyelvtannal jellemezzük, mely konkrétan egy formális nyelvet írnak le.
+
+A nyelvtan két nagy kategóriája a generatív és analitikus nyelvtan csoportja. Előbbi azt írja le, hogyan lehet előállítani az adott nyelvet az adott szabályhalmazből, míg utóbbi az adott nyelv olvasását írja le, ugyancsak szabályokkal.
+
+A programozási nyelvek alapvetően ilyen formális nyelvek.
 
 \subsection{Véges automaták}
 
+Fontos szót ejteni a véges automatákról (Final State Automata, FSA). A véges automaták olyan automaták, melyek meghatározott véges állapothalmaz, bemeneti ábécé, kezdő és végállapot valamint átmeneti függvény megadása után egy rendszert képez. Ez felírható egy irányított gráffal, itt az egyes állapotok a gráf csúcspontjai. Mivel véges automatáról van szó, az automata az egyik állapotból egy input hatására egy másik állapotba kerül.
+
+Két nagy csoportot különböztetünk, a determinisztikus és a nem determinisztikus automata. A nem determinisztikus automata esetében lehetnek olyan szavak, melyeket nem tud beolvasni, mivel egyes átmeneteknél elakadhat. Viszont a nem determinisztikus automata egy adott input szimbólum hatására egy adott állapotból több áűllapotba is átmehet. Véges automaták felhasználhatók a reguláris nyelvek leírására.
 
 \subsection{Reguláris nyelvek}
 
-A reguláris nyelvek a véges automatákkal leírható nyelvek.
+A reguláris nyelvek reguláis kifejezések segíytségével kifejezett formális nyelv, melyeket a véges automaták képesek felismerni és értelmezni. Reguláris kifejezéseket több helyen is használnak az informatikában, mivel többféle kifejezést is értelmezni lehet, illetve sok helyen ellenőrzéseket lehet velük végezni különféle adatokon.
+
+A reguláris nyelvek pedig a különféle programozási nyelvek feldolgozásánál nyújtanak segítséget, a lexer és parser generátorok egyes elemeinél, melyek alapján a generátorok készítése megtörténik.
 
 % TODO: EBNF jelölésrendszere
 
@@ -17,13 +26,7 @@ A reguláris nyelvek a véges automatákkal leírható nyelvek.
 
 \section{A feldolgozás lépései}
 
-Leírni a fordítás lépéseit. Ehhez rögtön az elején lehet egy ábra, amit aztán külön pontok részleteznek.
-
-Meg kell indokolni (röviden), hogy miért az említett nyelvek kerültek kiválasztásra.
-
-Az esetleges nehézségekre, kihívásokra már itt fel lehet hívni a figyelmet.
-
-A feldolgozás lépéseinek áttekintését láthatjuk \aref{fig:process}. ábrán.
+A \aref{fig:process}. ábrán láthatóak a fordítás legfőbb lépési, a következőkben ezeket nézzük át röviden.
 
 \begin{figure}
 \centering
@@ -32,8 +35,36 @@ A feldolgozás lépéseinek áttekintését láthatjuk \aref{fig:process}. ábr�
 \label{fig:process}
 \end{figure}
 
-\section{Tokenizálás}
+\subsection{Tokenizálás}
 
-% TODO: Parser-tokenizer (lexer) kapcsán írni néhány dolgot áttekintés képpen.
+Az tokenizálás a fordítás első lépése lesz, ebben a lépésben a felhasználó által megadott programkód beolvasásra kerül, majd a program szétbontja azt és megvizsgálja az egyes elemeket. A tokenizer minden elemhez hozzá kell tudjon rendelni a program egy tokent, így a tokenizer visszatérési értéke tokenek egy sorozata lesz.
 
-% TODO: Gyakori tokenek (szám-, szöveg literál, operátorok, zárójelek, kommentek, szóközök és egyéb fehér karakterek)
+A tokenek sorozatában nem szerepelnek a különböző fehér karakterek, mint a szóköz, újsor, tabulátor karakter, mivel a tokenizer a feldolgozás során ezeket az elemeket, mivel ezek csak az olvashatóságot növelik a kódban, a feldolgozásához, fordításhoz plusz információval nem járulnak hozzá, törli.
+
+Ezután a többi tokent a megadott reguláris kifejezések alapján hozza létre. A leggyakoribb tokenek közül néhány példa:
+szám literál: [0-9_]+
+szöveg literál: [a-zA-Z0-9_]+
+zárójelek: \( és \)
+fehér karakterek: (\n | \r | \r\n | \f | \t)+
+
+A tokenizer általában egy külön programrész, osztály a feldolgozóban, melyet általában lexernek is neveznek. Ezt az osztályt külön programok segítségével lehet megalkotni, melyeket lexer generatornak nevezik. Az interneten többféle ilyen generátor is található, melyeket segítségül hívva meg lehet alkotni a feldolgozó osztályt.
+
+Fontos, hogy ezeknek a generátoroknak meg kell adni egy szintaktikai leírást, mely alapján a lexert létrehozzák, azonban figyelni kell arra, hogy az adott generátornak megfelelő módon, és a általunk megadott nyelvre illeszkedő kifejezéseket adjunk meg.
+
+A fellelhető generátorok közül jelen esetben olyanok közül kell választani amelyek a reguláris kifejezések segítségével adják meg a feldolgozási elemeket. Ilyenek  például az AnnoFlex, JFlex programok, ezekről részletesebben a szintaktikai elemzés fejezetben esik szó.
+
+A megvalósításkor nehézséget okozott a fentebb említett választás és szintaktikai leírás. Mivel a korábbi tanulmányaim során ilyenre nem került sor, a generátor általt felhasznált szintaktikai leírás megvalósítása néhány esetben hibára futott. Ami ebben segítséget jelentett, az az AnnoFlex programban megadott példa kód volt, mely alapján további reguláris kifejezéseket fel lehetett venni.
+
+\subsection{Parser}
+
+A tokenek sorozata ezután átkerül a feldolgozás következő lépéseként a parserhez. A parser osztályt, mely a kapott kódot feldolgozza, szintén előtte definiálni kell, melyet az adott nyelvhez kapcsolódó megadott szintaktika, illetve egy parser generator végezhet el.
+
+A lexer generatorthoz hasonlóan a parser generator is megtalálható az interneten. Fontos megjegyezni, hogy olyan parser és lexer generatort érdemes választani, mely a lehető legjobban együtt tud műküdik. Ilyen például a JFlex és a CUP generátor, mely generátort úgy terveztek, hogy egymással együttműködve tudnak működik.
+
+A CUP generátort emellett magában is használható egy adott token sorozat feldolgozására, ezekről részletesebben szintén a szintaktikai elemzés fejezetben esik szó.
+
+Szintén nehézséget okozott a megfelelő parser generátor kiválasztása, hiszen annak olyannak kell lennie, hogy a kiválasztott lexer generátorral együtt tudjon működni, az az által generált eredményhalmazt be tudja olvasni. Itt is felmerültek a fájl szintaktikai megvalósításakor fellépő hibák. Sajnos a CUP parser generátor leírása nem volt annyira részletes ez ügyben, így a hibák javítása hosszabb időt vett igénybe.
+
+\subsection{Code generator}
+
+Az utolsó lépés, hogy miután a parser generator által létrehozott objektum hierarchia elkészült, ebből a program elvégzi a konvertálást, és gíy jön létre majd a célnyelvi forráskód, ami már az adott nyelv szintaktikájának megfelelő és felhasználható a programozó izlése szerint.

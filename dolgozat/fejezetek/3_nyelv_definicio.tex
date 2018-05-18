@@ -2,7 +2,7 @@
 
 \section{Általános szempontok}
 
-A saját nyelv kialakításánál az elsődleges szempont a könnyű kezelhetőség volt, hogy bár több nyelvre, több platformra kerülhet lefordításra a kód, a felhasználó, programozó egyszerűen, könnyen tudja megírni a kódot a definiált nyelven, így nem kell minden célnyelvi szintektikai és szemantikai szabállyal tistába lennie, azokat külön-külön alkalmaznia.
+A saját nyelv kialakításánál az elsődleges szempont a könnyű kezelhetőség volt, hogy bár több nyelvre, több platformra kerülhet lefordításra a kód, a felhasználó, programozó egyszerűen, könnyen tudja megírni a kódot a definiált nyelven, így nem kell minden célnyelvi szintektikai és szemantikai szabállyal tisztába lennie, azokat külön-külön alkalmaznia.
 
 Ezek alapján a nyelv a Python nyelvhez hasonló megoldásokat és jegyeket hordoz magán, a nyelvi szintaktika és szemantika megvalósításának tekintetében.
 
@@ -10,9 +10,9 @@ Ahhoz, hogy a nyelvet definiálni lehessen az alábbiakban áttekintjük a felad
 
 \section{A célnyelvek áttekintése}
 
-A C nyelv magasszintű, általános célú programozási nyelv, mely az egyik legelterjedtebb programozási nyelv, a ma fellehető számítógép architektúrák szinte mindegyikére készült C fordító. A nyelv sturkturált és szabványos programozási nyelv, ugyanúgy megtalálhatóak itt a vezérlési szerkezetek mint a többi magas szintű nyelvben. Változó deklarálásakor meg kell adni a változó nevét és típusát is, mivel a nyelv erősen típusok nyelv. A változó neve konvenció alapján betűvel kezdődik és utána betűket és számokat tartalmazhat. Ezután egyenlőségjellel adhatjuk meg a változó értékét. C nyelven az utasításokat a sor végén ;-vel zárjuk le. Mivel az egyes utasítások lezárását ; jelzi, a nyelven a sortörések kihagyhatók, ezek fehér karakterek csak az olvashatóságot növelik, a fordítás során eltávolítására kerülnek. C nyelven írt programok során is az utasítások szekvenciálisan futnak le.
+A C nyelv magasszintű, általános célú programozási nyelv, mely az egyik legelterjedtebb programozási nyelv, a ma fellehető számítógép architektúrák szinte mindegyikére készült C fordító. A nyelv sturkturált és szabványos programozási nyelv, ugyanúgy megtalálhatóak itt a vezérlési szerkezetek mint a többi magas szintű nyelvben. Változó deklarálásakor meg kell adni a változó nevét és típusát is, mivel a nyelv erősen típusok nyelv. A változó neve konvenció alapján betűvel kezdődik és utána betűket és számokat tartalmazhat. Ezután egyenlőségjellel adhatjuk meg a változó értékét. C nyelven az utasításokat a sor végén ;-vel zárjuk le. Mivel az egyes utasítások lezárását ; jelzi, a nyelven a sortörések kihagyhatók, ezek a fehér karakterek csak az olvashatóságot növelik, a fordítás során eltávolítására kerülnek. C nyelven írt programok során is az utasítások szekvenciálisan futnak le.
 
-A nyelv nem objektum orientált nyelv, azaz osztályok definíció szintjén nincsenek a nyelvben. Jelen dolgozat további nyelveiben megjelenik ez a funkció, osztályba szervezhető a kód, csakúgy mint a definiált nyelvben is, így valamivel nehezebb C módra történő fordítás. C nyelven a struktúrák találhatók meg, melyek a typedef struct kulcsszóval vezethetnek be. Ebben adhatók meg az osztályokhoz hasonló programelemek. Szintén fontos különbség, hogy a C nyelven megjelennek a pointerek, melyek egy adott változó címere mutató változó. Ezáltal érték szerint és cím szerint is át lehet adni változókat, ilyen más nyelvekben nincs.
+A nyelv nem objektum orientált nyelv, azaz osztályok definíció szintjén nincsenek a nyelvben. Jelen dolgozat további nyelveiben megjelenik ez a funkció, osztályba szervezhető a kód, csakúgy mint a definiált nyelvben is, így valamivel nehezebb C módra történő fordítás. C nyelven a struktúrák találhatók meg, melyek a typedef struct kulcsszóval vezethetnek be. Ebben adhatók meg az osztályokhoz hasonló programelemek. Szintén fontos különbség, hogy a C nyelven megjelennek a pointerek, melyek egy adott változó címere mutató változók. Ezáltal érték szerint és cím szerint is át lehet adni változókat.
 
 C nyelven emellett használható a szelekció, azaz az elágazás. Ezt az if kulcsszó vezeti be, ami után ( és ) között kell megadni az elágazás feltétet. Itt a rendszer azt vizsgálja a megadott feltételek igaz vagy hamis, és aszerint fut le az adott ágban megírt kód. A szelekció többi ágat az else if (feltétel) és az else kulcsszó vezeti be. A C nyelv is ismerni a switch szelekciót, itt is meg kell adni egy kifejezést, változott és a switch belül megadni azon kifejezéseket melyekre az illeszkedést a program vizsgálni fogja.
 
@@ -49,9 +49,9 @@ Emellett szintén fontos különbség a blokkokat jelző \texttt{\{} és \texttt
 
 A nyelv támogatja az objektum orientált leírást, a class kulcsszóval bevezetett osztályokat lehet megírni, melyben definiálhatunk változókat, metódusokat majd példányosíthatjuk csak úgy mint az általánosságban vizsgált programozási nyelvek esetében.
 
-A PHP egy szerveroldali nyelv, tulajdonképpen scriptnyelv, az így megírt fájlok futtatásához a fizikai szervergépre valamilyen PHP fordító kell telepíteni és konfigurálni. Legelterjedtebb manapság még mindig az Apache webszerver, mely a UNIX rendszerekre telepíthető.
+A PHP egy szerveroldali nyelv, tulajdonképpen scriptnyelv, az így megírt fájlok futtatásához a fizikai szervergépre valamilyen PHP fordítót kell telepíteni és konfigurálni. Legelterjedtebb manapság még mindig az Apache webszerver, mely a UNIX rendszerekre telepíthető.
 
-Érdemes kiemelni a PHP hiba, illetve figyelmeztetés kijelzését is, mely szerver, az Apache konfigurációs fáljában oldalon, illetve a PHP fájlban is letiltható, illetve engedélyezhető. Érdemes ezt mindig engedélyezni a fejlesztés során, mivel egyéb esetben egyes hibák elfedésre kerülnek a PHP rugalmassága miatt, így a végső eredmény is hibás lehet. Például az alábbi kódban:
+Érdemes kiemelni a PHP hiba, illetve figyelmeztetés kijelzését is, mely szerver oldalon, az Apache konfigurációs fáljában, illetve a PHP fájlban is letiltható, illetve engedélyezhető. Érdemes ezt mindig engedélyezni a fejlesztés során, mivel egyéb esetben egyes hibák elfedésre kerülnek a PHP rugalmassága miatt, így a végső eredmény is hibás lehet. Például az alábbi kódban:
 
 \begin{cpp}
 <?php
@@ -104,63 +104,50 @@ A definiált nyelvben is a megadott konstrukciók végrehajtási sorrendjét a v
 
 A nyelvben az értékadás a Python nyelv egyszerűségét idézi, azaz meg kell adni egy változó nevét és az értékét. Ahogy az utasítások sorának végére, ide sem kell ;-t tenni.
 
-Ha a változó egy adattag egy osztályban akkor a változó definiálásakor meg lehet adni a változó láthatósági módosítóját. Ha nem írjuk ezt ki, akkor alapértelmezetten a változó private módosítót kap, azaz nem lesz kívülről elérhető, csak az osztály metódusai módosíthatják. Emellett megadhatjuk neki a public módosítót, mely esetben mind kívülről, mind belülről az osztályból elérhető és módosítható lesz.
-
 Az értékadást az alábbi példa szemlélteti:
 \begin{cpp}
-szoveg = "szoveg"
+string szoveg = "szoveg"
 \end{cpp}
 
-Többszörös értékeadás is lehetséges a nyelvben, azaz egyszerre több vátozó is megaható, melyek aztán felveszik az adott értéket.
-
-\begin{cpp}
-ertek = ertek2 = 5
-\end{cpp}
-
-A változók definiálásakor nem kell megadni a változó típusát, a definiált nyelv gyengén típusos, így a változó típusát a változóban tárolt érték fogja meghatározni.
+A változók definiálásakor meg kell adni a változó típusát, miel a nyelv erősen típusos. A nyelv az int, string, double, boolean, void, array és dictionary typusokat ismeri, melyek minden tekintett célnyelvben megtalálhatók, a C nyelvben a string karaktertömbként, illetve a dictionary struktúraként, így mindegyik nyelvre lehet fordítani.
 
 \begin{verbatim}
-valtozo1 = 5 ~ szám típusú
-valtozo2 = "szöveg" ~ text/string tipusú
-valtozo3 = valtozo1 + valtozo2 ~ eredmény 5szöveg, mint string típsú változó
+int valtozo1 = 5 ~ szám típusú
+string valtozo2 = "szöveg" ~ text/string tipusú
+string valtozo3 = valtozo1 + valtozo2 ~ eredmény 5szöveg, mint string típsú változó
 \end{verbatim}
 
 A változók, illetve osztály adattagok esetében meg lehet adni láthatósági módosítót is, azonban ez nem kötelező. Ha nincs megadva láthatósági módosító egy adott változóhoz, akkor a nyelvi definicíó alapján alapértelmezetten private láthatóságú lesz a változó, azaz csak az adott osztály, amiben a változó létre lett hozva, az tudja majd kezelni, kívülről nem lehet.
 
-Ha azt szeretnénk, hogy kívülről is lehessen kezelni az adott változót, akkor mindenképpen ki kell írni a láthatósági módosítót, ami public lesz, ha mindenhonnan el lehet érni a változót és protected, ha csak a szülő, illetve a gyerek érheti el. A metódusok belül létrehozott változók minden esetben a metódusokon belül használhatók.
+Ha azt szeretnénk, hogy kívülről is lehessen kezelni az adott változót, akkor mindenképpen ki kell írni a láthatósági módosítót. Ilyen esetben public módosítót kell megadni, így mindenhonnan elérhető az adott változó. A metódusok belül létrehozott változók minden esetben a metódusokon belül használhatók.
 
-valtozoT = {1, 2, 3, 5, "tizenkettő"} ~ egy adott tömbben többféle típusú elem is szerepelhet, például szám és szöveg. A tömb elemeire a valtozoT(x)-el lehet hivatkozni, ahol az x a tömb x. eleme lesz.
-Túlindexelés:
-\begin{itemize}
-\item Ha a tömb 10 elemű és a tomb(12)-t hívjuk akkor a változóba ahol az elemet letároljuk, vagy metódusba ahova átadjuk egy 0 kerül át.
-\item Ugyanaz, mint az első esetben, de itt létre is jön a 12. elem. Tehát mondjuk 10 elemű a tömb, a 12.-re elemre való hivatkozással létrejön a 11. és 12. elem, mindkettő 0 értékkel.
-Nem tudom melyik a jobb, ha egyáltalán bármelyik is.
-\end{itemize}
+array valtozoT = {1, 2, 3, 5, "tizenkettő"} ~ egy adott tömbben többféle típusú elem is szerepelhet, például szám és szöveg. A tömb elemeire a valtozoT(x)-el lehet hivatkozni, ahol az x a tömb x. eleme lesz.
+Túlindexelés esetén a porogramozónak figyelnie kell, ugyanis a nyelv rugalmassága miatt nem fog hibaüzenetet kapni. Ha a tömb 10 elemű és a tomb(12)-t hívjuk akkor a változóba ahol az elemet letároljuk, vagy metódusba ahova átadjuk egy 0 kerül át.
 
 \begin{verbatim}
-tomb = valtozoT + "húsz"
+array tomb = valtozoT + "húsz"
 Print(tomb) ~ eredmény: 1 2 3 5 tizenkettő húsz
 Del(tomb)
-tomb = valtozoT
+array tomb = valtozoT
 tomb(2) = 1.25
 tomb(3) *= 5
 Print(tomb) ~ eredmény: 1 1.25 15 5 tizenkettő
 Del(tomb)
-tomb = valtozoT
+array tomb = valtozoT
 Print(tomb(7)) ~ eredmény: 0
 Del(tomb)
 \end{verbatim}
 
-tomb = valtozoT + {5, "nyolc", "miskolc"} ~a már letárolt, névvel ellátott tömbhöz egy névtelen tömböt fűzünk hozzá, ez önmagában nem tárolódik a memóriában, csak az új változóban az eredeti tömbbel együtt, ahhoz hozzáfűzve
+array tomb = valtozoT + {5, "nyolc", "miskolc"} ~a már letárolt, névvel ellátott tömbhöz egy névtelen tömböt fűzünk hozzá, ez önmagában nem tárolódik a memóriában, csak az új változóban az eredeti tömbbel együtt, ahhoz hozzáfűzve
 valtozoT += {5, "nyolc", "miskolc"} ~ ugyanaz mint az előbb, csak itt nem jön létre új változó, a már meglévőhöz kapcsolódnak az új elemek
 Print(tomb) ~ eredmény: 1 2 3 5 tizenkettő 5 nyolc miskolc
 Print(valtozoT) ~ eredmény: 1 2 3 5 tizenkettő 5 nyolc miskolc
 
-A második vezérlési szerkezet az elágazás. A definiált nyelvben a szelekció az if kulcsszóval kerül bevezetésre, melyet egy feltétel követ. A feltétel három tagból kell, hogy álljon, mely egy operátor és annak két oldalán valamilyen kifejezés kell, hogy legyen.
+A második vezérlési szerkezet az elágazás. A definiált nyelvben a szelekció az If kulcsszóval kerül bevezetésre, melyet egy feltétel követ. A feltétel három tagból kell, hogy álljon, mely egy operátor és annak két oldalán valamilyen kifejezés kell, hogy legyen.
 
-Az elágazás további ágait EIf kulcsszóval vezetjük be, mely után szintén egy feltétel kell, hogy álljon, melynek a szerkezete az If feltételével megegyező kell, hogy legyen. Illetve egy utolsó ág van fenntartva arra az esetre, hogy ha a szelekció egyik korába ágának feltétele sem teljesül ezt az Else kulcsszóval kell bevezetni, itt nem kell feltételt megadni.
+Az elágazás további ágait ElIf kulcsszóval vezetjük be, mely után szintén egy feltétel kell, hogy álljon, melynek a szerkezete az If feltételével megegyező kell, hogy legyen. Illetve egy utolsó ág van fenntartva arra az esetre, hogy ha a szelekció egyik korába ágának feltétele sem teljesül ezt az Else kulcsszóval kell bevezetni, itt nem kell feltételt megadni.
 
-A szelekció egyes ágain több végrehajtható művelet is helyet kaphat, melyeket a program sorrendben, szekvencia alapján végez el. Az egy adott ághoz tartozó műveleti blokkot a programnyelvben nem kell külön zárójel, illetve kapcsos zárójelpárral körülzárni, a definiált nyelvben az egy adott blokkhoz való tartozást, a programkód tabulálása jelenti, azaz az If kulcsszó majd a feltétel után az utasításokat új sorban, egy tabulátorral beljebb tolva kell megadni, az alábbi példához hasonlóan.
+A szelekció egyes ágain több végrehajtható művelet is helyet kaphat, melyeket a program sorrendben, szekvencia alapján végez el. Az egy adott ághoz tartozó műveleti blokkot a programnyelvben nem kell külön zárójel, illetve kapcsos zárójelpárral körülzárni, a definiált nyelvben az egy adott blokk határait blokk kezdetét és végét jelentő speciális utasítások megjelenése mutatja. Az If esetében az If után az ElIf vagy Else kulcsszavak lesznek ezek, az Else végén pedig egy End utasítás kell, hogy helyet kapjon.
 
 \begin{verbatim}
 If elso == 1
@@ -174,106 +161,95 @@ Else
 		masodik = elso/2
 	Else
 		masodik = elso-20
+	End
+End
 \end{verbatim}
 
-A szelekció másik típusa a definiált nyelvben olyan elágazás, mely az elágazás elején vár egy változót vagy kifejezést és ezt utána a megadott elemekre próbálja illeszteni. Ezen szelekció a Sw kulcsszóval kerül bevezetésre, melyet követ a változó, illetve kifejezés.
+A szelekció másik típusa a definiált nyelvben olyan elágazás, mely az elágazás elején vár egy változót vagy kifejezést és ezt utána a megadott elemekre próbálja illeszteni. Ezen szelekció a Switch kulcsszóval kerül bevezetésre, melyet követ a változó, illetve kifejezés.
 
 A program futása során az a kódrész fog lefutni, amelyhez tartozó elemre a kifejezés illesztése sikeres volt. Ha nincs ilyen elem akkor egy alapértelmezett kódrészként megadott kód fog lefutni, melyet a Def kulcsszóval kell bevezetni. Ezen kódrész megírása mindenképpen szükséges.
 
-Az egy adott blokkba tartozó kódot ebben a szelekcióban is a tabulátor határozza meg. Az alábbiakban látható erre egy példa.
+Az egy adott blokkba tartozó kódot ebben a szelekcióban is a kulcsszavak megjelenése. Az alábbiakban látható erre egy példa.
 
 \begin{verbatim}
-Sw vizsgált_elem
-eredmeny1:
-blokk1_utasitas1
-blokk1_utasitas2
-eredmeny1:
-	blokk2_utasitas1
-	blokk2_utasitas2
-Def:
-def_utasitas
+Switch vizsgált_elem
+	eredmeny1:
+		blokk1_utasitas1
+		blokk1_utasitas2
+	eredmeny1:
+		blokk2_utasitas1
+		blokk2_utasitas2
+	Def:
+		def_utasitas
+End
 \end{verbatim}
 
-A harmadik vezérlési szerkezet a definiált nyelvben az iteráció. Az iterációt a Loop kulcsszóval kell bevezetni, ezután következik a ciklusfeltétel, majd az utasításblokk, mely az előzőekhez hasonlóan a tabulátor jelzi.
+A harmadik vezérlési szerkezet a definiált nyelvben az iteráció. Az iteráció itt is többféle lehet, melyeket a For, While illetve a Do kulcsszavakkal kell bevezetni, ezután következik a ciklusfeltétel, majd az utasításblokk.
 
 \begin{verbatim}
-Loop ciklusfeltétel
-utasítás1
-utasítás2
-\end{verbatim}
-
-A ciklus lehet hátul tesztelő is
-\begin{verbatim}
-Loop
+For a=1, a<5, a++
 	utasítás1
 	utasítás2
-ciklusfeltétel
+End
 \end{verbatim}
 
 A ciklusfeltétel lehet:
 - a < 10 (ha a nem létezik automatikusan létrehozásra kerül 0 értékkel, minden ciklusmag lefutása utána automatikusan növekszik egyel)
 - a = 15, a > 10, a-- (15-el jön létre, csökken egyel minden ciklusmag lefutása után és addig fut míg nagyobb mint 10)
 
-Függvények, a funct kulcsszóval kerülnek bevezetésre, amit a függvény neve követ, majd a paraméterek listája.
+Függvények, a Funct kulcsszóval kerülnek bevezetésre, amit a függvény neve követ, majd a paraméterek listája zárójelpáron belül.
 
 \begin{verbatim}
-funct kiir (a)
-utasítás
+Funct kiir (a)
+	utasítás
+End
 
-funct add (a, b)
-c = a + b
+Funct add (a, b)
+	c = a + b
+End
 \end{verbatim}
 
-A függvény mindig visszatér az utolsó utasításban megadott változó értékével, ez a függvény meghívásának módja miatt vagy eltárolódik vagy elveszik.
+A függvnyeket szintén End kulcsszóval kell lezárni, illetve fontos, hogy a függvény mindig visszatér az utolsó utasításban előűllított értékkel, mely egyrészt eltárolódhat, illetve akár el is veszhet attól függően, hogy a függvény milyen módon lett meghívva.
 
 \begin{verbatim}
 q = add(5, 2)
 \end{verbatim}
 
-A q-ba a fenti add függvény c értéke kerül, tehát 7.
-
-Lehetséges, hogy a függvény nevét nem kell megadni, a névtelen függvények egyszer fognak lefutni, többet nem lehet őket meghívni, mivel a függvények meghívása a nevükkel történne egyébként.
-
-\begin{verbatim}
-q = funct (a, b)
-c = a + b
-c = c / 2
-\end{verbatim}
+A q-ba a fenti add függvény c értéke kerül, tehát 7, viszont ha a q és = törlésre kerül a kódból, a függvény így is lefut, és vissza is tér a 7 értékkel, de az nem tárolódik le sehol, tehát el fog veszni.
 
 Az osztályok segítségével lehet jól leképezni a valóságban lévő, vagy valósághoz közel álló elemeket is. Nem csak az egyes tulajdonságok és adott elemhez tartozó változók egy egységben történő kezelésére lennének jók, de az egyes elemek, objektumok egymáshoz való viszonyát, leszármazást is meg lehetne ezzel oldani.
 
-Mivel általánosságban is elterjedtek az osztály alapú, objektum orientált nyelvek, ezért a definiált nyelv is ilyen, így a programozóknak, a nyelv használóinak kényelmesebb lesz, mivel olyat nyelvet tudnak használni, melyhez hasonlót már használtak, vagy tanultak róla.
+Mivel általánosságban is elterjedtek az osztály alapú, objektum orientált nyelvek, ezért a definiált nyelv is ilyen, így a programozóknak, a nyelv használóinak kényelmesebb lesz, mivel olyat nyelven tudnak használni, melyhez hasonlót már használtak, vagy tanultak róla.
 
-Az osztályok a Create kulcsszóval kell bevezetni, majd az osztály neve következik és a paraméterek listája. Az osztályon belül a paraméterek és metódusok definiálása szintén a tabulátorral van elhatárolva.
-
-\begin{verbatim}
-Create osztalynev(paramterek)
-belső paraméretek definiálása
-egyedi metódusok definiálása
-\end{verbatim}
-
-Az osztályokban a paraméterekben átadott változókat nem kel külön definiálni, azok automatikusan létrejönnek, és konstruktor is automatikusan lefut. Ezeknek lesz getter és setter metódusa is automatikusan.
+Az osztályok a Create kulcsszóval kell bevezetni, majd az osztály neve következik és a paraméterek listája. Az osztályon belül a paraméterek és metódusok definiálása történik, az osztály végét az előzőekhez hasonlóan itt is az End kulcsszó jelöli.
 
 \begin{verbatim}
-Create osztaly(param1, param2)
-param3
-
-Oszaly()
-param3 = param1 + 15
+Create osztalynev(paraméterek)
+	belső paraméretek definiálása
+	egyedi metódusok definiálása
+End
 \end{verbatim}
 
-Ha külön belső változónak szeretnénk konstruktorban értéket adni, akkor külön ki kell írni a konstruktor meghívását, amit az osztály nevével megadott függvénnyel tehetünk meg.
+\begin{verbatim}
+Create osztaly
+	
+	Osztaly(int param1, string param2)
+		int @param1 = param1
+		string @param2 = param2
+	End
+		
+	Fuct @decPar1()
+		@param1--
+	End
+\end{verbatim}
+
+A fenti példában látható, hogy az osztálynak meg kell adni egy konstruktort, melyben megadhatunk paramétereket is. Azokat nem kell külön előre definiálni, az a konstruktorban történik meg és itt értéket is lehet nekik adni, ha szeretnénk. Fontos, hogy az osztály saját elemeit, adattagjait @ jellel kell megjelölni. Az osztály adattagjainak getter és setter metódusa automatikusan létrejön, tehát meghívható.
 
 Az osztály változónak módosítása a getter, setter metódusokon keresztül lehetséges például osztaly.getParam1 / osztaly.setParam1 metódus meghívásával. Ugyanígy lehet meghívni saját magunk által írt metódust is.
 
 Egy osztály és azon elemei a memóriában addig maradnak míg arra hivatkozás van, ha az osztály objektuma nincs változóba letárolva, akkor nem marad meg. A ciklusváltozó, ha a ciklusban lett létrehozva akár automatikusan akár manuálisan akkor megszűnik a ciklus végén, a memóriából is törlődik. A programban definiált változók és tartalmuk a program futásának végéig a memóriában maradnak, azután törlődnek. Illetve manuálisan is törölhetők a Del(változónév) segítségével, ekkor törlésre kerül a memóriából az elem.
 
 Ha egy elemre úgy hivatkozunk, hogy nem volt még definiálva, akkor automatikusan létrejön a változó 0 értékkel, ha előtte már volt definiálva és kitöröltük, majd úgy hivatkozunk rá, akkor is 0 értékkel jön létre, bármilyen típusú értéke is volt előzőleg, erre figyelni kell.
-
-
-% QUEST: A nyelv expression-öket és/vagy statement-eket tartalmaz?
-
-% TODO: EBNF és/vagy szintaxis diagramos nyelvi definíció.
 
 \section{Nyelv definiálása}
 
@@ -283,24 +259,28 @@ Az alábbiakban a programozási nyelv nyelvtanának felírása történik meg Ex
 
 \begin{verbatim}
 Program  ::= Class+
-Class ::= "Create" Space Identifier Space "(" Identifier+ ")" ("ex" Identifier)? LineBreak ((Tabulator Assignment LineBreak) | (Tabulator Function LineBreak))+
-Function ::= "Funct" "(" Identifier+ ")" LineBreak (Tabulator (Assignment | Instruction | Selection | Choose | Loop | EndLoop) LineBreak)+
-EndLoop ::= "Loop" LineBreak (Tabulator (Assignment | Instruction) LineBreak)+ Condition
-Loop ::= "Loop" Space Condition LineBreak (Tabulator (Assignment | Instruction) LineBreak)+
-Choose ::= "Switch" Space Identifier LineBreak (Tabulator Identifier ":" LineBreak (Tabulator (Instruction | Assignment) LineBreak))+ Tabulator "Def" ":" LineBreak Tabulator (Instruction | Assignment) LineBreak
-Selection ::= "If" Space Condition LineBreak (Tabulator (Assigment | Instruction))+ ("EIf" Space Condition LineBreak (Tabulator (Assigment | Instruction))+)* ("Else" Space Condition LineBreak (Tabulator (Assigment | Instruction))+)?
-Condition ::= Identifier ("=" | ">=" | "<=" | ">" | "<") (Identifier | Character | String | Digit)
-Instruction ::= Identifier "=" (Identifier Operator Identifier)+
+Class ::= "Create" Identifier LParen Identifier+ RParen ("ex" Identifier)? (Assignment | Function)+ "End"
+Function ::= "Funct" LParen Identifier+ RParen (Assignment | Instruction | Selection | (For | While))+ "End"
+For ::= "For" Condition Block+ "End"
+While ::= "While" Condition Block+ "End"
+If ::= "If" Condition Block ("EIf" Block)* ("Else" Block)? "End"
+Switch ::= "Switch" (Identifier ":" Block)+ "Def" ":" Block "End"
+Block ::= Expression+
+Expression ::= (Instruction | Assignment)
+Condition ::= Identifier Operator (Identifier | Character | String | Digit)
+Instruction ::= Identifier "=" BinaryOperator+
 Assignment ::= Identifier "=" (Character | String | Digit)+
 Identifier ::= Character (Character | Digit)+
+BinaryOperator ::= Identifier Operator Identifier
 String ::= '"' Character+ '"'
 Character ::= [a-zA-Z]+
 Digit ::= [0-9]+
-Space ::= " "
-LineBreak ::= "\n" | "\r" | "\r\n"
-Tabulator ::= "\t"
-Operator ::= "+" | "-" | "*" | "/"
+Whitespace ::= " " | "\n" | "\r" | "\r\n" | "\t"
+Operator ::= "+" | "-" | "*" | "/" | ">" | "<" | "<=" | ">=" | "==" | "&&" | "||" | "+=" | "-=" | "*=" | "/="
+LParen ::= "("
+RParen ::= ")"
 Comment  ::= '/*' ( [^*] | '*'+ [^*/] )* '*'* '*/'
+
 \end{verbatim}
 
 \subsection{Szintaxis diagramok}
@@ -314,16 +294,16 @@ Comment  ::= '/*' ( [^*] | '*'+ [^*/] )* '*'* '*/'
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=1]{kepek/rr_operator.png}
-\caption{Operator}
-\label{fig:rr_operator}
+\includegraphics[scale=0.5]{kepek/rr_whitespace.png}
+\caption{Whitespace}
+\label{fig:rr_whitespace}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=1]{kepek/rr_linebreak.png}
-\caption{LineBreak}
-\label{fig:rr_linebreak}
+\includegraphics[scale=1]{kepek/rr_operator.png}
+\caption{Operator}
+\label{fig:rr_operator}
 \end{figure}
 
 \begin{figure}[h!]
@@ -349,9 +329,30 @@ Comment  ::= '/*' ( [^*] | '*'+ [^*/] )* '*'* '*/'
 
 \begin{figure}[h!]
 \centering
+\includegraphics[scale=1]{kepek/rr_block.png}
+\caption{Block}
+\label{fig:rr_block}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{kepek/rr_binaryoperator.png}
+\caption{BinaryOperator}
+\label{fig:rr_binaryoperator}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
 \includegraphics[scale=0.5]{kepek/rr_identifier.png}
 \caption{Identifier}
 \label{fig:rr_identifier}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.5]{kepek/rr_expression.png}
+\caption{Expression}
+\label{fig:rr_expression}
 \end{figure}
 
 \begin{figure}[h!]
@@ -377,30 +378,30 @@ Comment  ::= '/*' ( [^*] | '*'+ [^*/] )* '*'* '*/'
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.4]{kepek/rr_selection.png}
-\caption{Selection}
-\label{fig:rr_selection}
+\includegraphics[scale=0.4]{kepek/rr_if.png}
+\caption{If}
+\label{fig:rr_if}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.4]{kepek/rr_choose.png}
-\caption{Choose}
-\label{fig:rr_choose}
+\includegraphics[scale=0.4]{kepek/rr_switch.png}
+\caption{Switch}
+\label{fig:rr_switch}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.4]{kepek/rr_loop.png}
-\caption{Loop}
-\label{fig:rr_loop}
+\includegraphics[scale=0.4]{kepek/rr_for.png}
+\caption{For}
+\label{fig:rr_for}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.4]{kepek/rr_endloop.png}
-\caption{EndLoop}
-\label{fig:rr_endloop}
+\includegraphics[scale=0.4]{kepek/rr_while.png}
+\caption{While}
+\label{fig:rr_while}
 \end{figure}
 
 \begin{figure}[h!]
@@ -426,20 +427,34 @@ Comment  ::= '/*' ( [^*] | '*'+ [^*/] )* '*'* '*/'
 
 \section{Példák}
 
-Egy példa forráskód részlet , melyben egy osztály és a benne lévő elemek láthatók
+Egy példa forráskód részlet, melyben egy osztály és a benne lévő elemek láthatók
 
 \begin{verbatim}
-Create NewLangExample(elsoParam, masodikParam)
-	harmadikParam = 10
+Create Ember
 	
-	funct addAllParam()
-		elsoParam + masodikParam + harmadikParam
+	Ember(string nev, int kor, int irSzam, string utca, int hSz)
+		string @nev = nev
+		int @kor = kor
+		Cim @cim = Cim(irSzam, utca, hSz)
+	End
+		
+	Funct void @decrKor(int szam)
+		While szam>0
+			@kor = @kor - 1
+			@szam = @szam --
+		End
+	End
+	
+	Funct string @createString()
+		@nev + @kor + @cim.createString
+	End
+End
 \end{verbatim}
 		
 Az alábbiakban a fenti osztály példányosítása és használatának példája látható
 
 \begin{verbatim}
-pelda = NewLangExample(1, 3)
-pelda.setElsoParam(5)
-szam = pelda.addAllParam
+Ember pelda = Ember("teszt", 20, 1542, "Teszteles", 50)
+pelda.setParam1("TesztKetto")
+string ember = pelda.createString
 \end{verbatim}
