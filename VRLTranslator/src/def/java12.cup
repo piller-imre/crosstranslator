@@ -1,0 +1,31 @@
+package def;
+import main.*;
+import java.util.*;
+import java.io.*;
+import java_cup.runtime.*;
+import java_cup.runtime.ComplexSymbolFactory.ComplexSymbol;
+
+parser code {:
+  public boolean syntaxErrors;
+
+  Scanner scanner;
+
+  public Parser(Scanner scan) {
+    scanner = scan;
+  }
+:};
+
+terminal CREATE, IDENTIFIER, END;
+
+non terminal Program        program;
+non terminal List<ClassExpression>     clslist;
+non terminal ClassExpression           cls;
+
+program   ::=  clslist:cl                        {: RESULT = new Program(cl); :}
+    ;
+clslist  ::=  cls:c clslist:cl                           {: cl.add(c); RESULT = cl; :}
+    | /* empty */                                  {: RESULT = new LinkedList<ClassExpression>(); :}
+    ;
+    
+cls ::= CREATE IDENTIFIER:i END			{: RESULT = new ClassExpression(i.toString()); :}
+	;
