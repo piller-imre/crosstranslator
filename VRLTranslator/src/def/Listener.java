@@ -36,7 +36,7 @@ public class Listener extends MouseAdapter {
 	JLabel fileName,message;
 	JPanel messagePanel;
 	JScrollPane scrollPane;
-	List<String> content = new ArrayList<>();
+	ArrayList<String> content = new ArrayList<>();
 	
 	Listener(JButton button,JLabel message, JPanel messagePanel, JScrollPane scrollPane){
 		this.button = button;
@@ -75,22 +75,26 @@ public class Listener extends MouseAdapter {
 				token = anno.getNextToken();
 			}
 			
-			/*Parser parser = new Parser(new Scanner(content));
+			Parser parser = new Parser(new Scanner(content));
 			try {
 				parser.parse();
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			}*/
-			
-			System.out.println("Here is the standard output of the command:\n");
+			}
+			/*System.out.println("Here is the standard output of the command:\n");
 			String s = null;
 			int i=0;
 			message.setText("<html>");
 			for (String string : content) {
-				message.setText(message.getText() + string +"<br />");
+				try {
+					message.setText(parser.parse().value.toString());
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
-			message.setText(message.getText() + "</html>");
+			message.setText(message.getText() + "</html>");*/
 		}
 	}
 }

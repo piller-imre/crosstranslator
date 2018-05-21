@@ -1,4 +1,5 @@
 package def;
+import java_cup.runtime.Symbol;
 import main.*;
 import main.ClassExpression;
 /**
@@ -20,7 +21,7 @@ public class Example_Annoflex {
 	/** @expr [\t]+                                                                         */ String createTabulator()   { return "tabulator"; }
 	/** @expr (\+ | \- | \+\+ | \-\- | \&\& | \|\| | \= | \=\= | \+\= | \-\= | \*\= | \/\= | \< | \> | \<\= | \>\= )   */ String createOperator()         { return "operator"; }
 	/** @expr [A-Z][a-zA-Z0-9_]+                                                          */ String createIdentifier()    { return "identifier"; }
-	/** @expr @?[a-z][a-zA-Z0-9_]+\.[a-zA-Z0-9_]+\([a-zA-Z0-9_,.]?\)                                         */ String createFunctionCall()    { return "functioncall"; }
+	/** @expr @?[a-z][a-zA-Z0-9_]+\.[a-zA-Z0-9_]+\(\)    */ String createFunctionCall()    { return "functioncall"; }
 	/** @expr \(                                                                             */ String createLeftpar()     { return "lParen"; }
 	/** @expr \)                                                                             */ String createRightpar()    { return "rParen"; }
 	/** @expr \{                                                                             */ String createLeftbrace()   { return "lBrace"; }
@@ -34,7 +35,6 @@ public class Example_Annoflex {
 	/** @expr \,                                                                       */ String createComma()      { return "comma"; }
 	/** @expr [^]                                                                           */ String createMisc()        { return "misc"; }
 	
-  
     //%%LEX-MAIN-START%%
     
     //================================================
@@ -50,12 +50,12 @@ public class Example_Annoflex {
      *             Generation Statistics             *
      * * * * * * * * * * * * * * * * * * * * * * * * *
      *                                               *
-     * Rules:           24                           *
+     * Rules:           27                           *
      * Lookaheads:      0                            *
      * Alphabet length: 53                           *
-     * NFA states:      173                          *
-     * DFA states:      106                          *
-     * Static size:     16 KB                        *
+     * NFA states:      182                          *
+     * DFA states:      105                          *
+     * Static size:     8 KB                         *
      * Instance size:   24 Bytes                     *
      *                                               *
      ************************************************/
@@ -68,50 +68,53 @@ public class Example_Annoflex {
      * Maps Unicode characters to DFA input symbols.
      */
     private static final byte[] CHARACTER_MAP = createCharacterMap(
-    "\1\t\23\1\3\1\0\1\2\1\4\1\1\22\22\1\1\5\7\1\1\1\17\1\21\1\n\1" +
-    "\5\1\30\1\6\1\20\1\13\1\33\n\1\2\f\1\t\1\r\1\1\1\16\1\31\2\34\1" +
-    "\31\2\35\1\31\2\36\1\31\t\37\1\31\3\40\1\31\3\26\1\1\1\27\1" +
-    "\1\1\33\1\1\1\43\1\57\1\'\1\63\1\"\1\50\1\62\1\53\1\52\1\32\2" +
-    "\55\1\32\1\46\1\54\1\56\1\32\1\41\1\61\1\44\1\45\1\60\1\51\1" +
-    "\32\1\64\1\32\1\24\1\b\1\25\1\1\7\0\1\1\u1fa2\0\2");
+    "\0\t\3\1\2\1\0\1\1\1\27\1\0\22\1\1\0\5\6\1\0\1\17\1\20\1\t\1" +
+    "\4\1\26\1\5\1\16\1\n\1\32\n\25\1\0\1\13\1\b\1\f\1\0\1\r\1\30\2" +
+    "\33\1\30\1\40\1\34\1\30\2\35\1\30\t\36\1\30\3\37\1\30\3\23\1" +
+    "\0\1\24\1\0\1\32\1\0\1\43\1\60\1\'\1\56\1\"\1\50\1\63\1\53\1" +
+    "\52\1\31\2\55\1\31\1\46\1\54\1\57\1\31\1\41\1\62\1\44\1\45\1" +
+    "\61\1\51\1\31\1\64\1\31\1\21\1\7\1\22\1");
     
     /**
      * The transition table of the DFA.
      */
     private static final byte[][] TRANSITION_TABLE = createTransitionTable(
-    "\0\31\34\34\0\31\74\34\0\31\74\34\0\31\74\34\0\31\74\34\0\31\74\34\0\31" +
-    "\74\34\0\31\26\34\0\31\26\34\0\65\0\31\74\22\5\1\74\t\0\65\0\2\r\1\0\17" +
-    "\r\1\0\"\0\3\16\2\0\60\0\23\17\1\0\41\0\65\0\65\0\65\0\65\0\65\0\65" +
-    "\0\31\26\34\0\33\27\1\0\31\0\65\0\65\31\2\r\1\16\2\103\1\102\1\101\1" +
-    "\100\1\76\1\77\2\76\2\51\1\20\1\31\1\21\1\r\1\17\1\22\1\23\1\24\1\25\1" +
-    "\30\1\54\1\'\1\27\1\73\1\63\1\52\1\60\1\67\1\'\2\120\1\'\6\45\1\'\3" +
-    "\144\1\133\1\41\1\125\1\'\1\115\1\'\1\0\20\33\1\f\1\0\43\0\17\33\1\0\45" +
-    "\0\17\33\1\0\t\26\n\146\1\26\21\0\17\33\1\0\t\26\34\0\31\147\32\36\1" +
-    "\147\1\0\1\1\1\0\3\1\24\"\21\37\1\"\n\0\31\151\23\40\1\151\b\0\31\147\34" +
-    "\0\31\147\34\0\1\1\1\0\3\1\24\"\13\43\1\"\20\0\31\151\r\44\1\151\16" +
-    "\0\1\1\1\0\3\1\24\"\21\150\1\"\n\0\31\151\34\0\31\151\34\0\32\50\1\0\6" +
-    "\50\24\0\31\74\17\4\1\74\f\0\31\74\16\13\1\74\r\0\31\74\34\0\31\74\13" +
-    "\3\1\74\20\0\31\74\t\2\1\74\22\0\31\74\21\75\1\74\n\0\31\74\20\57\1" +
-    "\74\13\0\31\74\16\55\1\74\r\0\31\74\r\61\1\74\16\0\31\74\f\62\1\74\6" +
-    "\64\1\74\b\0\31\74\b\6\1\74\23\0\31\74\24\152\1\74\7\0\31\74\21\65\1" +
-    "\74\n\0\31\74\22\66\1\74\t\0\31\74\13\56\1\74\20\0\31\74\n\70\1\74\21" +
-    "\0\31\74\t\71\1\74\22\0\31\74\b\72\1\74\23\0\31\74\34\0\31\74\13\53\1" +
-    "\74\20\0\t\n\1\0\53\0\t\n\1\0\53\0\b\n\1\0\54\0\7\n\1\0\55\0\6\n\1\0\2" +
-    "\n\1\0\53\0\5\n\1\0\3\n\1\0\53\0\17\33\1\0\t\26\33\t\1\0\31\26\33\t\1" +
-    "\0\31\26\b\105\1\26\23\0\31\26\n\106\1\26\21\0\31\26\r\107\1\26\16\0\31" +
-    "\26\23\110\1\26\b\0\17\33\1\0\t\26\21\111\1\26\n\0\31\147\13\112\1\147\20" +
-    "\0\1\1\1\0\3\1\24\"\16\113\1\"\r\0\31\151\21\114\1\151\1\137\1\151\b" +
-    "\0\31\147\n\104\1\147\21\0\1\1\1\0\3\1\24\"\b\116\1\"\23\0\31\151\b" +
-    "\117\1\151\23\0\31\26\31\t\1\26\2\0\17\33\1\0\t\26\r\121\1\26\16\0\31" +
-    "\147\21\122\1\147\n\0\1\1\1\0\3\1\24\"\b\123\1\"\23\0\31\151\13\124\1" +
-    "\151\20\0\31\26\r\t\1\26\16\0\31\26\n\126\1\26\21\0\17\33\1\0\t\26\t" +
-    "\127\1\26\22\0\31\147\24\130\1\147\7\0\1\1\1\0\3\1\24\"\23\131\1\"\b" +
-    "\0\31\151\23\132\1\151\b\0\31\26\t\t\1\26\22\0\17\33\1\0\t\26\24\\\1" +
-    "\26\7\0\31\147\26\135\1\147\5\0\1\1\1\0\3\1\24\"\f\136\1\"\17\0\31\26\16" +
-    "\b\1\26\r\0\17\33\1\0\t\26\21\140\1\26\n\0\31\147\24\141\1\147\7\0\1" +
-    "\1\1\0\3\1\24\"\26\142\1\"\5\0\31\151\b\46\1\151\3\143\1\151\17\0\31" +
-    "\26\t\b\1\26\22\0\31\26\13\145\1\26\20\0\17\33\1\0\t\26\34\0\31\147\27" +
-    "\35\1\147\4\0\1\1\1\0\3\1\24\"\34\0\31\74\t\7\1\74\22");
+    "\0\30\30\35\0\30\65\35\0\30\65\35\0\30\65\35\0\30\65\35\0\30\65\35\0\30" +
+    "\65\35\0\30\65\35\0\16\40\1\0\t\30\35\0\16\40\1\0\t\30\35\0\1\13\1\0\25" +
+    "\13\1\0\35\0\2\f\1\0\24\f\1\0\35\0\3\r\1\0\61\0\65\0\30\65\26\b\1\65\6" +
+    "\0\65\0\65\0\65\0\65\0\65\0\65\0\65\0\65\0\16\40\1\0\t\30\35\0\32\31\1" +
+    "\0\32\0\31\1\1\0\7\1\24\0\65\0\65\34\1\13\1\f\1\r\1\74\1\73\1\72\1\71\1" +
+    "\67\1\70\2\67\2\32\1\34\1\21\1\22\1\23\1\24\1\25\1\26\1\27\1\33\1\75\1" +
+    "\46\1\150\1\31\1\64\1\54\1\41\1\51\1\60\1\44\1\150\2\101\1\150\6\131\1" +
+    "\150\3\111\1\142\1\127\1\121\1\116\1\150\2\0\20\20\1\0\44\0\17\36\1" +
+    "\0\b\37\35\0\30\37\35\0\30\65\20\4\1\65\f\0\30\65\23\5\1\65\t\0\30\65\17" +
+    "\"\1\65\r\0\30\65\16\17\1\65\16\0\30\65\f\3\1\65\20\0\30\65\35\0\30" +
+    "\65\n\2\1\65\22\0\30\65\22\66\1\65\n\0\30\65\21\50\1\65\13\0\30\65\17" +
+    "\45\1\65\r\0\30\65\16\52\1\65\16\0\30\65\r\53\1\65\6\55\1\65\b\0\30" +
+    "\65\t\6\1\65\23\0\30\65\25\151\1\65\7\0\30\65\22\56\1\65\n\0\30\65\23" +
+    "\57\1\65\t\0\30\65\f\'\1\65\20\0\30\65\13\61\1\65\21\0\30\65\n\62\1" +
+    "\65\22\0\30\65\t\63\1\65\23\0\30\65\35\0\30\65\f\43\1\65\20\0\b\16\1" +
+    "\0\54\0\b\16\1\0\54\0\7\16\1\0\55\0\6\16\1\0\56\0\5\16\1\0\2\16\1\0\54" +
+    "\0\4\16\1\0\3\16\1\0\54\0\1\13\1\f\1\0\24\75\1\0\35\0\16\40\1\0\t\30\34" +
+    "\n\1\0\16\40\1\0\t\30\13\76\1\30\21\0\16\40\1\0\t\30\t\77\1\30\23\0\30" +
+    "\30\t\100\1\30\23\0\16\40\1\0\t\30\t\76\1\30\23\0\16\40\1\0\t\30\13" +
+    "\102\1\30\21\0\16\40\1\0\t\30\16\103\1\30\16\0\16\40\1\0\t\30\24\104\1" +
+    "\30\b\0\16\40\1\0\t\30\22\105\1\30\n\0\16\40\1\0\t\30\f\106\1\30\20" +
+    "\0\16\40\1\0\t\30\17\107\1\30\r\0\30\30\22\110\1\30\1\135\1\30\b\0\16" +
+    "\40\1\0\t\30\33\n\1\30\1\0\16\40\1\0\t\30\16\112\1\30\16\0\16\40\1\0\t" +
+    "\30\22\113\1\30\n\0\16\40\1\0\t\30\t\114\1\30\23\0\30\30\f\115\1\30\20" +
+    "\0\16\40\1\0\t\30\26\n\1\30\6\0\16\40\1\0\t\30\22\117\1\30\n\0\30\30\24" +
+    "\120\1\30\b\0\16\40\1\0\t\30\16\n\1\30\16\0\16\40\1\0\t\30\13\122\1" +
+    "\30\21\0\16\40\1\0\t\30\n\123\1\30\22\0\16\40\1\0\t\30\25\124\1\30\7" +
+    "\0\16\40\1\0\t\30\24\125\1\30\b\0\30\30\24\126\1\30\b\0\16\40\1\0\t" +
+    "\30\f\n\1\30\20\0\30\30\16\130\1\30\16\0\16\40\1\0\t\30\n\n\1\30\22" +
+    "\0\16\40\1\0\t\30\25\132\1\30\7\0\16\40\1\0\t\30\30\133\1\30\4\0\16" +
+    "\40\1\0\t\30\r\\\1\30\17\0\16\40\1\0\t\30\17\t\1\30\r\0\16\40\1\0\t" +
+    "\30\22\136\1\30\n\0\16\40\1\0\t\30\25\137\1\30\7\0\16\40\1\0\t\30\30" +
+    "\140\1\30\4\0\30\30\t\147\1\30\3\141\1\30\17\0\16\40\1\0\t\30\n\t\1" +
+    "\30\22\0\16\40\1\0\t\30\f\143\1\30\20\0\16\40\1\0\t\30\13\144\1\30\21" +
+    "\0\16\40\1\0\t\30\31\145\1\30\3\0\16\40\1\0\t\30\22\146\1\30\n\0\30" +
+    "\30\35\0\30\65\n\7\1\65\22");
     
     /**
      * Maps state numbers to action numbers.
@@ -119,10 +122,10 @@ public class Example_Annoflex {
     private static final byte[] ACTION_MAP = createActionMap(
     "\0\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\b\1\t\1\n\1\13\1\f\1" +
     "\r\1\16\1\17\1\20\1\21\1\22\1\23\1\24\1\25\1\26\1\27\1" +
-    "\30\1\0\3\25\1\b\1\25\2\30\1\25\1\b\1\25\1\30\1\25\1\30\1" +
-    "\0\1\30\2\n\1\30\1\n\3\30\1\n\2\30\1\n\3\30\1\n\3\30\1" +
-    "\n\2\t\1\30\3\t\2\25\t\30\1\25\2\30\1\25\4\30\1\25\5\30\1" +
-    "\25\b\30\1\25\5\n\1");
+    "\30\1\31\1\32\1\33\1\0\4\33\1\16\2\33\1\16\1\33\1\16\2" +
+    "\33\1\16\2\33\1\16\3\33\1\16\3\33\1\16\2\r\1\33\3\r\2" +
+    "\n\1\27\3\33\1\27\7\33\1\27\4\33\1\27\2\33\1\27\5\33\1" +
+    "\27\1\33\1\27\b\33\1\27\5\33\1\16\1");
     
     //===============
     // String Fields
@@ -181,7 +184,7 @@ public class Example_Annoflex {
      * @return The character map of the scanner.
      */
     private static byte[] createCharacterMap(String characterMapData) {
-        byte[] characterMap = new byte[8234];
+        byte[] characterMap = new byte[126];
         int length = characterMapData.length();
         int i = 0;
         int j = 0;
@@ -204,7 +207,7 @@ public class Example_Annoflex {
      * @return The transition table of the scanner.
      */
     private static byte[][] createTransitionTable(String transitionTableData) {
-        byte[][] transitionTable = new byte[106][53];
+        byte[][] transitionTable = new byte[105][53];
         int length = transitionTableData.length();
         int i = 0;
         int j = 0;
@@ -233,7 +236,7 @@ public class Example_Annoflex {
      * @return The action map of the scanner.
      */
     private static byte[] createActionMap(String actionMapData) {
-        byte[] actionMap = new byte[106];
+        byte[] actionMap = new byte[105];
         int length = actionMapData.length();
         int i = 0;
         int j = 0;
@@ -425,7 +428,7 @@ public class Example_Annoflex {
         if (dot < regionEnd) {
             
             // find longest match
-            int curState = 25;
+            int curState = 28;
             int iterator = dot;
             int matchState = -1;
             int matchPosition = 0;
@@ -433,8 +436,8 @@ public class Example_Annoflex {
             do {
                 char curChar = string.charAt(iterator);
                 
-                curState = TRANSITION_TABLE[curState][curChar >= 8234 ?
-                        1 : CHARACTER_MAP[curChar]];
+                curState = TRANSITION_TABLE[curState][curChar >= 126 ?
+                        0 : CHARACTER_MAP[curChar]];
                 
                 if (curState == -1) {
                     break;
@@ -461,24 +464,27 @@ public class Example_Annoflex {
                 case 3: return createSwitch();
                 case 4: return createFor();
                 case 5: return createWhile();
-                case 6: return createModifier();
-                case 7: return createVarType();
-                case 8: return createOperator();
-                case 9: return createIdentifier();
-                case 10: return createFunctionCall();
-                case 11: return createWhitespace();
-                case 12: return createLinebreak();
-                case 13: return createTabulator();
-                case 14: return createLeftpar();
-                case 15: return createRightpar();
-                case 16: return createLeftbrace();
-                case 17: return createRightbrace();
-                case 18: return createLeftbrack();
-                case 19: return createRightbrack();
-                case 20: return createVariable();
-                case 21: return createNumber();
-                case 22: return createComma();
-                case 23: return createMisc();
+                case 6: return createEnd();
+                case 7: return createModifier();
+                case 8: return createVarType();
+                case 9: return createWhitespace();
+                case 10: return createLinebreak();
+                case 11: return createTabulator();
+                case 12: return createOperator();
+                case 13: return createIdentifier();
+                case 14: return createFunctionCall();
+                case 15: return createLeftpar();
+                case 16: return createRightpar();
+                case 17: return createLeftbrace();
+                case 18: return createRightbrace();
+                case 19: return createLeftbrack();
+                case 20: return createRightbrack();
+                case 21: return createColon();
+                case 22: return createVariable();
+                case 23: return createNumber();
+                case 24: return createThisParam();
+                case 25: return createComma();
+                case 26: return createMisc();
                 }
             }
             

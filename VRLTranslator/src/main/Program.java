@@ -23,4 +23,11 @@ public class Program {
 	public void addValues(ClassExpression value) {
 		this.values.add(value);
 	}
+
+	@Override
+	public String toString() {
+		return "Program [values=" + values + "]";
+	}
+	
+	
 }

@@ -6,7 +6,7 @@ import java.util.List;
 public class ClassExpression extends Expression {
 	private String name;
 	private List<VarExpression> members;
-	private List<Function> methods;
+	private List<FunctExpression> methods;
 	
 	public ClassExpression(String name) {
 		super();
@@ -32,11 +32,11 @@ public class ClassExpression extends Expression {
 		this.members = members;
 	}
 
-	public List<Function> getMethods() {
+	public List<FunctExpression> getMethods() {
 		return methods;
 	}
 
-	public void setMethods(List<Function> methods) {
+	public void setMethods(List<FunctExpression> methods) {
 		this.methods = methods;
 	}
 	
@@ -52,16 +52,22 @@ public class ClassExpression extends Expression {
 		this.members.set(place, member);
 	}
 	
-	public void addFunction(Function method) {
+	public void addFunction(FunctExpression method) {
 		this.methods.add(method);
 	}
 	
-	public void removeFunction(Function method) {
+	public void removeFunction(FunctExpression method) {
 		this.methods.remove(method);
 	}
 	
-	public void setFunction(int place, Function method) {
+	public void setFunction(int place, FunctExpression method) {
 		this.methods.set(place, method);
 	}
+
+	@Override
+	public String toString() {
+		return "ClassExpression [name=" + name + ", members=" + members + ", methods=" + methods + "]";
+	}
+	
 	
 }
