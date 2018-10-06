@@ -2,6 +2,8 @@
 
 \section{Általános szempontok}
 
+% TODO: A kezelhetőséget itt majd még konkretizálni kell! Például: könnyen tanulható, olvasható, egyszerű szerkezeteket tartalmaz, hasonlít az elterjedt megoldásokhoz
+
 A saját nyelv kialakításánál az elsődleges szempont a könnyű kezelhetőség volt, hogy bár több nyelvre, több platformra kerülhet lefordításra a kód, a felhasználó, programozó egyszerűen, könnyen tudja megírni a kódot a definiált nyelven, így nem kell minden célnyelvi szintektikai és szemantikai szabállyal tisztába lennie, azokat külön-külön alkalmaznia.
 
 Ezek alapján a nyelv a Python nyelvhez hasonló megoldásokat és jegyeket hordoz magán, a nyelvi szintaktika és szemantika megvalósításának tekintetében.
@@ -9,6 +11,10 @@ Ezek alapján a nyelv a Python nyelvhez hasonló megoldásokat és jegyeket hord
 Ahhoz, hogy a nyelvet definiálni lehessen az alábbiakban áttekintjük a feladat során célnyelvként tekintett nyelveket általánosan, azok megvalósítását, tulajdonságait, fő elemeit. Majd ezután a saját definiált nyelv tervezett nyelvi elemeit vesszük sorra.
 
 \section{A célnyelvek áttekintése}
+
+% TODO: Megnézni, hogy a korábbiakban hogy volt bevezetve a "célnyelv" fogalma, és vagy ott, vagy itt pontosítani!
+
+% TODO: A célnyelveknek itt külön subsection lenne jó majd!
 
 A C nyelv magasszintű, általános célú programozási nyelv, mely az egyik legelterjedtebb programozási nyelv, a ma fellehető számítógép architektúrák szinte mindegyikére készült C fordító. A nyelv sturkturált és szabványos programozási nyelv, ugyanúgy megtalálhatóak itt a vezérlési szerkezetek mint a többi magas szintű nyelvben. Változó deklarálásakor meg kell adni a változó nevét és típusát is, mivel a nyelv erősen típusok nyelv. A változó neve konvenció alapján betűvel kezdődik és utána betűket és számokat tartalmazhat. Ezután egyenlőségjellel adhatjuk meg a változó értékét. C nyelven az utasításokat a sor végén ;-vel zárjuk le. Mivel az egyes utasítások lezárását ; jelzi, a nyelven a sortörések kihagyhatók, ezek a fehér karakterek csak az olvashatóságot növelik, a fordítás során eltávolítására kerülnek. C nyelven írt programok során is az utasítások szekvenciálisan futnak le.
 

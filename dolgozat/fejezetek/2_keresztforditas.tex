@@ -2,11 +2,16 @@
 
 \section{Formális nyelvek}
 
+% TODO: Ide kellenek majd még hivatkozások!
+% TODO: Definiálni kell az ábécét, a nyelvtant és a nyelvet!
+
 Általánosan formális nyelveknek nevezünk minden olyan nyelvet, melyekben véges hosszúságú szavak generálhatók véges ábécékből. Az informatikához kapcsolódóan az ilyen leírást a formális nyelvtannal jellemezzük, mely konkrétan egy formális nyelvet írnak le.
 
 A nyelvtan két nagy kategóriája a generatív és analitikus nyelvtan csoportja. Előbbi azt írja le, hogyan lehet előállítani az adott nyelvet az adott szabályhalmazből, míg utóbbi az adott nyelv olvasását írja le, ugyancsak szabályokkal.
 
 A programozási nyelvek alapvetően ilyen formális nyelvek.
+
+% TODO: A Chomsky féle hierarchiát itt meg kell majd említeni!
 
 \subsection{Véges automaták}
 
@@ -14,9 +19,11 @@ Fontos szót ejteni a véges automatákról (Final State Automata, FSA). A vége
 
 Két nagy csoportot különböztetünk, a determinisztikus és a nem determinisztikus automata. A nem determinisztikus automata esetében lehetnek olyan szavak, melyeket nem tud beolvasni, mivel egyes átmeneteknél elakadhat. Viszont a nem determinisztikus automata egy adott input szimbólum hatására egy adott állapotból több áűllapotba is átmehet. Véges automaták felhasználhatók a reguláris nyelvek leírására.
 
+% TODO: Itt elég csak a determinisztikus véges automatákra koncentrálni!
+
 \subsection{Reguláris nyelvek}
 
-A reguláris nyelvek reguláis kifejezések segíytségével kifejezett formális nyelv, melyeket a véges automaták képesek felismerni és értelmezni. Reguláris kifejezéseket több helyen is használnak az informatikában, mivel többféle kifejezést is értelmezni lehet, illetve sok helyen ellenőrzéseket lehet velük végezni különféle adatokon.
+A reguláris nyelvek reguláris kifejezések segítségével kifejezett formális nyelv, melyeket a véges automaták képesek felismerni és értelmezni. Reguláris kifejezéseket több helyen is használnak az informatikában, mivel többféle kifejezést is értelmezni lehet, illetve sok helyen ellenőrzéseket lehet velük végezni különféle adatokon.
 
 A reguláris nyelvek pedig a különféle programozási nyelvek feldolgozásánál nyújtanak segítséget, a lexer és parser generátorok egyes elemeinél, melyek alapján a generátorok készítése megtörténik.
 
@@ -42,10 +49,13 @@ Az tokenizálás a fordítás első lépése lesz, ebben a lépésben a felhaszn
 A tokenek sorozatában nem szerepelnek a különböző fehér karakterek, mint a szóköz, újsor, tabulátor karakter, mivel a tokenizer a feldolgozás során ezeket az elemeket, mivel ezek csak az olvashatóságot növelik a kódban, a feldolgozásához, fordításhoz plusz információval nem járulnak hozzá, törli.
 
 Ezután a többi tokent a megadott reguláris kifejezések alapján hozza létre. A leggyakoribb tokenek közül néhány példa:
-szám literál: [0-9_]+
-szöveg literál: [a-zA-Z0-9_]+
-zárójelek: \( és \)
-fehér karakterek: (\n | \r | \r\n | \f | \t)+
+szám literál: \texttt{[0-9\_]+}
+szöveg literál: \texttt{[a-zA-Z0-9\_]+}
+zárójelek: \texttt{(} és \texttt{)}
+fehér karakterek:
+\begin{verbatim}
+(\\n | \\r | \\r\\n | \\f | \\t)+
+\end{verbatim}
 
 A tokenizer általában egy külön programrész, osztály a feldolgozóban, melyet általában lexernek is neveznek. Ezt az osztályt külön programok segítségével lehet megalkotni, melyeket lexer generatornak nevezik. Az interneten többféle ilyen generátor is található, melyeket segítségül hívva meg lehet alkotni a feldolgozó osztályt.
 
@@ -65,6 +75,6 @@ A CUP generátort emellett magában is használható egy adott token sorozat fel
 
 Szintén nehézséget okozott a megfelelő parser generátor kiválasztása, hiszen annak olyannak kell lennie, hogy a kiválasztott lexer generátorral együtt tudjon működni, az az által generált eredményhalmazt be tudja olvasni. Itt is felmerültek a fájl szintaktikai megvalósításakor fellépő hibák. Sajnos a CUP parser generátor leírása nem volt annyira részletes ez ügyben, így a hibák javítása hosszabb időt vett igénybe.
 
-\subsection{Code generator}
+\subsection{Kód generálás}
 
 Az utolsó lépés, hogy miután a parser generator által létrehozott objektum hierarchia elkészült, ebből a program elvégzi a konvertálást, és gíy jön létre majd a célnyelvi forráskód, ami már az adott nyelv szintaktikájának megfelelő és felhasználható a programozó izlése szerint.
