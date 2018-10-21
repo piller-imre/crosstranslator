@@ -5,19 +5,40 @@
 % TODO: Ide kellenek majd még hivatkozások!
 % TODO: Definiálni kell az ábécét, a nyelvtant és a nyelvet!
 
-Általánosan formális nyelveknek nevezünk minden olyan nyelvet, melyekben véges hosszúságú szavak generálhatók véges ábécékből. Az informatikához kapcsolódóan az ilyen leírást a formális nyelvtannal jellemezzük, mely konkrétan egy formális nyelvet írnak le.
+A formális nyelvek bevezetéséhez először is át kell tekintetni, az ábécé, a nyelv és nyelvtan fogalmát.
 
-A nyelvtan két nagy kategóriája a generatív és analitikus nyelvtan csoportja. Előbbi azt írja le, hogyan lehet előállítani az adott nyelvet az adott szabályhalmazből, míg utóbbi az adott nyelv olvasását írja le, ugyancsak szabályokkal.
+"Szimbólumok tetszőleges nemüres, véges halmazát ábécének nevezzük és V-vel jelöljük." (Dömösi Pál, Falucskai János, Horváth Géza, Mecsei Zoltán, Nagy Benedek - Formális Nyelvek és Automaták https://gyires.inf.unideb.hu/KMITT/b24/) Látható tehát, hogy az ábécét egy halmazként definiáljuk, mely nem üres halmaz és tetszőleges szimbólumokat tartalmaz. Bár az említett könyvben a definíció szerint V-vel jelölik az ábécét, általánosságban azt mondhatjuk, hogy nagybetűvel (A, B) esetleg Σ-val történik ennek jelölése.
+
+"A V ábécé feletti szavak egy tetszőleges L halmazát a V ábécéből alkotott (formális) nyelvnek nevezzük" (Dömösi Pál, Falucskai János, Horváth Géza, Mecsei Zoltán, Nagy Benedek - Formális Nyelvek és Automaták https://gyires.inf.unideb.hu/KMITT/b24/), azaz a nyelv egy az adott ábécé felett értelmezett szavak tetszőleges halmaza lesz. Általánosan formális nyelveknek nevezünk minden olyan nyelvet, melyekben véges hosszúságú szavak generálhatók véges ábécékből.
+
+Az informatikához kapcsolódóan az ilyen leírást a formális nyelvtannal jellemezzük, mely konkrétan egy formális nyelvet ír le.
+
+A nyelvtan két nagy kategóriája a generatív és analitikus nyelvtan. Előbbi azt írja le, hogyan lehet előállítani az adott nyelvet egy adott szabályhalmazból, míg utóbbi az adott nyelv olvasását írja le, ugyancsak szabályokkal.
+A generatív nyelvek tekintetében meg kell említeni azok osztályozását is. Ezt először az 1950-es években vetette fel Noam Chomsky nyelvész, mely osztályozást róla nevezték Chomsky-hierarchiának.
+
+"Chomsky négy nyelvosztályt definiált. Ezeket számokkal jelölte, így van 0-ás, 1-es, 2-es és 3-as nyelvosztály. Az egyes nyelvosztályokban a helyettesítési szabályok alakjára vonatkozóan Chomsky az osztály sorszámának növekedésével egyre szigorúbb megkötéseket írt elő." (BACH IVÁN - Formális nyelvek https://www.typotex.hu/download/formalisnyelvek.pdf)
+
+ Ez a besorolás 4 osztályba sorolja a nyelveket az alapján, hogy mennyire kifejezőek. Az alábbi táblázatban lehet összefoglalni az egyes csoportok, azaz osztályok tulajdonságait.
+\begin{table}
+	\caption{Chomsky-hierarchia}
+	\label{1. táblázat}
+	\begin{tabular}{c|c|c|c|c}
+		\textbf{Nyelvoszály} & \textbf{Nyelvtanok} & \textbf{Nyelvek} & \textbf{Automaták} & \textbf{Produkciók szabályok}\\
+		0. nyelvosztály & Rekurzívan megszámlálható & Rekurzívan megszámlálható & Turing-gép & Nincs megkötés\\
+		1. nyelvosztály & Környezetfüggő & Környezetfüggő & Korlátos nem determinisztikus Turing-gép & $\alpha$A$\beta$ -> $\alpha$$\gamma$$\beta$\\
+		2. nyelvosztály & Környezetfüggetlen & Környezetfüggetlen & Nem determinisztikus veremautomata & A -> $\gamma$\\
+		3. nyelvosztály & Szabályos & Szabályos & Véges determinisztikus automata & A -> a illetve A -> aB vagy A -> Ba\\
+	\end{tabular}
+\end{table}
+(Formális nyelvtan - https://hu.wikipedia.org/wiki/Formális_nyelvtan)
 
 A programozási nyelvek alapvetően ilyen formális nyelvek.
-
-% TODO: A Chomsky féle hierarchiát itt meg kell majd említeni!
 
 \subsection{Véges automaták}
 
 Fontos szót ejteni a véges automatákról (Final State Automata, FSA). A véges automaták olyan automaták, melyek meghatározott véges állapothalmaz, bemeneti ábécé, kezdő és végállapot valamint átmeneti függvény megadása után egy rendszert képez. Ez felírható egy irányított gráffal, itt az egyes állapotok a gráf csúcspontjai. Mivel véges automatáról van szó, az automata az egyik állapotból egy input hatására egy másik állapotba kerül.
 
-Két nagy csoportot különböztetünk, a determinisztikus és a nem determinisztikus automata. A nem determinisztikus automata esetében lehetnek olyan szavak, melyeket nem tud beolvasni, mivel egyes átmeneteknél elakadhat. Viszont a nem determinisztikus automata egy adott input szimbólum hatására egy adott állapotból több áűllapotba is átmehet. Véges automaták felhasználhatók a reguláris nyelvek leírására.
+Két nagy csoportot különböztetünk, a determinisztikus és a nem determinisztikus automata. A nem determinisztikus automata esetében lehetnek olyan szavak, melyeket nem tud beolvasni, mivel egyes átmeneteknél elakadhat. Viszont a nem determinisztikus automata egy adott input szimbólum hatására egy adott állapotból több állapotba is átmehet. Véges automaták felhasználhatók a reguláris nyelvek leírására.
 
 % TODO: Itt elég csak a determinisztikus véges automatákra koncentrálni!
 
@@ -26,6 +47,34 @@ Két nagy csoportot különböztetünk, a determinisztikus és a nem determinisz
 A reguláris nyelvek reguláris kifejezések segítségével kifejezett formális nyelv, melyeket a véges automaták képesek felismerni és értelmezni. Reguláris kifejezéseket több helyen is használnak az informatikában, mivel többféle kifejezést is értelmezni lehet, illetve sok helyen ellenőrzéseket lehet velük végezni különféle adatokon.
 
 A reguláris nyelvek pedig a különféle programozási nyelvek feldolgozásánál nyújtanak segítséget, a lexer és parser generátorok egyes elemeinél, melyek alapján a generátorok készítése megtörténik.
+
+A fenti elemek készítése során a reguláris nyelvek használata végett mindenképpen meg kell vizsgálnunk a leíráshoz használt jelölésrendszert. Ilyen esetben az Extended Backus-Naur Form (ENBF) és railroad, vagy szintaxis diagram segítségével tudjuk a megfelelő nyelvtant összeállítani.
+
+\subsection{Extended Backus-Naur From}
+
+Az Extended Backus-Naur Form egy formális nyelvek leírására használható metanyelv, melyet John Backus hozott létre és mutatott be. Maga a metanyelv valójában szabályok halmaza, melyben terminális és nemterminális elemek találhatók meg adott összerendelésben, azaz kifejezésben melynek bal és jobb oldalán egy-egy elem áll általában ::= vagy : jellel összekapcsolva ;-vel lezárva a kifejezést. A terminális elemek olyan nyelvi elemek, melyek előre definiáltak, mint például a literálok (string literál, integer interál). A terminális elemeket a fentebb említett kifejezések bal oldalán nem jelennek meg.
+A nem terminális kifejezések ezekből a terminális kifejezésekből, más nemterminális kifejezésekből, vagy ezek kapcsolataiból állnak.
+
+id ::= 	STRING
+	;
+integer ::= INT
+	;
+
+Az fentebb látható esetekben a kifejezések bal oldalán egy-egy nemterminális kifejezés áll, a jobb oldalon ezzel szemben terminális kifejezés, string, illetve integer literál áll. Az alább láható kifejezésben ezután felhasználhatjuk a már definiált elemeket is.
+
+sum ::=	integer + integer
+	;
+
+Megadhatók a kifejezések olyan módon is, hogy egy bal oldalon álló nemterminális kifejezés több módon is előállítható. Ilyenkor a jobb oldalon álló kifejezéseket | jellel, azaz vagy kapcsolattal kell elválasztani.
+
+sum ::= integer + integer
+	;
+neg ::= integer - integer
+	;
+
+count ::= sum 
+	| neg
+	;
 
 % TODO: EBNF jelölésrendszere
 
