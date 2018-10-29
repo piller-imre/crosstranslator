@@ -6,7 +6,7 @@
 package hu.iit.uni_miskolc.horvath23.Crosstranslator.parser;
 
 /** CUP generated interface containing symbol constants. */
-public interface Sym {
+public interface sym {
   /* terminals */
   public static final int DIVEQ = 35;
   public static final int PLUSPLUS = 26;

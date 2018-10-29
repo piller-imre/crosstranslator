@@ -10,7 +10,6 @@ import java.io.*;
 import java_cup.runtime.*;
 import java_cup.runtime.ComplexSymbolFactory.ComplexSymbol;
 import hu.iit.uni_miskolc.horvath23.Crosstranslator.expressions.*;
-import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
   */
@@ -18,7 +17,7 @@ import java_cup.runtime.XMLElement;
 public class Parser extends java_cup.runtime.lr_parser {
 
  public final Class getSymbolContainer() {
-    return Sym.class;
+    return sym.class;
 }
 
   /** Default constructor. */
@@ -242,7 +241,7 @@ class CUP$Parser$actions {
             {
               List<ClassExpression> RESULT =null;
 		 RESULT = new LinkedList<ClassExpression>(); 
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("clslist",1, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("clslist",1, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), (Symbol) RESULT);
             }
           return CUP$Parser$result;
 

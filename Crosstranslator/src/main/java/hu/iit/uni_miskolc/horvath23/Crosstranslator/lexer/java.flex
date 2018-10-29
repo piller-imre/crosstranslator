@@ -27,7 +27,7 @@ import hu.iit.uni_miskolc.horvath23.Crosstranslator.parser.*;
 
 %public
 %class Scanner
-%implements Sym
+%implements sym
 
 %unicode
 

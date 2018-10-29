@@ -34,14 +34,15 @@ public class Listener extends MouseAdapter {
 	@Override
 	public void mouseClicked(MouseEvent e){
 		JFileChooser chooser = new JFileChooser();
-		chooser.setDialogTitle("F�jl kiv�laszt�sa");
+		chooser.setDialogTitle("Fájl kiválasztása");
 		int result = chooser.showOpenDialog(null);
 		if (result == JFileChooser.APPROVE_OPTION) {
 		    File file = chooser.getSelectedFile();
 		    try {
 				@SuppressWarnings("deprecation")
 				Parser parser = new Parser(new Scanner(new FileReader(file)));
-			} catch (FileNotFoundException e1) {
+				parser.parse();
+			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
