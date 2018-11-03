@@ -15,6 +15,9 @@ import javax.swing.JScrollPane;
 
 import hu.iit.uni_miskolc.horvath23.Crosstranslator.lexer.Scanner;
 import hu.iit.uni_miskolc.horvath23.Crosstranslator.parser.Parser;
+import java_cup.Lexer;
+import java_cup.runtime.ComplexSymbolFactory;
+import java_cup.runtime.ScannerBuffer;
 
 public class Listener extends MouseAdapter {
 
@@ -39,9 +42,12 @@ public class Listener extends MouseAdapter {
 		if (result == JFileChooser.APPROVE_OPTION) {
 		    File file = chooser.getSelectedFile();
 		    try {
-				@SuppressWarnings("deprecation")
-				Parser parser = new Parser(new Scanner(new FileReader(file)));
+		    	//Lexer scanner = new Lexer(new FileReader(file));
+		    	Scanner scanner = new Scanner(new FileReader(file));
+		    	ScannerBuffer buffer = new ScannerBuffer(scanner);
+				Parser parser = new Parser(buffer, new ComplexSymbolFactory());
 				parser.parse();
+				System.out.println(buffer.getBuffered());
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
