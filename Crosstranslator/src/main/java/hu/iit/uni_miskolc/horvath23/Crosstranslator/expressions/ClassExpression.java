@@ -15,8 +15,8 @@ public class ClassExpression extends Expression {
 	public ClassExpression(String name) {
 		super();
 		this.name = name;
-		this.members = new ArrayList<>();
-		this.methods = new ArrayList<>();
+		this.members = new ArrayList<VarExpression>();
+		this.methods = new ArrayList<FunctExpression>();
 	}
 
 	public String getName() {

@@ -11,7 +11,7 @@ public class Block extends Expression {
 	private List<Expression> members;
 
 	public Block() {
-		this.members = new ArrayList<>();
+		this.members = new ArrayList<Expression>();
 	}
 
 	public List<Expression> getMembers() {
