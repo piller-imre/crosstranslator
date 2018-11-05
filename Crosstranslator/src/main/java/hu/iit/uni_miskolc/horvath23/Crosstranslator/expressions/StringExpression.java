@@ -1,6 +1,10 @@
 package hu.iit.uni_miskolc.horvath23.Crosstranslator.expressions;
 
+/**
+ * Represents a string value
+ */
 public class StringExpression extends Expression {
+	
 	private String value;
 
 	public StringExpression(String value) {
@@ -14,8 +18,5 @@ public class StringExpression extends Expression {
 
 	public void setValue(String value) {
 		this.value = value;
-	}
-	
-	
-	
+	}	
 }

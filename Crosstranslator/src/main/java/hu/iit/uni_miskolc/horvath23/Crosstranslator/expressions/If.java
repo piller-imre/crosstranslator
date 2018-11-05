@@ -10,17 +10,20 @@ public class If extends Expression{
 		this.condition = condition;
 		this.block = block;
 	}
+	
 	public BinaryOperator getCondition() {
 		return condition;
 	}
+	
 	public void setCondition(BinaryOperator condition) {
 		this.condition = condition;
 	}
+	
 	public Block getBlock() {
 		return block;
 	}
+	
 	public void setBlock(Block block) {
 		this.block = block;
 	}
-
 }

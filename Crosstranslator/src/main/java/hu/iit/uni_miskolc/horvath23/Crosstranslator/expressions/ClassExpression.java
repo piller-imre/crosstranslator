@@ -3,7 +3,11 @@ package hu.iit.uni_miskolc.horvath23.Crosstranslator.expressions;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class definition
+ */
 public class ClassExpression extends Expression {
+	
 	private String name;
 	private List<VarExpression> members;
 	private List<FunctExpression> methods;
@@ -13,7 +17,6 @@ public class ClassExpression extends Expression {
 		this.name = name;
 		this.members = new ArrayList<>();
 		this.methods = new ArrayList<>();
-		
 	}
 
 	public String getName() {
@@ -63,11 +66,4 @@ public class ClassExpression extends Expression {
 	public void setFunction(int place, FunctExpression method) {
 		this.methods.set(place, method);
 	}
-
-	@Override
-	public String toString() {
-		return "ClassExpression [name=" + name + ", members=" + members + ", methods=" + methods + "]";
-	}
-	
-	
 }

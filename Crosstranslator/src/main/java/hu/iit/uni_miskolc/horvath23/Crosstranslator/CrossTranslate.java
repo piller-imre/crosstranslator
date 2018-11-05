@@ -14,6 +14,7 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 class WindowFrame extends JFrame {
+
 	private static final long serialVersionUID = -351798560130670466L;
 	JPanel panel, messagePanel;
 	JScrollPane scrollPane;
@@ -31,7 +32,8 @@ class WindowFrame extends JFrame {
 		setGUI();
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-	}	
+	}
+	
 	void setGUI() {
 		panel.setBackground(Color.decode("#DEB877"));
         panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
@@ -63,7 +65,6 @@ class WindowFrame extends JFrame {
 		
 		button.addMouseListener(new Listener(button,msg,messagePanel,scrollPane));
 	}
-
 }
 
 public class CrossTranslate {
