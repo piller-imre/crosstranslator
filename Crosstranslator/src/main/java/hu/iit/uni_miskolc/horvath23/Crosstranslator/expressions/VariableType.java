@@ -1,7 +1,16 @@
 package hu.iit.uni_miskolc.horvath23.Crosstranslator.expressions;
 
+/**
+ * Represents the available types
+ */
 public enum VariableType {
-	STRING("string"), INT("int"), DOUBLE("double"), BOOLEAN("boolean"), ARRAY("array"), DICTIONARY("dictionary"), VOID("void");
+	STRING("string"),
+	INT("int"),
+	DOUBLE("double"),
+	BOOLEAN("boolean"),
+	ARRAY("array"),
+	DICTIONARY("dictionary"),
+	VOID("void");
 	
 	private String dataType; 
     private VariableType(String dataType) { 

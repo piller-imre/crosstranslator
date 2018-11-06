@@ -3,7 +3,11 @@ package hu.iit.uni_miskolc.horvath23.Crosstranslator.expressions;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a sequence
+ */
 public class SequenceExpression extends Expression {
+	
 	private String name;
 	private List<Expression> values;
 	
@@ -11,15 +15,19 @@ public class SequenceExpression extends Expression {
 		this.name = name;
 		this.values = new ArrayList<Expression>();
 	}
+	
 	public String getName() {
 		return name;
 	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	public List<Expression> getValues() {
 		return values;
 	}
+	
 	public void setValues(List<Expression> values) {
 		this.values.addAll(values);
 	}
@@ -31,5 +39,4 @@ public class SequenceExpression extends Expression {
 	public void setValue(int place, Expression value) {
 		this.values.set(place, value);
 	}
-	
 }
