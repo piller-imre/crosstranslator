@@ -2,20 +2,28 @@ package hu.iit.uni_miskolc.horvath23.Crosstranslator.expressions;
 
 import java.util.List;
 
+/**
+ * Represents an associative array
+ */
 public class DictionaryExpression extends Expression {
+	
 	private String name;
 	private List<DictionaryElementExpression> elements;
+	
 	public DictionaryExpression(String name) {
 		super();
 		this.name = name;
 		this.elements.clear();
 	}
+	
 	public String getName() {
 		return name;
 	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	public List<DictionaryElementExpression> getElements() {
 		return elements;
 	}

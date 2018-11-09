@@ -22,10 +22,11 @@ import java_cup.runtime.ScannerBuffer;
 public class Listener extends MouseAdapter {
 
 	JButton button;
-	JLabel fileName,message;
+	JLabel fileName;
+	JLabel message;
 	JPanel messagePanel;
 	JScrollPane scrollPane;
-	ArrayList<String> content = new ArrayList<>();
+	ArrayList<String> content = new ArrayList<String>();
 	
 	Listener(JButton button,JLabel message, JPanel messagePanel, JScrollPane scrollPane){
 		this.button = button;
@@ -33,7 +34,7 @@ public class Listener extends MouseAdapter {
 		this.messagePanel = messagePanel;
 		this.scrollPane = scrollPane;
 	}
-	
+
 	@Override
 	public void mouseClicked(MouseEvent e){
 		JFileChooser chooser = new JFileChooser();
@@ -46,10 +47,13 @@ public class Listener extends MouseAdapter {
 		    	Scanner scanner = new Scanner(new FileReader(file));
 		    	ScannerBuffer buffer = new ScannerBuffer(scanner);
 				Parser parser = new Parser(buffer, new ComplexSymbolFactory());
-				parser.parse();
+				try {
+					parser.parse();
+				} catch (Exception exception) {
+					System.out.println(exception.getMessage());
+				}
 				System.out.println(buffer.getBuffered());
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}

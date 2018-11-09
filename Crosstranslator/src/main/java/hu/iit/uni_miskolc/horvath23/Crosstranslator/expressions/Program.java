@@ -3,6 +3,9 @@ package hu.iit.uni_miskolc.horvath23.Crosstranslator.expressions;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a program as a list of classes
+ */
 public class Program {
 	
 	private List<ClassExpression> values;
@@ -28,6 +31,4 @@ public class Program {
 	public String toString() {
 		return "Program [values=" + values + "]";
 	}
-	
-	
 }

@@ -2,7 +2,11 @@ package hu.iit.uni_miskolc.horvath23.Crosstranslator.expressions;
 
 import java.util.List;
 
+/**
+ * Representation of the function as an expression
+ */
 public class FunctExpression extends Expression {
+	
 	private ModifierType modifier;
 	private String name; 
 	private List<VarExpression> params;
@@ -15,30 +19,36 @@ public class FunctExpression extends Expression {
 		this.params = params;
 		this.block = block;
 	}
+	
 	public ModifierType getModifier() {
 		return modifier;
 	}
+	
 	public void setModifier(ModifierType modifier) {
 		this.modifier = modifier;
 	}
+	
 	public String getName() {
 		return name;
 	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	public List<VarExpression> getParams() {
 		return params;
 	}
+	
 	public void setParams(List<VarExpression> params) {
 		this.params = params;
 	}
+	
 	public Block getBlock() {
 		return block;
 	}
+	
 	public void setBlock(Block block) {
 		this.block = block;
 	}
-	
-	
 }
