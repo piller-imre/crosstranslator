@@ -74,5 +74,19 @@ public class LexerTest extends TestCase {
     	}
     }
     
+    public void testLparen()
+    {
+    	StringReader reader = new StringReader("(");
+    	Scanner scanner = new Scanner(reader);
+    	try { 
+    		Symbol symbol = scanner.next_token();
+    		assertEquals(symbol.sym, sym.LPAREN);
+    		assertEquals(symbol.value, '(');
+    	}
+    	catch (Exception exception) {
+    		fail("Unexpected exception!");
+    	}
+    }
+    
     // TODO: Test the other symbols!
 }
