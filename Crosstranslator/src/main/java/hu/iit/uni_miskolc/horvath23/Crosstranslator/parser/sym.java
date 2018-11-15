@@ -10,23 +10,24 @@ public interface sym {
   /* terminals */
   public static final int DIVEQ = 35;
   public static final int PLUSPLUS = 26;
-  public static final int STRING_LITERAL = 53;
-  public static final int FUNCTION = 43;
+  public static final int NONMEMBER = 52;
+  public static final int STRING_LITERAL = 58;
+  public static final int MEMBER_TAG = 53;
   public static final int GTEQ = 39;
   public static final int MULT = 24;
   public static final int GE = 41;
   public static final int LTEQ = 37;
   public static final int DOUBLE = 16;
-  public static final int PRIVATE = 48;
+  public static final int PRIVATE = 50;
   public static final int LPAREN = 6;
   public static final int INT = 14;
   public static final int ARRAY = 19;
-  public static final int FOR = 45;
+  public static final int FOR = 47;
   public static final int MINUS = 23;
   public static final int RPAREN = 7;
-  public static final int BOOLEAN_LITERAL = 51;
+  public static final int BOOLEAN_LITERAL = 56;
   public static final int OROR = 29;
-  public static final int CHARACTER_LITERAL = 52;
+  public static final int CHARACTER_LITERAL = 57;
   public static final int LT = 36;
   public static final int COMMA = 5;
   public static final int DIV = 25;
@@ -34,8 +35,10 @@ public interface sym {
   public static final int PLUSEQ = 32;
   public static final int MINUSEQ = 33;
   public static final int PLUS = 22;
-  public static final int NULL_LITERAL = 55;
+  public static final int NULL_LITERAL = 60;
   public static final int IF = 42;
+  public static final int MEMBER = 51;
+  public static final int EIF = 43;
   public static final int THIS = 21;
   public static final int DOT = 13;
   public static final int LE = 40;
@@ -48,22 +51,24 @@ public interface sym {
   public static final int MULTEQ = 34;
   public static final int VOID = 18;
   public static final int EQ = 30;
-  public static final int SWITCH = 44;
+  public static final int SWITCH = 46;
   public static final int LBRACK = 10;
   public static final int COLON = 12;
-  public static final int FLOATING_POINT_LITERAL = 50;
+  public static final int FLOATING_POINT_LITERAL = 55;
+  public static final int ELSE = 44;
   public static final int LBRACE = 8;
   public static final int VARIABLE = 4;
   public static final int RBRACK = 11;
-  public static final int WHILE = 46;
+  public static final int WHILE = 48;
   public static final int CREATE = 2;
-  public static final int PUBLIC = 47;
+  public static final int PUBLIC = 49;
   public static final int RBRACE = 9;
   public static final int END = 3;
   public static final int STRING = 15;
   public static final int GT = 38;
-  public static final int IDENTIFIER = 54;
-  public static final int INTEGER_LITERAL = 49;
+  public static final int FUNCT = 45;
+  public static final int IDENTIFIER = 59;
+  public static final int INTEGER_LITERAL = 54;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -108,12 +113,17 @@ public interface sym {
   "LE",
   "GE",
   "IF",
-  "FUNCTION",
+  "EIF",
+  "ELSE",
+  "FUNCT",
   "SWITCH",
   "FOR",
   "WHILE",
   "PUBLIC",
   "PRIVATE",
+  "MEMBER",
+  "NONMEMBER",
+  "MEMBER_TAG",
   "INTEGER_LITERAL",
   "FLOATING_POINT_LITERAL",
   "BOOLEAN_LITERAL",

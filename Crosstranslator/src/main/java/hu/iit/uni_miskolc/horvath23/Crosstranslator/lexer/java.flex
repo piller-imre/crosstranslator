@@ -118,6 +118,13 @@ SingleCharacter = [^\r\n\'\\]
   /* keywords */
   "Create"                       { return symbol(CREATE); }
   "End"                          { return symbol(END); }
+  "@"                            { return symbol(MEMBER_TAG); }
+  "If"                           { return symbol(IF); }
+  "EIf"                          { return symbol(EIF); }
+  "Else"                         { return symbol(ELSE); }
+  "Switch"                       { return symbol(SWITCH); }
+  "For"                          { return symbol(FOR); }
+  "Funct"                        { return symbol(FUNCT); }
   
   /* boolean literals */
   "true"                         { return symbol(BOOLEAN_LITERAL, true); }
