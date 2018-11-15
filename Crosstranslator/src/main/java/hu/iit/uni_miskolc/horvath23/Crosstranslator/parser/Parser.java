@@ -429,11 +429,13 @@ class CUP$Parser$actions {
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 3: // clslist ::= 
-            {
-              List<ClassExpression> RESULT =null;
-		 RESULT = new LinkedList<ClassExpression>(); 
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("clslist",1, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
-            }
+          {
+        	  // BUG: Class list parameter problem!
+              List<ClassExpression> RESULT = null;
+              RESULT = new LinkedList<ClassExpression>();
+              // CUP$Parser$result = parser.getSymbolFactory().newSymbol("clslist", 1, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = null;
+          }
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/

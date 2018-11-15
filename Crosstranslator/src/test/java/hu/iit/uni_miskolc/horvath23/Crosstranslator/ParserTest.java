@@ -49,5 +49,4 @@ public class ParserTest extends TestCase {
 	// TODO: Test empty class!
 	// TODO: Test single member!
 	// TODO: Test single method!
-	
 }
