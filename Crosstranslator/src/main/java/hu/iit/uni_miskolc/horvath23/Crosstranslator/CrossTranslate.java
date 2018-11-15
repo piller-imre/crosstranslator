@@ -13,21 +13,43 @@ import javax.swing.JTextArea;
 class WindowFrame extends JFrame {
 
 	private static final long serialVersionUID = -351798560130670466L;
-	
-	JFrame mainFrame;
-	JTextArea inputMessagePanel;
-	JTextArea outputMessagePanel;
-	JLabel label;
-	JButton toPhp, toJava, toJavaScript, toC, toPython;
-	JPanel buttonPanel;
+	private final Listener listener;
+	private JFrame mainFrame;
+	private JTextArea inputMessagePanel;
+	private JTextArea outputMessagePanel;
+	private JLabel label;
+	private JButton toPhp, toJava, toJavaScript, toC, toPython;
+	private JPanel buttonPanel;
+	private String inputText;
 	
 	WindowFrame() {
+		listener = new Listener();
 		mainFrame = new JFrame();
 		toPhp = new JButton("PHP");
+		toPhp.addActionListener((e) -> {
+			inputText = inputMessagePanel.getText();
+			listener.scanText(inputText, "PHP");
+		});
 		toJava = new JButton("Java");
+		toJava.addActionListener((e) -> {
+			inputText = inputMessagePanel.getText();
+			listener.scanText(inputText, "Java");
+		});
 		toJavaScript = new JButton("JavaScript");
+		toJavaScript.addActionListener((e) -> {
+			inputText = inputMessagePanel.getText();
+			listener.scanText(inputText, "JavaScript");
+		});
 		toC = new JButton("C");
+		toC.addActionListener((e) -> {
+			inputText = inputMessagePanel.getText();
+			listener.scanText(inputText, "C");
+		});
 		toPython = new JButton("Python");
+		toPython.addActionListener((e) -> {
+			inputText = inputMessagePanel.getText();
+			listener.scanText(inputText, "Python");
+		});
 		label = new JLabel("VRL nyelv feldolgozása");
 		inputMessagePanel = new JTextArea("Ide add meg a VRL kódot!");
 		outputMessagePanel = new JTextArea();

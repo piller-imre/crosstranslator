@@ -9,7 +9,7 @@ terminal CREATE, END;
 terminal VARIABLE, COMMA, LPAREN, RPAREN, LBRACE, RBRACE, LBRACK, RBRACK, COLON, DOT;
 terminal INT, STRING, DOUBLE, BOOLEAN, VOID, ARRAY, DICTIONARY, THIS;
 terminal PLUS, MINUS, MULT, DIV, PLUSPLUS, MINUSMINUS, ANDAND, OROR, EQ, EQEQ, PLUSEQ, MINUSEQ, MULTEQ, DIVEQ, LT, LTEQ, GT, GTEQ, LE, GE;
-terminal IF, FUNCTION, SWITCH, FOR, WHILE, PUBLIC, PRIVATE;
+terminal IF, EIF, ELSE, FUNCT, SWITCH, FOR, WHILE, PUBLIC, PRIVATE, MEMBER, NONMEMBER, MEMBER_TAG;
 
 terminal java.lang.Number INTEGER_LITERAL;
 terminal java.lang.Number FLOATING_POINT_LITERAL;
@@ -22,6 +22,7 @@ terminal NULL_LITERAL;
 non terminal Program        program;
 non terminal List<ClassExpression>     clslist;
 non terminal ModifierType modifier;
+non terminal VariableAttr varattr;
 non terminal ClassExpression           cls;
 non terminal Block block;
 non terminal List<VarExpression> identlist;
@@ -32,6 +33,10 @@ non terminal Expression expr;
 non terminal List<Expression> exprlist;
 non terminal AssignmentExpression assignment;
 non terminal FunctionCallExpression functCall;
+non terminal For forExpr;
+non terminal While whileExpr;
+non terminal If ifExpr;
+non terminal operator;
 
 start with program;
 
@@ -52,13 +57,16 @@ block ::=	expr:e				{: Block b = new Block(); b.addMember(e); RESULT = b; :}
 expr ::=	assignment
 	|	funct
 	|	variable
+	|	ifExpr
+	|	whileExpr
+	|	forExpr
 	;
 
 assignment ::= variable:v1 EQ variable:v2		{: RESULT = new AssignmentExpression(v1,v2); :} 
 	;
 	
-funct ::= FUNCTION IDENTIFIER:i LPAREN identlist:il RPAREN block:b END		{: RESULT = new FunctExpression(i.toString(), il, b); :}
-	|	modifier:m FUNCTION IDENTIFIER:i LPAREN identlist:il RPAREN variable:v END	{: Block b = new Block(); b.addMember(v); FunctExpression f = new FunctExpression(i.toString(), il, b); f.setModifier(m); RESULT = f; :}
+funct ::= FUNCT IDENTIFIER:i LPAREN identlist:il RPAREN block:b END		{: RESULT = new FunctExpression(i.toString(), il, b); :}
+	|	modifier:m FUNCT IDENTIFIER:i LPAREN identlist:il RPAREN variable:v END	{: Block b = new Block(); b.addMember(v); FunctExpression f = new FunctExpression(i.toString(), il, b); f.setModifier(m); RESULT = f; :}
 	;
 	
 identlist ::=	variable:v			{: LinkedList<VarExpression> il = new LinkedList<VarExpression>(); il.add(v); RESULT = il; :}
@@ -75,8 +83,47 @@ modifier ::= PUBLIC			{: RESULT = ModifierType.PUBLIC; :}
 	|	PRIVATE				{: RESULT = ModifierType.PRIVATE; :}
 	;
 	
-variable ::=	typident:t VARIABLE:v		{: RESULT = new VarExpression(v.toString(), ModifierType.PRIVATE, t); :}
-	|	modifier:m typident:t VARIABLE:v		{: RESULT = new VarExpression(v.toString(), m, t); :}
-	|	INTEGER_LITERAL:v		{: RESULT = new VarExpression(v.toString(), ModifierType.PRIVATE, VariableType.INT); :}
-	|	modifier:m INTEGER_LITERAL:v		{: RESULT = new VarExpression(v.toString(), m, VariableType.INT); :}
+varattr ::= MEMBER_TAG			{: RESULT = VariableAttr.MEMBER; :}
+	|	NONMEMBER			{: RESULT = VariableAttr.NONMEMBER; :}
+	;
+	
+variable ::=	typident:t IDENTIFIER:v		{: RESULT = new VarExpression(v.toString(), VariableAttr.NONMEMBER, ModifierType.PRIVATE, t); :}
+	|	modifier:m typident:t IDENTIFIER:v		{: RESULT = new VarExpression(v.toString(), VariableAttr.NONMEMBER, m, t); :}
+	|	INTEGER_LITERAL:v		{: RESULT = new VarExpression(v.toString(), VariableAttr.NONMEMBER, ModifierType.PRIVATE, VariableType.INT); :}
+	|	modifier:m INTEGER_LITERAL:v		{: RESULT = new VarExpression(v.toString(), VariableAttr.NONMEMBER, m, VariableType.INT); :}
+	|   typident:t varattr:va IDENTIFIER:v  {: RESULT = new VarExpression(v.toString(), va, ModifierType.PRIVATE, t); :}
+	|	modifier:m typident:t varattr:va IDENTIFIER:v		{: RESULT = new VarExpression(v.toString(), va, m, t); :}
+	|	varattr:va INTEGER_LITERAL:v		{: RESULT = new VarExpression(v.toString(), va, ModifierType.PRIVATE, VariableType.INT); :}
+	|	modifier:m varattr:va INTEGER_LITERAL:v		{: RESULT = new VarExpression(v.toString(), va, m, VariableType.INT); :}
+	;
+	
+operator ::=	PLUS
+	|	MINUS
+	|	MULT
+	|	DIV
+	|	PLUSPLUS
+	|	MINUSMINUS
+	|	ANDAND
+	|	OROR
+	|	EQ
+	|	EQEQ
+	|	PLUSEQ
+	|	MINUSEQ
+	|	MULTEQ
+	|	DIVEQ
+	|	LT
+	|	LTEQ
+	|	GT
+	|	GTEQ
+	|	LE
+	|	GE
+	;
+	
+ifExpr ::= IF variable:v1 operator:o variable:v2 block:b END		{: RESULT = new If(new BinaryOperator(o.toString(), v1, v2), b); :}
+	;
+
+whileExpr ::= WHILE variable:v1 operator:o variable:v2 block:b END		{: RESULT = new While(new BinaryOperator(o.toString(), v1, v2), b); :}
+	;
+
+forExpr ::=  FOR variable:v1 COMMA variable:v2 operator:o variable:v3 COMMA variable:v4 block:b END		{: RESULT = new For(v1, new BinaryOperator(o.toString(), v2, v3), v4, b); :}
 	;

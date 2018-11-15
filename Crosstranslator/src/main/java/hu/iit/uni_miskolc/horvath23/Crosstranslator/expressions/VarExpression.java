@@ -8,12 +8,14 @@ public class VarExpression extends Expression {
 	private String name;
 	private Enum<ModifierType> modifier;
 	private Enum<VariableType> type;
+	private Enum<VariableAttr> attr;
 	
-	public VarExpression(String name, Enum<ModifierType> modifier, Enum<VariableType> type) {
+	public VarExpression(String name, Enum<VariableAttr> attr, Enum<ModifierType> modifier, Enum<VariableType> type) {
 		super();
 		this.name = name;
 		this.modifier = modifier;
 		this.type = type;
+		this.attr = attr;
 	}
 	
 	public String getName() {
@@ -38,5 +40,13 @@ public class VarExpression extends Expression {
 	
 	public void setType(Enum<VariableType> type) {
 		this.type = type;
+	}
+
+	public Enum<VariableAttr> getAttr() {
+		return attr;
+	}
+
+	public void setAttr(Enum<VariableAttr> attr) {
+		this.attr = attr;
 	}
 }
