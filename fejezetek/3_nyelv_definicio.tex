@@ -89,7 +89,7 @@ A Java nyelven megírt kódok futtatásához is saját környezet kell. A java t
 
 A Java nyelvben, ha bármilyen hibát vétünk akkor már a kód fordítása során erről értesítést kapunk, a fordítás pedig leáll. Tehát Java nyelvben a fenti kód (itt természetesen osztályt is kell definiálnunk, majd annak a metódusát meghívni):
 
-\begin{cpp}
+\begin{lstlisting}[language=Java]
 public class Test {
     private value;
     
@@ -107,7 +107,7 @@ public class Test {
       test.multiply();
    }
 }
-\end{cpp}
+\end{lstlisting}
 
 Ez a kód már fordításkor hibát fog jelezni, hiszen a konstruktorban zárójelpárban megadtuk, hogy várunk egy integer értéket, viszont a main függvényben az osztály inicializálásakor nem adtunk meg értéket. 
 
@@ -122,13 +122,13 @@ Az értékadást az alábbi példa szemlélteti:
 string szoveg = "szoveg"
 \end{cpp}
 
-A változók definiálásakor meg kell adni a változó típusát, miel a nyelv erősen típusos. A nyelv az int, string, double, boolean, void, array és dictionary typusokat ismeri, melyek minden tekintett célnyelvben megtalálhatók, a C nyelvben a string karaktertömbként, illetve a dictionary struktúraként, így mindegyik nyelvre lehet fordítani.
+A változók definiálásakor meg kell adni a változó típusát, mivel a nyelv erősen típusos. A nyelv az int, string, double, boolean, void, array és dictionary típusokat ismeri, melyek minden tekintett célnyelvben megtalálhatók, a C nyelvben a string karaktertömbként, illetve a dictionary struktúraként, így mindegyik nyelvre lehet fordítani.
 
-\begin{verbatim}
+\begin{cpp}
 int valtozo1 = 5 ~ szám típusú
 string valtozo2 = "szöveg" ~ text/string tipusú
-string valtozo3 = valtozo1 + valtozo2 ~ eredmény 5szöveg, mint string típsú változó
-\end{verbatim}
+string valtozo3 = valtozo1 + valtozo2 ~ eredmény 5szöveg, mint string típusú változó
+\end{cpp}
 
 A változók, illetve osztály adattagok esetében meg lehet adni láthatósági módosítót is, azonban ez nem kötelező. Ha nincs megadva láthatósági módosító egy adott változóhoz, akkor a nyelvi definicíó alapján alapértelmezetten private láthatóságú lesz a változó, azaz csak az adott osztály, amiben a változó létre lett hozva, az tudja majd kezelni, kívülről nem lehet.
 
@@ -137,7 +137,7 @@ Ha azt szeretnénk, hogy kívülről is lehessen kezelni az adott változót, ak
 array valtozoT = {1, 2, 3, 5, "tizenkettő"} ~ egy adott tömbben többféle típusú elem is szerepelhet, például szám és szöveg. A tömb elemeire a valtozoT(x)-el lehet hivatkozni, ahol az x a tömb x. eleme lesz.
 Túlindexelés esetén a porogramozónak figyelnie kell, ugyanis a nyelv rugalmassága miatt nem fog hibaüzenetet kapni. Ha a tömb 10 elemű és a tomb(12)-t hívjuk akkor a változóba ahol az elemet letároljuk, vagy metódusba ahova átadjuk egy 0 kerül át.
 
-\begin{verbatim}
+\begin{cpp}
 array tomb = valtozoT + "húsz"
 Print(tomb) ~ eredmény: 1 2 3 5 tizenkettő húsz
 Del(tomb)
@@ -149,12 +149,12 @@ Del(tomb)
 array tomb = valtozoT
 Print(tomb(7)) ~ eredmény: 0
 Del(tomb)
-\end{verbatim}
 
 array tomb = valtozoT + {5, "nyolc", "miskolc"} ~a már letárolt, névvel ellátott tömbhöz egy névtelen tömböt fűzünk hozzá, ez önmagában nem tárolódik a memóriában, csak az új változóban az eredeti tömbbel együtt, ahhoz hozzáfűzve
 valtozoT += {5, "nyolc", "miskolc"} ~ ugyanaz mint az előbb, csak itt nem jön létre új változó, a már meglévőhöz kapcsolódnak az új elemek
 Print(tomb) ~ eredmény: 1 2 3 5 tizenkettő 5 nyolc miskolc
 Print(valtozoT) ~ eredmény: 1 2 3 5 tizenkettő 5 nyolc miskolc
+\end{cpp}
 
 A második vezérlési szerkezet az elágazás. A definiált nyelvben a szelekció az If kulcsszóval kerül bevezetésre, melyet egy feltétel követ. A feltétel három tagból kell, hogy álljon, mely egy operátor és annak két oldalán valamilyen kifejezés kell, hogy legyen.
 
@@ -162,7 +162,7 @@ Az elágazás további ágait ElIf kulcsszóval vezetjük be, mely után szinté
 
 A szelekció egyes ágain több végrehajtható művelet is helyet kaphat, melyeket a program sorrendben, szekvencia alapján végez el. Az egy adott ághoz tartozó műveleti blokkot a programnyelvben nem kell külön zárójel, illetve kapcsos zárójelpárral körülzárni, a definiált nyelvben az egy adott blokk határait blokk kezdetét és végét jelentő speciális utasítások megjelenése mutatja. Az If esetében az If után az ElIf vagy Else kulcsszavak lesznek ezek, az Else végén pedig egy End utasítás kell, hogy helyet kapjon.
 
-\begin{verbatim}
+\begin{cpp}
 If elso == 1
 	masodik = elso/2
 	harmadik = elso-masodik
@@ -176,7 +176,7 @@ Else
 		masodik = elso-20
 	End
 End
-\end{verbatim}
+\end{cpp}
 
 A szelekció másik típusa a definiált nyelvben olyan elágazás, mely az elágazás elején vár egy változót vagy kifejezést és ezt utána a megadott elemekre próbálja illeszteni. Ezen szelekció a Switch kulcsszóval kerül bevezetésre, melyet követ a változó, illetve kifejezés.
 
@@ -184,7 +184,7 @@ A program futása során az a kódrész fog lefutni, amelyhez tartozó elemre a 
 
 Az egy adott blokkba tartozó kódot ebben a szelekcióban is a kulcsszavak megjelenése. Az alábbiakban látható erre egy példa.
 
-\begin{verbatim}
+\begin{cpp}
 Switch vizsgált_elem
 	eredmeny1:
 		blokk1_utasitas1
@@ -195,16 +195,16 @@ Switch vizsgált_elem
 	Def:
 		def_utasitas
 End
-\end{verbatim}
+\end{cpp}
 
 A harmadik vezérlési szerkezet a definiált nyelvben az iteráció. Az iteráció itt is többféle lehet, melyeket a For, While illetve a Do kulcsszavakkal kell bevezetni, ezután következik a ciklusfeltétel, majd az utasításblokk.
 
-\begin{verbatim}
+\begin{cpp}
 For a=1, a<5, a++
 	utasítás1
 	utasítás2
 End
-\end{verbatim}
+\end{cpp}
 
 A ciklusfeltétel lehet:
 - a < 10 (ha a nem létezik automatikusan létrehozásra kerül 0 értékkel, minden ciklusmag lefutása utána automatikusan növekszik egyel)
@@ -212,21 +212,21 @@ A ciklusfeltétel lehet:
 
 Függvények, a Funct kulcsszóval kerülnek bevezetésre, amit a függvény neve követ, majd a paraméterek listája zárójelpáron belül.
 
-\begin{verbatim}
+\begin{cpp}
 Funct kiir (a)
 	utasítás
 End
 
-Funct add (a, b)
+Funct int add (a, b)
 	c = a + b
 End
-\end{verbatim}
+\end{cpp}
 
-A függvnyeket szintén End kulcsszóval kell lezárni, illetve fontos, hogy a függvény mindig visszatér az utolsó utasításban előűllított értékkel, mely egyrészt eltárolódhat, illetve akár el is veszhet attól függően, hogy a függvény milyen módon lett meghívva.
+A függvnyeket szintén End kulcsszóval kell lezárni, illetve fontos, hogy a függvény mindig visszatér az utolsó utasításban előállított értékkel, mely egyrészt eltárolódhat, illetve akár el is veszhet attól függően, hogy a függvény milyen módon lett meghívva.
 
-\begin{verbatim}
+\begin{cpp}
 q = add(5, 2)
-\end{verbatim}
+\end{cpp}
 
 A q-ba a fenti add függvény c értéke kerül, tehát 7, viszont ha a q és = törlésre kerül a kódból, a függvény így is lefut, és vissza is tér a 7 értékkel, de az nem tárolódik le sehol, tehát el fog veszni.
 
@@ -236,14 +236,14 @@ Mivel általánosságban is elterjedtek az osztály alapú, objektum orientált 
 
 Az osztályok a Create kulcsszóval kell bevezetni, majd az osztály neve következik és a paraméterek listája. Az osztályon belül a paraméterek és metódusok definiálása történik, az osztály végét az előzőekhez hasonlóan itt is az End kulcsszó jelöli.
 
-\begin{verbatim}
+\begin{cpp}
 Create osztalynev(paraméterek)
 	belső paraméretek definiálása
 	egyedi metódusok definiálása
 End
-\end{verbatim}
+\end{cpp}
 
-\begin{verbatim}
+\begin{cpp}
 Create osztaly
 	
 	Osztaly(int param1, string param2)
@@ -251,10 +251,10 @@ Create osztaly
 		string @param2 = param2
 	End
 		
-	Fuct @decPar1()
+	Fuct int @decPar1()
 		@param1--
 	End
-\end{verbatim}
+\end{cpp}
 
 A fenti példában látható, hogy az osztálynak meg kell adni egy konstruktort, melyben megadhatunk paramétereket is. Azokat nem kell külön előre definiálni, az a konstruktorban történik meg és itt értéket is lehet nekik adni, ha szeretnénk. Fontos, hogy az osztály saját elemeit, adattagjait @ jellel kell megjelölni. Az osztály adattagjainak getter és setter metódusa automatikusan létrejön, tehát meghívható.
 
@@ -440,7 +440,7 @@ Comment  ::= '/*' ( [^*] | '*'+ [^*/] )* '*'* '*/'
 
 \section{Példák}
 
-Egy példa forráskód részlet, melyben egy osztály és a benne lévő elemek láthatók
+Az alábbiakban egy egyszerűbb példa forráskód részletet, melyben egy osztály és a benne lévő elemek láthatók.
 
 \begin{verbatim}
 Create Ember
@@ -469,5 +469,5 @@ Az alábbiakban a fenti osztály példányosítása és használatának példáj
 \begin{verbatim}
 Ember pelda = Ember("teszt", 20, 1542, "Teszteles", 50)
 pelda.setParam1("TesztKetto")
-string ember = pelda.createString
+string ember = pelda.createString()
 \end{verbatim}
