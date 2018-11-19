@@ -2,59 +2,71 @@
 \Chapter{Célnyelvek áttekintése}
 % ==============================
 
-A dolgozat szempontjából célnyelvnek azon magasszintű programozási nyelveket tekintjük, melyekre a felhasználó által, a definiált nyelven írt kód a program futtatásának végén lefordul. A program jelenleg nem minden magasszintű programozási nyelvre képes fordítani, tehát nem minden magasszintű programozási nyelv tekinthető célnyelvnek, valamint jelenleg a célnyelvként tekintett magasszintű nyelvek nem minden nyelvi elemét támogatja a program. Ezek a program egy későbbi fejlesztése során elérhetővé válhatnak. Az alábbiakban a dolgozat szempontjából tekintett célnyelveket vizsgáljuk meg röviden.
+\section{A célnyelvek általános jellemzői}
 
-\section{C}
+A dolgozat szempontjából célnyelvnek azon magasszintű programozási nyelveket tekintjük, melyekre a felhasználó által, a definiált nyelven írt kód a program futtatásának végén lefordul. A program jelenleg nem minden magasszintű programozási nyelvre képes fordítani, tehát nem minden magasszintű programozási nyelv tekinthető célnyelvnek, valamint jelenleg a célnyelvként tekintett magasszintű nyelvek nem minden nyelvi elemét támogatja a program.
+A további programozási nyelvek támogatása, illetve a nyelvek összes elemének a támogatására vonatkozó tervek már későbbi fejlesztési lehetőségként szerepelnek csak.
+A következő szakaszokban a dolgozat szempontjából kiemelt fontosságú célnyelveket vizsgáljuk meg röviden.
 
-A C nyelv magasszintű, általános célú programozási nyelv, mely az egyik legelterjedtebb programozási nyelv, a ma fellehető számítógép architektúrák szinte mindegyikére készült C fordító. A nyelv sturkturált és szabványos programozási nyelv, ugyanúgy megtalálhatóak itt a vezérlési szerkezetek mint a többi magas szintű nyelvben. Változó deklarálásakor meg kell adni a változó nevét és típusát is, mivel a nyelv erősen típusok nyelv. A változó neve konvenció alapján betűvel kezdődik és utána betűket és számokat tartalmazhat. Ezután egyenlőségjellel adhatjuk meg a változó értékét. C nyelven az utasításokat a sor végén ;-vel zárjuk le. Mivel az egyes utasítások lezárását ; jelzi, a nyelven a sortörések kihagyhatók, ezek a fehér karakterek csak az olvashatóságot növelik, a fordítás során eltávolítására kerülnek. C nyelven írt programok során is az utasítások szekvenciálisan futnak le.
+\subsection{C}
 
-A nyelv nem objektum orientált nyelv, azaz osztályok definíció szintjén nincsenek a nyelvben. Jelen dolgozat további nyelveiben megjelenik ez a funkció, osztályba szervezhető a kód, csakúgy mint a definiált nyelvben is, így valamivel nehezebb C módra történő fordítás. C nyelven a struktúrák találhatók meg, melyek a typedef struct kulcsszóval vezethetnek be. Ebben adhatók meg az osztályokhoz hasonló programelemek. Szintén fontos különbség, hogy a C nyelven megjelennek a pointerek, melyek egy adott változó címere mutató változók. Ezáltal érték szerint és cím szerint is át lehet adni változókat.
+A C nyelv magasszintű, általános célú programozási nyelv, mely az egyik legelterjedtebb programozási nyelv.
+A ma fellelhető számítógép architektúrák szinte mindegyikére készült C fordító.
+A nyelv sturkturált és szabványos programozási nyelv.
+Megtalálhatóak benne azok a vezérlési szerkezetek, mint a magassabb szintű nyelvekben.
+A nyelv erősen típusos, tehát változó deklarálásakor meg kell adni annak nevét és típusát.
+A változó neve konvenció alapján betűvel kezdődik és utána betűket és számokat tartalmazhat.
+Ezután egyenlőségjellel adhatjuk meg a változó értékét.
+C nyelven az utasításokat a sor végén \texttt{;}-vel zárjuk le.
+Mivel az egyes utasítások lezárását \texttt{;} jelzi, a nyelven a sortörések kihagyhatók, ezek a fehér karakterek csak az olvashatóságot növelik az esetek jelentős részében, így a fordítás során eltávolítására kerülnek.
+C nyelven írt programok esetében is az utasítások szekvenciálisan futnak le.
 
-C nyelven emellett használható a szelekció, azaz az elágazás. Ezt az if kulcsszó vezeti be, ami után ( és ) között kell megadni az elágazás feltétet. Itt a rendszer azt vizsgálja a megadott feltételek igaz vagy hamis, és aszerint fut le az adott ágban megírt kód. A szelekció többi ágat az else if (feltétel) és az else kulcsszó vezeti be. A C nyelv is ismerni a switch szelekciót, itt is meg kell adni egy kifejezést, változott és a switch belül megadni azon kifejezéseket melyekre az illeszkedést a program vizsgálni fogja.
+A nyelv nem támogatja közvetlenül az objektum orientált programozás, azaz osztályok definiálására nincs lehetőség a nyelvben.
+Jelen dolgozat további nyelveiben megjelenik ez a lehetőség, osztályba szervezhető a kód, mint az újonnan definiált saját programozási nyelvben is.
+Emiatt komplikáltabb annak a C nyelvre történő fordítása.
+C nyelvben a struktúrák találhatók meg, melyek a \texttt{struct} kulcsszóval hozhatók létre.
+Ebben adhatók meg az osztályokhoz hasonló programelemek. Szintén fontos különbség, hogy a C nyelvben megjelennek a mutatók, melyek egy adott változó címét tároló változók. Ezáltal érték szerint és cím szerint is át lehet adni paramétereket.
 
-Emellett a programban megadható iteráció is. Ciklusból a nyelven 3 különböző van, a while, for és do while. Ezek mindegyikéhez kell egy ciklusváltozó, egy feltétel, melyet minden egy ciklusban ellenőriz a rendszer. A for és a while elöl tesztelő ciklus, míg a do while hátul tesztelő, azaz az egyszer biztos le fog futni a cilkusmag, míg az előző kettőben nem biztos. A C nyelvben nincs külön hibakezelés, minden ilyen feladatot a programozónak kell feltételvizsgálattal megoldania, illetve klasszikus esetben nincs automatikus szemétgyűjtő algoritmus sem, a memória felszabadításáról is a programozónak kell gondoskodnia.
+C nyelvben emellett használható a szelekció, azaz az elágazás, mint vezérlési szerkezet.
+Ezt az \texttt{if} kulcsszó vezeti be, ami után \texttt{(} és \texttt{)} között kell megadni az elágazás feltételét.
+Itt a rendszer azt vizsgálja, hogy a megadott feltételek igaz vagy hamis értékűek-e, és a szerint fut le az adott ágban megírt kód. A szelekció többi ágat az \textit{else if}, illetve az \texttt{else} kulcsszó vezeti be.
+A C nyelv is ismerni a \texttt{switch} szelekciót, itt is meg kell adni egy kifejezést és a \texttt{case}-en belül megadni azon kifejezéseket melyekre az illeszkedést a program vizsgálni fogja.
 
-\section{JavaScript}
+Emellett a programban megadható iteráció is. Ciklusból a nyelvben 3 különböző van, a \texttt{while}, \texttt{for} és \texttt{do while}. Ezek mindegyikéhez kell egy ciklusváltozó, egy feltétel, melyet minden egy ciklusban ellenőriz a rendszer. A \texttt{for} és a \texttt{while} elöl tesztelő ciklus, míg a \texttt{do while} hátul tesztelő, azaz az egyszer biztos le fog futni a cilkusmag, míg az előző kettőben nem biztos. A C nyelvben nincs külön hibakezelés, minden ilyen feladatot a programozónak kell feltételvizsgálattal megoldania, illetve klasszikus esetben nincs automatikus szemétgyűjtő algoritmus sem, vagyis a memória felszabadításáról is a programozónak kell kezeskednie.
 
-A JavaScript egy scriptnyelv, mely leggyakrabban a böngészőben jelenik meg, és kliens oldalon is látható a kódja. A nyelv először MochaScript néven lett létrehozva, majd később a szintaxisa a Java nyelvhez lett hasonló, itt lett a neve JavaScript.
+\subsection{JavaScript}
 
-A nyelvet a böngészőkben használt html nyelv statikusságának megtörésére használták, illetve JavaScript segítségével egyszerűen elvégezhető előzetes ellenőrzés az adatokra, mely mellett azonban természetesen mindenképpen kell szerver oldali ellenőrzés is, mivel ahogyan fentebb említettem a JavaScript kód látható böngészőben is különféle eszközökkel, így akár manipulálható is. A kódot a html kódba is ágyazhatjuk, de legtöbbször egy külön .js fáljban van elhelyezve. A JavaScript gyengén típusos nyelv, a változók definiálásakor nem kell típust megjelölni. A változó értéke fogja megadni a változó típusát.
+A JavaScript egy scriptnyelv, mely leggyakrabban a böngészőkben jelenik meg, és kliens oldalon is látható a kódja. A nyelv először \textit{MochaScript} néven került definiálásra, majd később a szintaxisa a Java nyelvhez lett hasonló. Ezt követően lett a neve JavaScript.
 
-A JavaScriptben is megtalálhatók az ismert vezérlési szerkezetek, ugyanúgy használható az értékadás, szekvencia, szelekció és iteráció is. Sőt még objektum orientálttá is tehető a nyelv. A JavaScriptben külön kifejezéssel lehet változót deklarálni, ez a var kulcsszó, melyet mindig meg kell adni, ezután következik a változó név majd az érték.
+A nyelv népszerűségét elsősorban az adja, hogy ez volt az első olyan nyelv, amelyet a legtöbb webböngésző natívan támogatott, így a \texttt{HTML} oldalakhoz alkalmazáslogikát lehetett létrehozni. Eleinte főként HTML kódba ágyazva fordult elő, majd később alakították úgy, hogy teljes értékű programozási nyelvként használható legyen.
 
-Külön meg kell említeni a láthatóságot a JavaScript esetében. Itt a változók alapértelmezetten csak az adott scope-ban elérhetők, ahol létre lettek hozva. Általános esetben mindenképpen egy függvény kerül megírásra, és ebben történik a változók létrehozása, a műveletek elvégzése. A változók csak az adott függvényen belül láthatók ahol létre lettek hozva. Megadhatók azonban olyan módon is a változók, hogy máshonnan is elérhető legyenek, ekkor a függvényen kívül kell deklarálni őket, így globális változókká válnak és elérhetők. Másik módszer ha olyan változóknak adunk értéket amik még nincsenek is deklarálva. A JavaScript ebben az esetben létrehozza a változót, mely azonban globális változóként kerül létrehozásra.
+A JavaScriptben is megtalálhatók az ismert vezérlési szerkezetek, ugyanúgy használható az értékadás, szekvencia, szelekció és iteráció is. A nyelv magasabb szintű olyan tekintetben, hogy a nyelvben már objektumok vannak. A JavaScriptben külön kifejezéssel lehet változót deklarálni, ez a \texttt{var} kulcsszó segítségével oldható meg, amelyet a változónév követ.
 
-Fentebb említettem a JavaScriptet, mint objektum orientálttá tehető nyelvet. A JavaScriptben általánosságban mindig egy függvényt írunk a function kulcsszóval, még akkor is, ha ez esetleg rejtetten, mondjuk egy jQuery fájlban az alábbi módon nézne ki:
+Külön meg kell említeni a láthatóságot a JavaScript esetében. Itt a változók alapértelmezetten csak az adott hatókörben elérhetők, ahol létre lettek hozva. Általános esetben mindenképpen egy függvény kerül megírásra, és ebben történik a változók létrehozása, a műveletek elvégzése. A változók csak az adott függvényen belül láthatók ahol létre lettek hozva. Megadhatók azonban olyan módon is a változók, hogy máshonnan is elérhető legyenek, ekkor a függvényen kívül kell deklarálni őket, így globális változókká válnak és elérhetők. Másik módszer ha olyan változóknak adunk értéket amik még nincsenek is deklarálva. A JavaScript ebben az esetben létrehozza a változót, mely azonban globális változóként kerül létrehozásra.
 
-\begin{cpp}
-$("data").click(function() {
-	utasitasok;
-});
-\end{cpp}
-% $
+A nyelvben a függvények létrehozására a \texttt{function} kulcsszót használhatjuk. A nyelv megengedi a függvények értékként való átadását.
 
-Látható a fentebbi kódban is megjelenik a function kulcsszó. A nyelv objetum orientáltsága mindössze annyit jelent, hogy egy osztályként használt függvényt írunk meg, majd ennek adunk adattagokat és további függvényeket is, és végül ezt fogjuk használni objektumként, azaz osztályként.
+A JavaScript esetében minden utasítássort \texttt{;}-vel kell lezárni a C jellegű szintaxisa miatt, és többi formai jellegzetességében is sok hasonlóságot mutat a C nyelvvel.
 
-A JavaScript esetében minden utasítássort \texttt{;}-vel kell lezárni szintaktikailag, tehát ebben hasonlít az általánosan vizsgált programozási nyelvekhez.
-
-\section{Python}
+\subsection{Python}
 
 A Pyhton egy objektum orientált programozási nyelv, mely egyre nagyobb teret hódít egyszerű kezelhetősége és rugalmassága miatt. Guido van Rossum a nyelv megalkotásakor a fent emlíett egyszerűséget tartotta a legfontosabbnak.
 
-A nyelv gyengén típusos nyelv, tehát itt sem kell megadni típusmegjelölést, illetve fontos különbség a többi nyelvhez képest, hogy nem használnak \texttt{;}-t az utasítások lezárásakor, így az utasítások végét a sor vége jelenti. Más magas szintű nyelvekkel ellentétben itt ezért nem is lehetne az egész kódot egy sorban megadni.
+A nyelv dinamikusan, de szigorúan típusos nyelv, tehát itt sem kell megadni típusmegjelölést.
+Fontos különbség a többi nyelvhez képest, hogy nem szokás használni a \texttt{;}-t az utasítások lezárásakor, így az utasítások végét a sor vége jelenti. Azon nyelvek közé tartozik, amelynél általában nem lehet az egész programokódot egy sorban megadni, mert a formázás szemantikai jelentéssel bír.
 
-Emellett szintén fontos különbség a blokkokat jelző \texttt{\{} és \texttt{\}} hiánya, a nyelv az olvashatóságot is segítendő, a tabulátorokkal történő behúzással jelzi az egyes blokkokat.
+Emellett szintén fontos különbség a blokkokat jelző \texttt{\{} és \texttt{\}} hiánya.
+A nyelv az olvashatóságot is segítendő behúzásokkal jelzi az egyes blokkokat.
 
-Általánosságban egy adott metódus, osztálydefiníció, elágazás, megírásakor a sor végére \texttt{:}-ot teszünk, ezután a következő sortól tabulátor behízással történik az adott feltétel vagy osztály magjának leírása.
+Általánosságban egy adott metódus, osztálydefiníció, elágazás, megírásakor a sor végére \texttt{:}-ot teszünk, ezután a következő sortól behúzással történik az adott feltétel vagy osztály magjának leírása.
 
-A nyelv támogatja az objektum orientált leírást, a class kulcsszóval bevezetett osztályokat lehet megírni, melyben definiálhatunk változókat, metódusokat majd példányosíthatjuk csak úgy mint az általánosságban vizsgált programozási nyelvek esetében.
+A nyelv támogatja az objektum orientált programozást. A \texttt{class} kulcsszóval bevezetve osztályokat lehet megírni, melyben definiálhatunk adattagokat, metódusokat majd példányosíthatjuk azokat.
 
-\section{PHP}
+\subsection{PHP}
 
-A PHP egy szerveroldali nyelv, tulajdonképpen scriptnyelv, az így megírt fájlok futtatásához a fizikai szervergépre valamilyen PHP fordítót kell telepíteni és konfigurálni. Legelterjedtebb manapság még mindig az Apache webszerver, mely a UNIX rendszerekre telepíthető.
+A PHP egy szerveroldali nyelv, tulajdonképpen scriptnyelv. Az így megírt fájlok futtatásához PHP fordítót kell telepíteni és konfigurálni.
 
 Érdemes kiemelni a PHP hiba, illetve figyelmeztetés kijelzését is, mely szerver oldalon, az Apache konfigurációs fáljában, illetve a PHP fájlban is letiltható, illetve engedélyezhető. Érdemes ezt mindig engedélyezni a fejlesztés során, mivel egyéb esetben egyes hibák elfedésre kerülnek a PHP rugalmassága miatt, így a végső eredmény is hibás lehet. Például az alábbi kódban:
-
 \begin{cpp}
 <?php
    function multiply ($value) {
@@ -66,24 +78,20 @@ A PHP egy szerveroldali nyelv, tulajdonképpen scriptnyelv, az így megírt fáj
    Print "Return value is $retval\n";
 ?>
 \end{cpp}
-
-Látható, hogy a multiply függvény egy paramétert vár, és azzal számol, azonban a meghívásakor nem kerül átadásra paraméter. Ilyenkor a PHP rugalmassága miatt, egyszerűen 0 értékkel fog számolni a program, azaz a végeredmény is nulla lesz.
+Látható, hogy a \texttt{multiply} függvény egy paramétert vár, és azzal számol, azonban a meghívásakor nem kerül átadásra paraméter. Ilyenkor a PHP rugalmassága miatt, egyszerűen 0 értékkel fog számolni a program, azaz a végeredmény is nulla lesz.
 
 Azonban ez nyilvánvalóan nem a helyes működés lenne (kivéve természetesen, ha pont a 0 számmal szeretnénk meghívni egyébként is a metódust), ezért érdemes bekapcsolni a hibajelzést. Ilyenkor a program kijelzi, hogy bár a metódus deklarálásakor megadtuk, hogy paramétert várunk, meghívásakor nem adtunk neki paramétert.
 
-Általánosságban a PHP megvalósítása miatt, ha ilyen hibákat vétünk (és ha nincs hiba kijelzés) a PHP mindig megpróbálja megoldani, a programot lefuttatni.
+Általánosságban a PHP megvalósítása miatt, ha ilyen hibákat vétünk (és ha nincs hiba kijelzés) a PHP mindig megpróbálja megoldani, kísérletet tesz a program lefuttatására.
 
-A PHP alapvetően nem objektum orientált nyelv. Eredetileg ez szerveroldali scriptnyelv volt, csak a 2004-ben kiadott 5-ös verzióval került be az objektum orientáltság. Mivel a PHP akkoriban a legnépszerűbb szerveroldali scriptnyelv volt, sőt még manapság is az, nagyon sok olyan kód készült, melyben objektum orientált leírás nem volt, így ezeket először át kellene alakítani objektum orientálttá.
+A PHP alapvetően nem objektum orientált nyelv. Eredetileg ez szerveroldali scriptnyelv volt, csak a 2004-ben kiadott 5-ös verzióval került be az objektum orientáltság. Mivel a PHP akkoriban a legnépszerűbb szerveroldali scriptnyelv volt, nagyon sok olyan kód készült, melyben objektum orientált leírás nem volt, így ezeket először át kellene alakítani objektum orientálttá.
 
-\section{Java}
+\subsection{Java}
 
-A Java nyelven megírt kódok futtatásához is saját környezet kell. A java telepíthető minden operációs rendszerre, valamint komplexitása miatt az egyik legelterjedtebb és leginkább használt nyelv.
+A Java nyelven megírt kódok futtatásához is saját környezet kell. A java futtatókörnyezet elérhető minden elterjedt operációs rendszerre. Az egyik leginkább elterjedt programozási nyelv, amelynek egyaránt ok az, hogy szerver oldalon szivesen használják, illetve hogy a mobil alkalmazások esetében az Android platform is támogatja.
 
-\section{Célnyelvek összegzése}
-
-A Java nyelvben, ha bármilyen hibát vétünk akkor már a kód fordítása során erről értesítést kapunk, a fordítás pedig leáll. Tehát Java nyelvben a fenti kód (itt természetesen osztályt is kell definiálnunk, majd annak a metódusát meghívni):
-
-\begin{lstlisting}[language=Java]
+A Java nyelvben, ha bármilyen hibát vétünk akkor arról remélhetőleg már a kód fordítása során értesítést kapunk. A fordítás ekkor leáll. Tekintsük például az alábbi Java kódot.
+\begin{java}
 public class Test {
     private value;
     
@@ -101,22 +109,22 @@ public class Test {
       test.multiply();
    }
 }
-\end{lstlisting}
+\end{java}
 
-Ez a kód már fordításkor hibát fog jelezni, hiszen a konstruktorban zárójelpárban megadtuk, hogy várunk egy integer értéket, viszont a main függvényben az osztály inicializálásakor nem adtunk meg értéket. 
+Ez a kód már fordításkor hibát fog jelezni, hiszen a konstruktorban zárójelpárban megadtuk, hogy várunk egy integer értéket, viszont a main függvényben az osztály inicializálásakor nem adtunk azt meg. 
+
+\section{Célnyelvek összehasonlítása}
 
 Az alábbi részben a tervezett célnyelvek szintaxisának, elemeinek áttekintése történik meg a hangsúlyt az egyes célnyelvek különbözőségeire fektetve.
 
-\section{Nyelvi típusok}
+\subsection{Nyelvi típusok}
 
-Az alábbiakban egy összefoglaló látható a különböző nyelvi típusokról, hogy az egyes célnyelvekben megjelenik-e az adott típus és ha igen akkor milyen formában. Ez alapján egy áttekintést kaphatunk arról, hogy a megírt kód lefordítása után az egyes nyelveket a típusok hogyan jelennek meg.
+Az alábbiakban egy összefoglaló látható a különböző nyelvi típusokról (\ref{tab:lang_types}. táblázat), hogy az egyes célnyelvekben megjelenik-e az adott típus és ha igen akkor milyen formában. Ez alapján egy áttekintést kaphatunk arról, hogy a megírt kód lefordítása után az egyes nyelveket a típusok hogyan jelennek meg.
 A kapott táblázat alapján meg tudjuk majd állapítani, hogy mely típusok jelennek meg a nyelvek nagy többségében, azaz a fordítás során mely típusokat kell mindenképpen figyelembe venni, megvalósítani.
 
-Mivel a programozási nyelv megalkotása és a fordító megvalósítása során mindvégig a könnyű használhatóság és egyszerű megtanulhatóság lett szem előtt tartva, ezért jelen verzióban csak a fent említett közös típusok kerülnek megvalósításra. A későbbiekben ez bővíthető, hogy az egyes célnyelvek minden elemét tudja a program kezelni.
-
+Mivel a programozási nyelv megalkotása és a fordító megvalósítása során mindvégig a könnyű használhatóság és egyszerű megtanulhatóság fontos szempontként szerepelt, ezért jelen verzióban csak a fent említett közös típusok kerülnek megvalósításra. A későbbiekben ez bővíthető, úgy hogy az egyes célnyelvek minden elemét tudja a program kezelni.
 \begin{table}
-	\caption{Programozási nyelvi típusok}
-	\label{2. táblázat}
+	\centering
 	\begin{tabular}{c|c|c|c|c}
 		\textbf{C} & \textbf{Python} & \textbf{Java} & \textbf{JavaScript} & \textbf{PHP}\\
 		char & - & - & string & string \\
@@ -138,15 +146,11 @@ Mivel a programozási nyelv megalkotása és a fordító megvalósítása során
 		- & str & string & string & string \\
 		- & boolean & boolean & boolean & boolean \\
 	\end{tabular}
+	\caption{Programozási nyelvi típusok}
+	\label{tab:lang_types}
 \end{table}
 
-https://www.tutorialspoint.com/cprogramming/c\_data\_types.htm
-
-https://realpython.com/python-data-types/
-
-https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html
-
-https://javascript.info/types
+% TODO: Általános hivatkozásokat berakni az adott programozási nyelvekhez!
 
 A táblázatból látható, hogy a C nyelvben alapvetően sok különféle típus került definiálásra, melyek a további nyelvekben vagy nem jelennek meg, vagy ha meg is jelennek, közös típus alá vannak rendelve, azaz egy-egy típust kell csak megjeleníteni a kódban.
 
@@ -157,7 +161,7 @@ A fenti táblázat alapján a fordítóprogram a szám és szöveg típusú vál
 A szám típusok közül jelenleg az integer típus támogatott, mivel ez a leggyakrabban használt az általunk vizsgált témakörben, a szöveg string típusú lesz, mivel ez a megszokott a programozási nyelvek tekintetében, csakúgy mint a boolean típus. A definiált programozási nyelv típusosság tekintetében a Python nyelvre hasonlít, így a típus megjelölése itt sem szükséges.
 A tömb típust itt dictionary néven fogjuk kezelni, a struktúra pedig a modern, objektum-orientált nyelvekhez hasonlóan osztályokból fog állni, melyek a változókat illetve függvényeket foglalhatnak magukba.
 
-\section{Változók deklarálása}
+\subsection{Változók deklarálása}
 
 Az alábbi részben áttekintjük, hogy az egyes célnyelvként tekintett magas szintű programozási nyelvekben a változó deklarálásában milyen különbségeket tapasztalhatunk. Az egyes célnyelvek függően attól, hogy a típusmegjelölést ki kell-e írni, illetve, hogy milyen kulcsszóval vagy kulcsszó nélkül adjuk meg az egyes változókat nagyban különböznek. Ezt a különbséget a fordítóprogramnak kezelnie kell, és el kell fednie a felhasználó elől.
 
@@ -167,50 +171,37 @@ A legfontosabb különbség a C és Java nyelv illetve a Python, JavaScript és 
 \end{cpp}
 
 Azt is megtehetjük, hogy a deklarálással együtt inicializáljuk a változót, azaz egy értéket is adunk neki. Ez minden célnyelvként vett nyelv esetében működik, azaz megtehetjük, hogy az alábbi módon adjuk meg a változót például Java nyelven:
-
 \begin{cpp}
 	int valtozo = 12;
 \end{cpp}
 
-Ezzel szemben a Python, JavaScript és PHP nyelveken a típusmegjelölést nem kell kiírni a változó elé, viszont ezen nyelvek többségében is jelezni kell, hogy egy változót adunk meg.
-
-A Python nyelvben kivételesen nem kötelező ezt megadni, sőt a korai Python verziók esetében több helyen is megjegyzik, hogy "nem szükséges a változókat deklarálni mielőtt használjuk őket, sőt a változók típusát sem kell megadni". (https://www.learnpython.org/en/Variables\_and\_Types)
-Általánosságban ilyenkor annyit mondhatunk, hogy egy nevet rendelünk egy értékhez, hogy milyen típus lesz az, azt az érték fogja meghatározni.
-
+Ezzel szemben a Python, JavaScript és PHP nyelveken a típusmegjelölést nem kell kiírni a változó elé, viszont ezen nyelvek többségében is jelezni kell, hogy egy változót adunk meg. Általánosságban ilyenkor annyit mondhatunk, hogy egy nevet rendelünk egy értékhez, hogy milyen típus lesz az, azt az érték fogja meghatározni.
 \begin{cpp}
 	valtozo = 12
 	print(valtozo)
 \end{cpp}
-
-Ennek hátránya a nehézkes kódolvasás és javítás, főleg komplex programok esetén, mivel egy adott változó bármilyen típusú értéket felvehet, de lehetséges, hogy az adott változót használó kódrésznek egy adott típusú változóra lenne szüksége, ilyen esetben nehéz lehet megtalálni a probléma pontos forrását. Ennek kiküszöbölésére a 3.6-os Python verziótól kezdődően lehetőség van a egy úgynevezett "hint" megadására a változónevek után, melyben megadhatjuk, hogy terveink szerint az adott változó milyen típusú értéket fog felvenni.
+Ennek hátránya a nehézkes kódolvasás és javítás, főleg komplex programok esetén, mivel egy adott változó bármilyen típusú értéket felvehet, de lehetséges, hogy az adott változót használó kódrésznek egy adott típusú változóra lenne szüksége, ilyen esetben nehéz lehet megtalálni a probléma pontos forrását. Ennek kiküszöbölésére a 3.6-os Python verziótól kezdődően lehetőség van egy úgynevezett \textit{hint} megadására a változónevek után, melyben megadhatjuk, hogy terveink szerint az adott változó milyen típusú értéket fog felvenni.
 
 \begin{cpp}
 	valtozo: str = "szoveg"
 	print(valtozo)
 \end{cpp}
 
-A Pythonhoz készített ellenőrzők, például a mypy program, már képesek ezeket feldolgozni, és a Java fejlesztőkörnyezethez hasonlóan kódoláskor már jelezni az esetleges típusbeli eltéréseket. Forrás: https://medium.com/@ageitgey/learn-how-to-use-static-type-checking-in-python-3-6-in-10-minutes-12c86d72677b
+% A Pythonhoz készített ellenőrzők, például a mypy program, már képesek ezeket feldolgozni, és a Java fejlesztőkörnyezethez hasonlóan kódoláskor már jelezni az esetleges típusbeli eltéréseket. Forrás: https://medium.com/@ageitgey/learn-how-to-use-static-type-checking-in-python-3-6-in-10-minutes-12c86d72677b
 
-A JavaSript nyelvben ismét más megoldást vezettek be a változók esetében, itt a Java nyelvhez hasonlóan deklarálni kell a változókat, azonban típust itt sem kell megadnunk. A deklarálás mikéntjének vizsgálatában ismét először nézzük meg a régebbi verziókat először. Itt még csak a var kulcsszóval történik a deklaráció, és szokásos módon itt is azonnal értéket is tudunk adni a változónak.
-
+A JavaSript nyelvben ismét más megoldást vezettek be a változók esetében, itt a Java nyelvhez hasonlóan deklarálni kell a változókat, azonban típust itt sem kell megadnunk. A deklarálás mikéntjének vizsgálatában ismét először nézzük meg a régebbi verziókat először. Itt még csak a \textit{var} kulcsszóval történik a deklaráció, és szokásos módon itt is azonnal értéket is tudunk adni a változónak.
 \begin{cpp}
 	var valtozo;
 	valtozo = "szoveg";
-	
 	var valtozo2 = 12;
 \end{cpp}
-
 Az ilyen módon deklarált változók minden esetben az őket bezáró funkciókban érhetők csak el, illetve globálisan ha nincs bezáró funkció.
 Az ECMAScript 2015 bevezetésekor változott ez meg, ami ECMAScript6 néven terjedt el a programozók körében. Ebben bevezettek két új váltózó típust és deklarálásukat.
-
 \begin{cpp}
 	let valtozo = "szoveg";
-	
 	const valtozo = "szoveg";
 \end{cpp}
-
-A let esetében, nem csak a bezáró funkcióban, de azon belül is csak abban a bezáró blokkban használható, ahol deklarálva lett.
-
+A \textit{let} esetében, nem csak a bezáró funkcióban, de azon belül is csak abban a bezáró blokkban használható, ahol deklarálva lett.
 \begin{cpp}
 	var valtozo = 5;
 	console.log(valtozo);
@@ -220,9 +211,7 @@ A let esetében, nem csak a bezáró funkcióban, de azon belül is csak abban a
 	}
 	console.log(valtozo);
 \end{cpp}
-
 A fenti példában az első konzol kiíratás 5-öt fog megjeleníteni, a második 8-at, míg a harmadik szintén 5-öt. Azonban fontos megjegyezni, hogy ha így írjuk meg a kódot
-
 \begin{cpp}
 	{
 		let valtozo = 8;
@@ -230,30 +219,28 @@ A fenti példában az első konzol kiíratás 5-öt fog megjeleníteni, a másod
 	}
 	console.log(valtozo);
 \end{cpp}
-
 akkor a második kiíratás hibára fog futni, hiszen ahogy említettük, a let kulcsszóval deklarált változó csak az adott bezáró blokkon belül érhető el.
 
-A const kulcsszóval deklarált változók majdnem teljesen úgy működnek, mint a let kulcsszóval deklaráltak, azaz csak az adott blokkon belül érhetők el, azonban ezek konstansok, azaz értékük nem változik.
-Forrás:
+A \texttt{const} kulcsszóval deklarált változók majdnem teljesen úgy működnek, mint a let kulcsszóval deklaráltak, azaz csak az adott blokkon belül érhetők el, azonban ezek konstansok, azaz értékük nem változik.
 
-http://es6-features.org/\#Constants,
-http://es6-features.org/\#BlockScopedVariables,
-https://www.w3schools.com/js/js\_es6.asp,
-https://www.sitepoint.com/how-to-declare-variables-javascript/
+% TODO: Forrásokat behivatkozni!
+%Forrás:
+%http://es6-features.org/\#Constants,
+%http://es6-features.org/\#BlockScopedVariables,
+%https://www.w3schools.com/js/js\_es6.asp,
+%https://www.sitepoint.com/how-to-declare-variables-javascript/
 
 A PHP nyelv ebből a szempontban nagyon egyszerű, itt sem kell típust kiírni, és a változó deklarálásakor a név előtt egy \textdollar jelet kell megadni.
-
 \begin{cpp}
 	\$valtozo = 8;	
 \end{cpp}
 
-\section{Tömbök definiálása}
+\subsection{Szekvenciális típusok kezelése}
 
 A tömböket általánosságban hasonlóan kell definiálni az egyes célnyelveken, de itt is okozhatnak nehézséget a fordítóprogram megvalósítása szempontjából a kisebb különbségek is.
 
-A C nyelvben a tömbök deklarálásához meg kell adni először a tömb típusát, majd a nevét, végül a tömb méretét [ és ] között. A tömböt azonnal fel is tölthetjük elemekkel, ekkor nem kell a tömb méretét külön megadni, csak az egyenlőségjel után { és } jel között kell felsorolni a tömb elemeit.
-Ha csak az egyik elemet akarjuk módosítani akkor a név után [ és ] jel között meg kell adni hanyadik elemet akarjuk módosítani majd az elem értékét. A tömb mindig a 0-ás indexelésű lesz, azaz az első elem a 0. indexű.
-
+A C nyelvben a tömbök deklarálásához meg kell adni először a tömb típusát, majd a nevét, végül a tömb méretét \texttt{[} és \texttt{]} között. A tömböt azonnal fel is tölthetjük elemekkel, ekkor nem kell a tömb méretét külön megadni, csak az egyenlőségjel után \texttt{\{} és \texttt{\}} jel között kell felsorolni a tömb elemeit.
+Ha csak az egyik elemet akarjuk módosítani akkor a név után \texttt{[} és \texttt{]} jel között meg kell adni hanyadik elemet akarjuk módosítani majd az elem értékét. A tömb mindig a 0-ás indexelésű lesz, azaz az első elem a 0. indexű.
 \begin{cpp}
 	int tomb[10];
 	int tomb2[] = {1, 5, 10, 25};
@@ -261,26 +248,19 @@ Ha csak az egyik elemet akarjuk módosítani akkor a név után [ és ] jel köz
 \end{cpp}
 
 A Java nyelv hasonlóan működik, azzal a különbséggel, hogy a tömbök típusa után kell megadni a szögletes zárójelpárt, és a méretét csak az inicializálás során kell megadni.
-
 \begin{cpp}
 	int[] tomb;
 	tomb = new int[5];
-	
 	int[] tomb2 = new int[]{3, 5, 2};
 \end{cpp}
-
-A tombök tekintetében a JavaScript, PHP és Python elég hasonlóan működik. Mindhárom nyelv esetében meg kell adni a tömb nevét, ami egy váltzó lesz, majd felsorolni a tömb elemeit, melyek többféle típusúak is lehetnek. Az adott tömbök futás alatt bővíthetők, tehát új elemet hozzá lehet adni a tömbökhöz. Ez utóbbival vigyázni kell, mivel egy adott változó direkt módon egy adott helyre történő beillesztése a tömbbe akár lyukakat is hagyhat a tömbben.
+A tömbök tekintetében a JavaScript, PHP és Python elég hasonlóan működik. Mindhárom nyelv esetében meg kell adni a tömb nevét, ami egy változó lesz, majd fel kell sorolni a tömb elemeit, melyek többféle típusúak is lehetnek. Az adott tömbök futás alatt bővíthetők, tehát új elemet hozzá lehet adni a tömbökhöz. Ez utóbbival vigyázni kell, mivel egy adott változó direkt módon egy adott helyre történő beillesztése a tömbbe akár lyukakat is hagyhat a tömbben.
 
 JavaScript alatt az alábbi módon valósítható meg a tömb kezelése:
-
 \begin{cpp}
 	var tomb = ["egy", "ketto"];
-	
 	console.log(tomb[1]);
-	
 	tomb[2] = "harom";
 	tomb.push("harom");
-	
 	consloe.log(tomb.length);
 \end{cpp}
 
@@ -288,31 +268,23 @@ JavaScript alatt az alábbi módon valósítható meg a tömb kezelése:
 % tomb.push("harom"); //A tömb végére illeszti az elemet
 % consloe.log(tomb.length); //Tömb méretének lekérdezése
 
-Ugyanez a tömbkezelés Python alatt:
-
+Ugyanez a tömbkezelés Python alatt lista használatával:
 \begin{cpp}
 	tomb = ["egy", "ketto"];
-	
 	print(tomb[1]);
-	
 	tomb.append("harom");
-	
 	print(len(tomb));
 \end{cpp}
 
 % tomb.append("harom"); //A tömb végére illeszti az elemet
 % print(len(tomb)); //Tömb méretének lekérdezése
 
-És végül a kezelés PHP alatt az alábbi lesz:
-
+Végül a kezelés PHP alatt az alábbi lesz:
 \begin{cpp}
 	$tomb = array("egy", "ketto");
-	
 	echo $tomb[1];
-	
 	$tomb[2] = "harom";
 	array_push($tomb, "harom");
-	
 	echo count($tomb);
 \end{cpp}
 
@@ -320,44 +292,39 @@ Ugyanez a tömbkezelés Python alatt:
 % array_push($tomb, "harom"); //A tömb végére illeszti az elemet
 % echo count($tomb); //Tömb méretének lekérdezése
 
-\section{Ciklusok}
+\subsection{Ciklusok}
 
 A célnyelvként tekintett programozás nyelvekben a ciklusok megvalósítása nagyon hasonlóan működik, minden tekintett célnyelvben van elöltesztelő és hátultesztelő ciklus is. A ciklusokban minden esetben van egy feltétel, egy ciklusváltozó, melynek változása lesz a feltétellel összehasonlítva és egy ciklusmag, mely minden iterációban lefut.
 
-A fontos különbség a tekintett célnyelvek között, hogy maga a nyelv sajátosságai megtalálhatók itt is, tehát például a Python nyelvnél nincs a ciklusmag { és } közé téve, de természetesen függetlenül ettől ez is blokkot képez. A többi nyelvnél általában a kapcsos zárójel kiírásával megjelenítik a blokkot.
+A fontos különbség a tekintett célnyelvek között, hogy maga a nyelv sajátosságai megtalálhatók itt is, tehát például a Python nyelvnél nincs a ciklusmag \texttt{{} és \texttt{}} közé téve, de természetesen függetlenül ettől ez is blokkot képez. A többi nyelvnél általában a kapcsos zárójel kiírásával megjelenítik a blokkot.
 
 A ciklusoknak a két fajtája, a while és a for minden nyelvben megtalálható.
-
 \begin{cpp}
 	for (int i = 1; i < 10; i++) {
 		System.out.println(i + "\n");
 	}
-
 	int j = 1;
 	while (j < 10) {
 		System.out.println(j + "\n");
 		j++;
 	}
 \end{cpp}
-
 A fenti példa egy Java kód a ciklusokra. A C nyelvben ez a ciklusszervezés majdnem teljesen megegyezik, a fő különbség az, hogy a C nyelvben a változókat mindig előre, a program elején kell deklarálni, tehát az nem tehető meg a ciklus fejlécében.
 
 A Python while ciklusa azonos a fenti kódban írtakkal, természetesen a nyelvi sajátosságok miatt fennálló különbségek kivételével. A for ciklus ebben az esetben kicsit megváltozik, de így is hasonlít a Java nyelvben található foreach ciklusra, mivel ilyenkor egy listán fut végig a ciklus.
-
 \begin{cpp}
 	tomb = ["egy", "ketto", "harom"];
 	for i in tomb:
 		print(i)
 \end{cpp}
 
-JavaScript és PHP alatt a ciklusok majdnem teljesen megegyeznek a Java kódban látható ciklusokkal, természetesen itt is meg kell említeni a nyelvi sajátosságokat (pládul a PHP változók előtt itt is szerepelnie kell a \textdollar szimbólum), melyek eltéréseket okoznak és melyeket figyelembe kell venni a kimeneti kód megalkotásakor.
+JavaScript és PHP alatt a ciklusok majdnem teljesen megegyeznek a Java kódban látható ciklusokkal, természetesen itt is meg kell említeni a nyelvi sajátosságokat (például a PHP változók előtt itt is szerepelnie kell a \textdollar szimbólum), melyek eltéréseket okoznak és melyeket figyelembe kell venni a kimeneti kód megalkotásakor.
 
-\section{Függvények}
+\subsection{Függvények}
 
-A függvények kezelése a célnyelvekben szintén hasonlóan működik. A függvényeknek kell legyen egy fejlécük, melyben megadjuk a nevüket, visszatérési értékük típusát ahol kell, és a paraméter listát, illetve szükséges egy függvénytörzs is.
+A függvények kezelése a célnyelvekben szintén hasonlóan működnek. A függvényeknek kell legyen egy fejlécük, melyben megadjuk a nevüket, visszatérési értékük típusát (statikus típusos nyelvek esetében), és a paraméter listát, illetve szükséges egy függvénytörzs is.
 
-A fő különbség itt a C nyelvben van, ahol a függvényeket előre definiálni kell, egy prototípust kell a program elején írni belőlük, melyben fel kell tüntetni a függvény visszatérési értékének típusát, nevét és a paraméterek típusait. Ez a C nyelv esetében azért szükséges mivel a programnak tudnia kell a függvényről a meghívás helyén, és régebbi konvenció szerint a program belépési pontja azaz a main függvény után írjuk a többi függvényt. Azonban ha minden függvény teljesen megírásra kerül a main függvény előtt, függvényprototípusokat nem szükséges definiálni. Ezt kihasználva a C nyelvre fordítás is egyszerűsödhet a függvények kezelése szempontjából.
-
+A fő különbség itt a C nyelvben van, ahol a függvényeket előre definiálni kell, egy prototípust kell a program elején írni belőlük, melyben fel kell tüntetni a függvény visszatérési értékének típusát, nevét és a paraméterek típusait. Ez a C nyelv esetében azért szükséges mivel a programnak tudnia kell a függvényről a meghívás helyén, és régebbi konvenció szerint a program belépési pontja azaz a \texttt{main} függvény után írjuk a többi függvényt. Azonban ha minden függvény teljesen megírásra kerül a main függvény előtt, függvényprototípusokat nem szükséges definiálni. Ezt kihasználva a C nyelvre fordítás is egyszerűsödhet a függvények kezelése szempontjából.
 \begin{cpp}
 	public static void main(String[] args) {
 		int i = 1;
@@ -369,31 +336,29 @@ A fő különbség itt a C nyelvben van, ahol a függvényeket előre definiáln
 		return a+b;
 	}
 \end{cpp}
-
 A fenti Java kódban egy függvényt és annak meghívását lehet látni. A függvények és meghívásaik a többi célnyelvként tekintett programozási nyelven is hasonlóan működnek.
 
-A fő különbség a Python nyelven, hogy itt a nyelvi sajátosságok miatt általában nem kell láthatósági módosítót és visszatérési érték típust megadni, ellenben a def kulcsszóval kell a függvény leírását bevezetni. Meghívása a Java nyelvhez hasonlóan a függvény nevével történik. Ahogy a függvény neve elé nem kell, úgy a paraméterlistában a paraméterek nevei elé sem kell a típus megjelölés, azonban az újabb Python verziókban a fentebb említett "hint" itt is használható.
+A fő különbség a Python nyelvben, hogy ott a nyelvi sajátosságok miatt általában nem kell láthatósági módosítót és visszatérési érték típust megadni, ellenben a \texttt{def} kulcsszóval kell a függvény leírását bevezetni. Meghívása a Java nyelvhez hasonlóan a függvény nevével történik. Ahogy a függvény neve elé nem kell, úgy a paraméterlistában a paraméterek nevei elé sem kell a típus megjelölés, azonban az újabb Python verziókban a fentebb említett \textit{hint} itt is használható.
 
-A PHP esetében a különbség majdnem ugyanaz, mint a Python esetében, tehát nem kell láthatósági módosító és típusmegjelölés sem, viszont a függvényt itt is kulcsszóval kell bevezetni, ez pedig a function lesz a PHP esetében. A paraméterek elő itt is kell a változóknál említett \textdollar szimbólum.
+A PHP esetében a különbség majdnem ugyanaz, mint a Python esetében, tehát nem kell láthatósági módosító és típusmegjelölés sem, viszont a függvényt itt is kulcsszóval kell bevezetni, ez pedig a \texttt{function} lesz a PHP esetében. A paraméterek elő itt is kell a változóknál említett \textdollar szimbólum.
 
-A JavaScript esetében szintén ez a helyzet mint az előző két esetben, és itt is a function kulcsszóval kell bevezetni a függvényt.
+A JavaScript esetében szintén ez a helyzet mint az előző két esetben, és itt is a \texttt{function} kulcsszóval kell bevezetni a függvényt.
 
-A függvények esetében visszatérési érték is lehetséges, hiszen a függvénytörzsben elvégzett adatokkal akár vissza is térhet a függvény a meghívó függvénybe. Ezt a return utasítással kell megadni minden nyelvben.
+A függvények esetében visszatérési érték is lehetséges, hiszen a függvénytörzsben elvégzett adatokkal akár vissza is térhet a függvény a meghívó függvénybe. Ezt a \texttt{return} utasítással kell megadni minden nyelvben.
 
 Szintén érdekesség, hogy a függvények paraméterének a legtöbb nyelvben lehet egy alapértelmezett értéket adni, és amennyiben nem kap értéket a meghíváskor, akkor ezt a kezdeti értéket fogja használni.
-A C nyelv ebből a szempontból sajnos kivétel, nem támogatott alapértelmezetten ez a megoldás, természetesen különböző módokon lehet olyan programot írni melyben akár struktúrákkal, akár több függvénnyel a fent leírt hatás elérhető, de ez nehézkes. A legközelebbi beépített megoldás ezzel kapcsolatban a változó paraméterekkel (varargs) megoldott függvény lenne, de ez nem a legegyszerűbb megoldás és itt az ellenőrzések sem egyszerűek.
-Ugyanígy a Java nyelv sem támogatja ezt a funkciót. Természetesen itt is megoldhatók ezek, itt a függvénytúlterhelés (function overloading) lenne a megoldás, amely esetben több függvényt írunk ugyanazon néven különböző paraméterlistával (ezt a Java támogatja), és az egyes függvények csak meghívják a további függvényeket melyek mind több és több paramétert tartalmaznak, míg végül az eredetileg megírni kívánt függvényt is. Az egyes függvények pedig a több paraméterrel rendelkező függvényeket egy alapértelmezett paraméterrel hívják meg, így a felhasználó mindig azt a függvényt tudja meghívni amennyi paraméter éppen a rendelkezésére áll a többi pedig alapértelmezett értékekkel kerül kitöltésre. Sajnos a nagyobb függvények esetében ez is eléggé bonyolulttá teszi nem csak a kódot de az ellenőrzést és javítást is.
+A C nyelv ebből a szempontból sajnos kivétel, nem támogatott alapértelmezetten ez a megoldás, természetesen különböző módokon lehet olyan programot írni melyben akár struktúrákkal, akár több függvénnyel a fent leírt hatás elérhető, de ez nehézkes. A legközelebbi beépített megoldás ezzel kapcsolatban a változó paraméterekkel (\textit{varargs}) megoldott függvény lenne, de ez nem a legegyszerűbb megoldás és itt az ellenőrzések sem egyszerűek.
+Ugyanígy a Java nyelv sem támogatja ezt a funkciót. Természetesen itt is megoldhatók ezek, itt a függvénytúlterhelés (\textit{function overloading}) lenne a megoldás, amely esetben több függvényt írunk ugyanazon néven különböző paraméterlistával (ezt a Java támogatja), és az egyes függvények csak meghívják a további függvényeket melyek mind több és több paramétert tartalmaznak, míg végül az eredetileg megírni kívánt függvényt is. Az egyes függvények pedig a több paraméterrel rendelkező függvényeket egy alapértelmezett paraméterrel hívják meg, így a felhasználó mindig azt a függvényt tudja meghívni amennyi paraméter éppen a rendelkezésére áll a többi pedig alapértelmezett értékekkel kerül kitöltésre. Sajnos a nagyobb függvények esetében ez is eléggé bonyolulttá teszi nem csak a kódot de az ellenőrzést és javítást is.
 
 A JavaScript a ECMAScript 2015-től kezdődően támogatja az alapértelmezett paramétert, csakúgy mint a PHP és a Python is támogatja ezt, így ez a három célnyelv az ami a kód bonyolítása nélkül képes ezeket kezelni.
 
 Minthogy két nyelv is van a célnyelvként választott nyelvek között mely ezt nem támogatja, ezért a rugalmasságot és egyszerűséget alapul véve a definiált nyelvben sem lesz egyenlőre ez a funkció benne, így alapértelmezett paramétereket nem tudnak a felhasználók megadni. A fordítóprogram további fejlesztésekor, a felhasználói visszajelzéseket figyelembe véve lehet kibővíteni ezzel a rendszert.
 
-\section{Struktúra és osztály}
+\subsection{Struktúra és osztály definiálása}
 
-Általánosságban a kódot a célnyelvekben valamilyen struktúrába szervezik. A magas szintű, modern programozási nyelvek az osztályokba szervezést követik, azaz a kódot valamilyen szempont alapján különböző osztályokba szervezik és ezek együttműködnek a program futása során.
+Általánosságban a kódot a célnyelvek valamilyen struktúrába szervezik. A magas szintű, modern programozási nyelvek az osztályokba szervezést követik, azaz a kódot valamilyen szempont alapján különböző osztályokba szervezik és ezek együttműködnek a program futása során.
 
 A dolgozat szempontjából célnyelvként vizsgált nyelvek szinte mindegyike támogatja az osztályokba szervezést, kivéve a C nyelvet, melyben máshogy lehet ehhez hasonló szerkezetet megoldani.
-
 \begin{cpp}
 	public class Osztaly {
 		int a;
@@ -407,19 +372,17 @@ A dolgozat szempontjából célnyelvként vizsgált nyelvek szinte mindegyike t�
 		}
 	}
 \end{cpp}
-
 A fenti rövid Java nyelven írt példa mutatja be az osztályokat. A vizsgált célnyelvek közül a C nyelvet kivéve az osztályok megalkotása ehhez hasonlóan működik, minden osztálynak kell egy neve legyen, adattagjai és metódusai. Java nyelven az osztálynak egy láthatósági módosítója is van. Az adott nyelveken az osztályoknak van egy kiemelt metódusuk, a konstruktor. A Java nyelven ez az osztály nevével ellátott függvény lesz, melynek nincs visszatérési értéke, ez inicializálja a változókat, melyeket osztályon belül adattagnak nevezünk. Java nyelven lehetőség van több konstruktort is írni a fentebb említett method overloading segítségével, így egy osztály többféle módon is példányosítható lesz.
-A példányosítás után az egyes metódusokra (amennyiben elérhetőek) a . operátorral hivatkozhatunk.
+A példányosítás után az egyes metódusokra (amennyiben elérhetőek) a \texttt{.} operátorral hivatkozhatunk.
 
-JavaScript nyelven az osztály tulajdonképpen egy egyedi függvényként is tekinthető, azaz a megírt tartalom függvényként is definiálható lenne. Azonban az osztályban történő definiálás az áttekinthetőség és az egyszerűbb leírás miatt történt. JavaScriptben is a class kulcsszóval kell bevezetni az osztálydefiníciót, azonban láthatósági módosítót nem kell megadni hozzá. Itt is létezik konstruktor függvény, de itt a constructor néven kell megírni, és csak egy darab lehet belőle. A példányosítás után itt is a . operátorral hivatkozhatunk az osztály metódusaira, adattagjaira.
+JavaScript nyelven az osztály tulajdonképpen egy egyedi függvényként is tekinthető, azaz a megírt tartalom függvényként is definiálható lenne. Azonban az osztályban történő definiálás az áttekinthetőség és az egyszerűbb leírás miatt történt. JavaScriptben is a class kulcsszóval kell bevezetni az osztálydefiníciót, azonban láthatósági módosítót nem kell megadni hozzá. Itt is létezik konstruktor függvény, de itt a constructor néven kell megírni, és csak egy darab lehet belőle. A példányosítás után itt is a \texttt{.} operátorral hivatkozhatunk az osztály metódusaira, adattagjaira.
 
-PHP nyelven szintén a class kulcsszóval kell bevezetni az osztály deklarálását, viszont itt különbség, hogy a konstruktort a \_\_constuct függvény néven kell megírni. Az osztály metódusaira és adattagjaira viszont itt a -> operátorral lehet hivatkozni.
+PHP nyelven szintén a class kulcsszóval kell bevezetni az osztály deklarálását, viszont itt különbség, hogy a konstruktort a \texttt{\_\_constuct} függvény néven kell megírni. Az osztály metódusaira és adattagjaira viszont itt a \texttt{->} operátorral lehet hivatkozni.
 
-A Python nyelven az előzőekhez hasonlóan szintén class kulcsszóval kell az osztályt létrehozni, viszont itt is másik néven szerepel a konstruktor, itt az \_\_init\_\_ függvényt kell megírni, melyet a nyelvi sajátosságok alapján a def kulcsszóval kell bevezetni. A metódusokra és adattagokra itt is a . operátorral lehet hivatkozni.
+A Python nyelven az előzőekhez hasonlóan szintén class kulcsszóval kell az osztályt létrehozni, viszont itt is másik néven szerepel a konstruktor, itt az \texttt{\_\_init\_\_} függvényt kell megírni, melyet a nyelvi sajátosságok alapján a def kulcsszóval kell bevezetni. A metódusokra és adattagokra itt is a \texttt{.} operátorral lehet hivatkozni.
 
 Ahogy fentebb említésre került, a C nyelv nem obejtum orientált nyelv, azaz osztályokat nem lehet definiálni, ezért ilyen esetben kerülő megoldás kell. A C nyelvben definiálhatunk struktúrákat, azonban itt problémát jelenthet, hogy a metódusokat nem tudjuk magában a struktúrában definiálni, azaz külön kell azokat definiálni és explicit átadni neki magát a struktúrát, hogy az adattagjait kezelni lehessen. Emiatt a program eléggé bonyolulttá válhat, könnyen összekeverhető, hogy melyik struktúrához mely függvények tartoznak. Ennek kivédésére különböző névkonvenciókat alkalmazhatunk. Viszont jelen dolgozat esetében nem kell a felhasználónak ilyennel foglalkoznia, hiszen a definiált nyelven megírt kódot a program fordítja le, így az állítja össze a célnyelvi megfelelőjét. Viszont sajnos ilyenkor ha a kimeneti programot tovább szeretné a felhasználó szerkeszteni akkor az nehézségeket okozhat, de mivel a bemeneti programot lehet a továbbiakban is szerkeszteni ezért a kimeneti fájlt nem szükséges szerkeszteni.
 Az alábbiakban látható egy példa a C nyelven megírt osztályhoz hasonló program megvalósításra.
-
 \begin{cpp}
 	typedef struct osztalyDef {
 		int a;
@@ -459,7 +422,6 @@ Az alábbiakban látható egy példa a C nyelven megírt osztályhoz hasonló pr
 	}
 \end{cpp}
 
-
 % ===========================
 \Chapter{A nyelv definíciója}
 % ===========================
@@ -468,7 +430,7 @@ Az alábbiakban látható egy példa a C nyelven megírt osztályhoz hasonló pr
 
 A saját nyelv kialakításánál az elsődleges szempont a könnyű kezelhetőség volt, hogy bár több nyelvre, több platformra kerülhet lefordításra a kód, a felhasználó, programozó egyszerűen, könnyen tudja megírni a kódot a definiált nyelven, így nem kell minden célnyelvi szintaktikai és szemantikai szabállyal tisztába lennie, azokat külön-külön alkalmaznia.
 
-Ezek alapján a nyelv a Python nyelvhez hasonló megoldásokat és jegyeket hordoz magán, a nyelvi szintaktika és szemantika megvalósításának tekintetében.
+Ezek alapján a nyelv a Python nyelv szintaktikájához hasonló megoldásokat és jegyeket hordoz magán, a nyelvi szintaktika és szemantika megvalósításának tekintetében.
 
 Ahhoz, hogy a nyelvet definiálni lehessen az alábbiakban áttekintjük a feladat során célnyelvként tekintett nyelveket általánosan, azok megvalósítását, tulajdonságait, fő elemeit. Majd ezután a saját definiált nyelv tervezett nyelvi elemeit vesszük sorra.
 
@@ -484,8 +446,7 @@ Az értékadást az alábbi példa szemlélteti:
 string szoveg = "szoveg"
 \end{cpp}
 
-A változók definiálásakor meg kell adni a változó típusát, mivel a nyelv erősen típusos. A nyelv az int, string, double, boolean, void, array és dictionary típusokat ismeri, melyek minden tekintett célnyelvben megtalálhatók, a C nyelvben a string karaktertömbként, illetve a dictionary struktúraként, így mindegyik nyelvre lehet fordítani.
-
+A változók definiálásakor meg kell adni a változó típusát, mivel a nyelv erősen típusos. A nyelv az \textit{int}, \textit{string}, \textit{double}, \textit{boolean}, \textit{void}, \textit{array} és \textit{dictionary} típusokat ismeri, melyek minden tekintett célnyelvben megtalálhatók, a C nyelvben a string karaktertömbként, illetve a dictionary struktúraként, így mindegyik nyelvre lehet fordítani.
 \begin{cpp}
 int valtozo1 = 5
 string valtozo2 = "szoveg"
@@ -500,9 +461,12 @@ A változók, illetve osztály adattagok esetében meg lehet adni láthatósági
 
 Ha azt szeretnénk, hogy kívülről is lehessen kezelni az adott változót, akkor mindenképpen ki kell írni a láthatósági módosítót. Ilyen esetben public módosítót kell megadni, így mindenhonnan elérhető az adott változó. A metódusok belül létrehozott változók minden esetben a metódusokon belül használhatók.
 
-array valtozoT = {1, 2, 3, 5, "tizenkettő"} ~ egy adott tömbben többféle típusú elem is szerepelhet, például szám és szöveg. A tömb elemeire a valtozoT(x)-el lehet hivatkozni, ahol az x a tömb x. eleme lesz.
-Túlindexelés esetén a porogramozónak figyelnie kell, ugyanis a nyelv rugalmassága miatt nem fog hibaüzenetet kapni. Ha a tömb 10 elemű és a tomb(12)-t hívjuk akkor a változóba ahol az elemet letároljuk, vagy metódusba ahova átadjuk egy 0 kerül át.
-
+Az alábbi példában az látható, hogy egy tömbben különféle típusú értékek szerepelhetnek.
+\begin{cpp}
+array valtozoT = {1, 2, 3, 5, "tizenketto"}
+\end{cpp}
+A tömb elemeire a \texttt{valtozoT(x)}-el lehet hivatkozni, amely a \texttt{valtozoT} tömb \texttt{x}-edik elemét jelöli.
+Túlindexelés esetén a porogramozónak figyelnie kell, ugyanis a nyelv rugalmassága miatt nem fog hibaüzenetet kapni. Ha a tömb 10 elemű és a \texttt{tomb(12)}-t hívjuk akkor a változóba ahol az elemet letároljuk, vagy metódusba ahova átadjuk egy 0 kerül át.
 \begin{cpp}
 array tomb = valtozoT + "husz"
 Print(tomb) ~ eredmeny: 1 2 3 5 tizenketto husz
@@ -527,12 +491,11 @@ Print(valtozoT)
 % Print(tomb) ~ eredmény: 1 2 3 5 tizenkettő 5 nyolc miskolc
 % Print(valtozoT) ~ eredmény: 1 2 3 5 tizenkettő 5 nyolc miskolc
 
-A második vezérlési szerkezet az elágazás. A definiált nyelvben a szelekció az If kulcsszóval kerül bevezetésre, melyet egy feltétel követ. A feltétel három tagból kell, hogy álljon, mely egy operátor és annak két oldalán valamilyen kifejezés kell, hogy legyen.
+A második vezérlési szerkezet az elágazás. A definiált nyelvben a szelekció az \texttt{If} kulcsszóval kerül bevezetésre, melyet egy feltétel követ. A feltétel három tagból kell, hogy álljon, mely egy operátor és annak két oldalán valamilyen kifejezés kell, hogy legyen.
 
-Az elágazás további ágait ElIf kulcsszóval vezetjük be, mely után szintén egy feltétel kell, hogy álljon, melynek a szerkezete az If feltételével megegyező kell, hogy legyen. Illetve egy utolsó ág van fenntartva arra az esetre, hogy ha a szelekció egyik korába ágának feltétele sem teljesül ezt az Else kulcsszóval kell bevezetni, itt nem kell feltételt megadni.
+Az elágazás további ágait \texttt{ElIf} kulcsszóval vezetjük be, mely után szintén egy feltétel kell, hogy álljon, melynek a szerkezete az \texttt{If} feltételével megegyező kell, hogy legyen. Illetve egy utolsó ág van fenntartva arra az esetre, hogy ha a szelekció egyik korába ágának feltétele sem teljesül ezt az \texttt{Else} kulcsszóval kell bevezetni, itt nem kell feltételt megadni.
 
-A szelekció egyes ágain több végrehajtható művelet is helyet kaphat, melyeket a program sorrendben, szekvencia alapján végez el. Az egy adott ághoz tartozó műveleti blokkot a programnyelvben nem kell külön zárójel, illetve kapcsos zárójelpárral körülzárni, a definiált nyelvben az egy adott blokk határait blokk kezdetét és végét jelentő speciális utasítások megjelenése mutatja. Az If esetében az If után az ElIf vagy Else kulcsszavak lesznek ezek, az Else végén pedig egy End utasítás kell, hogy helyet kapjon.
-
+A szelekció egyes ágain több végrehajtható művelet is helyet kaphat, melyeket a program sorrendben, szekvencia alapján végez el. Az egy adott ághoz tartozó műveleti blokkot a programnyelvben nem kell külön zárójel, illetve kapcsos zárójelpárral körülzárni, a definiált nyelvben az egy adott blokk határait blokk kezdetét és végét jelentő speciális utasítások megjelenése mutatja. Az \texttt{If} esetében az \texttt{If} után az \texttt{ElIf} vagy \texttt{Else} kulcsszavak lesznek ezek, az \texttt{Else} végén pedig egy \texttt{End} utasítás kell, hogy helyet kapjon.
 \begin{cpp}
 If elso == 1
 	masodik = elso/2
@@ -549,12 +512,11 @@ Else
 End
 \end{cpp}
 
-A szelekció másik típusa a definiált nyelvben olyan elágazás, mely az elágazás elején vár egy változót vagy kifejezést és ezt utána a megadott elemekre próbálja illeszteni. Ezen szelekció a Switch kulcsszóval kerül bevezetésre, melyet követ a változó, illetve kifejezés.
+A szelekció másik típusa a definiált nyelvben olyan elágazás, mely az elágazás elején vár egy változót vagy kifejezést és ezt utána a megadott elemekre próbálja illeszteni. Ezen szelekció a \texttt{Switch} kulcsszóval kerül bevezetésre, melyet követ a változó, illetve kifejezés.
 
-A program futása során az a kódrész fog lefutni, amelyhez tartozó elemre a kifejezés illesztése sikeres volt. Ha nincs ilyen elem akkor egy alapértelmezett kódrészként megadott kód fog lefutni, melyet a Def kulcsszóval kell bevezetni. Ezen kódrész megírása mindenképpen szükséges.
+A program futása során az a kódrész fog lefutni, amelyhez tartozó elemre a kifejezés illesztése sikeres volt. Ha nincs ilyen elem akkor egy alapértelmezett kódrészként megadott kód fog lefutni, melyet a \texttt{Def} kulcsszóval kell bevezetni. Ezen kódrész megírása mindenképpen szükséges.
 
 Az egy adott blokkba tartozó kódot ebben a szelekcióban is a kulcsszavak megjelenése. Az alábbiakban látható erre egy példa.
-
 \begin{cpp}
 Switch vizsgalt_elem
 	eredmeny1:
@@ -568,8 +530,7 @@ Switch vizsgalt_elem
 End
 \end{cpp}
 
-A harmadik vezérlési szerkezet a definiált nyelvben az iteráció. Az iteráció itt is többféle lehet, melyeket a For, While illetve a Do kulcsszavakkal kell bevezetni, ezután következik a ciklusfeltétel, majd az utasításblokk.
-
+A harmadik vezérlési szerkezet a definiált nyelvben az iteráció. Az iteráció itt is többféle lehet, melyeket a \texttt{For}, \texttt{While} illetve a \texttt{Do} kulcsszavakkal kell bevezetni, ezután következik a ciklusfeltétel, majd az utasításblokk.
 \begin{cpp}
 For a=1, a<5, a++
 	utasitas1
@@ -578,11 +539,12 @@ End
 \end{cpp}
 
 A ciklusfeltétel lehet:
-- a < 10 (ha a nem létezik automatikusan létrehozásra kerül 0 értékkel, minden ciklusmag lefutása utána automatikusan növekszik egyel)
-- a = 15, a > 10, a-- (15-el jön létre, csökken egyel minden ciklusmag lefutása után és addig fut míg nagyobb mint 10)
+\begin{itemize}
+    \item  \texttt{a < 10} (ha a nem létezik automatikusan létrehozásra kerül 0 értékkel, minden ciklusmag lefutása utána automatikusan növekszik egyel)
+    \item \texttt{a = 15, a > 10, a--} (15-el jön létre, csökken egyel minden ciklusmag lefutása után és addig fut míg nagyobb mint 10)
+\end{itemize}
 
-Függvények, a Funct kulcsszóval kerülnek bevezetésre, amit a függvény neve követ, majd a paraméterek listája zárójelpáron belül.
-
+Függvények, a \texttt{Funct} kulcsszóval kerülnek bevezetésre, amit a függvény neve követ, majd a paraméterek listája zárójelpáron belül.
 \begin{cpp}
 Funct kiir (a)
 	utasitas
@@ -593,20 +555,18 @@ Funct int add (a, b)
 End
 \end{cpp}
 
-A függvnyeket szintén End kulcsszóval kell lezárni, illetve fontos, hogy a függvény mindig visszatér az utolsó utasításban előállított értékkel, mely egyrészt eltárolódhat, illetve akár el is veszhet attól függően, hogy a függvény milyen módon lett meghívva.
-
+A függvényeket szintén \texttt{End} kulcsszóval kell lezárni, illetve fontos, hogy a függvény mindig visszatér az utolsó utasításban előállított értékkel, mely egyrészt eltárolódhat, illetve akár el is veszhet attól függően, hogy a függvény milyen módon lett meghívva.
 \begin{cpp}
 q = add(5, 2)
 \end{cpp}
 
-A q-ba a fenti add függvény c értéke kerül, tehát 7, viszont ha a q és = törlésre kerül a kódból, a függvény így is lefut, és vissza is tér a 7 értékkel, de az nem tárolódik le sehol, tehát el fog veszni.
+A \texttt{q}-ba a fenti add függvény \texttt{c} értéke kerül, tehát 7, viszont ha a \texttt{q} és \texttt{=} törlésre kerül a kódból, a függvény így is lefut, és vissza is tér a 7 értékkel, de az nem tárolódik le sehol, tehát el fog veszni.
 
 Az osztályok segítségével lehet jól leképezni a valóságban lévő, vagy valósághoz közel álló elemeket is. Nem csak az egyes tulajdonságok és adott elemhez tartozó változók egy egységben történő kezelésére lennének jók, de az egyes elemek, objektumok egymáshoz való viszonyát, leszármazást is meg lehetne ezzel oldani.
 
 Mivel általánosságban is elterjedtek az osztály alapú, objektum orientált nyelvek, ezért a definiált nyelv is ilyen, így a programozóknak, a nyelv használóinak kényelmesebb lesz, mivel olyat nyelven tudnak használni, melyhez hasonlót már használtak, vagy tanultak róla.
 
-Az osztályok a Create kulcsszóval kell bevezetni, majd az osztály neve következik és a paraméterek listája. Az osztályon belül a paraméterek és metódusok definiálása történik, az osztály végét az előzőekhez hasonlóan itt is az End kulcsszó jelöli.
-
+Az osztályok a \texttt{Create} kulcsszóval kell bevezetni, majd az osztály neve következik és a paraméterek listája. Az osztályon belül a paraméterek és metódusok definiálása történik, az osztály végét az előzőekhez hasonlóan itt is az End kulcsszó jelöli.
 \begin{cpp}
 Create osztalynev(parameterek)
 	belso parameterek definialasa
@@ -627,11 +587,11 @@ Create osztaly
 	End
 \end{cpp}
 
-A fenti példában látható, hogy az osztálynak meg kell adni egy konstruktort, melyben megadhatunk paramétereket is. Azokat nem kell külön előre definiálni, az a konstruktorban történik meg és itt értéket is lehet nekik adni, ha szeretnénk. Fontos, hogy az osztály saját elemeit, adattagjait @ jellel kell megjelölni. Az osztály adattagjainak getter és setter metódusa automatikusan létrejön, tehát meghívható.
+A fenti példában látható, hogy az osztálynak meg kell adni egy konstruktort, melyben megadhatunk paramétereket is. Azokat nem kell külön előre definiálni, az a konstruktorban történik meg és itt értéket is lehet nekik adni, ha szeretnénk. Fontos, hogy az osztály saját elemeit, adattagjait \texttt{@} jellel kell megjelölni. Az osztály adattagjainak \textit{getter} és \textit{setter} metódusa automatikusan létrejön, tehát meghívható.
 
-Az osztály változónak módosítása a getter, setter metódusokon keresztül lehetséges például osztaly.getParam1 / osztaly.setParam1 metódus meghívásával. Ugyanígy lehet meghívni saját magunk által írt metódust is.
+Az osztály változónak módosítása a \textit{getter}, \textit{setter} metódusokon keresztül lehetséges például \texttt{osztaly.getParam1}/\texttt{osztaly.setParam1} metódus meghívásával. Ugyanígy lehet meghívni saját magunk által írt metódust is.
 
-Egy osztály és azon elemei a memóriában addig maradnak míg arra hivatkozás van, ha az osztály objektuma nincs változóba letárolva, akkor nem marad meg. A ciklusváltozó, ha a ciklusban lett létrehozva akár automatikusan akár manuálisan akkor megszűnik a ciklus végén, a memóriából is törlődik. A programban definiált változók és tartalmuk a program futásának végéig a memóriában maradnak, azután törlődnek. Illetve manuálisan is törölhetők a Del(változónév) segítségével, ekkor törlésre kerül a memóriából az elem.
+Egy osztály és azon elemei a memóriában addig maradnak míg arra hivatkozás van, ha az osztály objektuma nincs változóba letárolva, akkor nem marad meg. A ciklusváltozó, ha a ciklusban lett létrehozva akár automatikusan akár manuálisan akkor megszűnik a ciklus végén, a memóriából is törlődik. A programban definiált változók és tartalmuk a program futásának végéig a memóriában maradnak, azután törlődnek. Illetve manuálisan is törölhetők a \texttt{Del}(változónév) segítségével, ekkor törlésre kerül a memóriából az elem.
 
 Ha egy elemre úgy hivatkozunk, hogy nem volt még definiálva, akkor automatikusan létrejön a változó 0 értékkel, ha előtte már volt definiálva és kitöröltük, majd úgy hivatkozunk rá, akkor is 0 értékkel jön létre, bármilyen típusú értéke is volt előzőleg, erre figyelni kell.
 
@@ -664,133 +624,134 @@ Operator ::= "+" | "-" | "*" | "/" | ">" | "<" | "<=" | ">=" | "==" | "&&" | "||
 LParen ::= "("
 RParen ::= ")"
 Comment  ::= '/*' ( [^*] | '*'+ [^*/] )* '*'* '*/'
-
 \end{verbatim}
 
 \subsection{Szintaxis diagramok}
 
+A következő ábrákon az egyes nyelvi elemek szintaxis diagram megfelelői láthatók. (Az operátorok nem szerepelnek benne, mivel azok egyszerű felsorolásként megadható, hasonlóképp a \texttt{Whitespace} karakterekhez.)
+
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.5]{kepek/rr_comment.png}
+\includegraphics[scale=0.6]{kepek/rr_comment.png}
 \caption{Comment}
 \label{fig:rr_comment}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.5]{kepek/rr_whitespace.png}
+\includegraphics[scale=0.6]{kepek/rr_whitespace.png}
 \caption{Whitespace}
 \label{fig:rr_whitespace}
 \end{figure}
 
-\begin{figure}[h!]
-\centering
-\includegraphics[scale=1]{kepek/rr_operator.png}
-\caption{Operator}
-\label{fig:rr_operator}
-\end{figure}
+%\begin{figure}[h!]
+%\centering
+%\includegraphics[scale=1]{kepek/rr_operator.png}
+%\caption{Operator}
+%\label{fig:rr_operator}
+%\end{figure}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=1]{kepek/rr_digit.png}
+\includegraphics[scale=0.6]{kepek/rr_digit.png}
 \caption{Digit}
 \label{fig:rr_digit}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=1]{kepek/rr_character.png}
+\includegraphics[scale=0.6]{kepek/rr_character.png}
 \caption{Character}
 \label{fig:rr_character}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=1]{kepek/rr_string.png}
+\includegraphics[scale=0.6]{kepek/rr_string.png}
 \caption{String}
 \label{fig:rr_string}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=1]{kepek/rr_block.png}
+\includegraphics[scale=0.6]{kepek/rr_block.png}
 \caption{Block}
 \label{fig:rr_block}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=1]{kepek/rr_binaryoperator.png}
+\includegraphics[scale=0.6]{kepek/rr_binaryoperator.png}
 \caption{BinaryOperator}
 \label{fig:rr_binaryoperator}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.5]{kepek/rr_identifier.png}
+\includegraphics[scale=0.6]{kepek/rr_identifier.png}
 \caption{Identifier}
 \label{fig:rr_identifier}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.5]{kepek/rr_expression.png}
+\includegraphics[scale=0.6]{kepek/rr_expression.png}
 \caption{Expression}
 \label{fig:rr_expression}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=1]{kepek/rr_assignment.png}
+\includegraphics[scale=0.6]{kepek/rr_assignment.png}
 \caption{Assignment}
 \label{fig:rr_assignment}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.7]{kepek/rr_instruction.png}
+\includegraphics[scale=0.6]{kepek/rr_instruction.png}
 \caption{Instruction}
 \label{fig:rr_instruction}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.4]{kepek/rr_condition.png}
+\includegraphics[scale=0.6]{kepek/rr_condition.png}
 \caption{Condition}
 \label{fig:rr_condition}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.4]{kepek/rr_if.png}
+\includegraphics[scale=0.6]{kepek/rr_if.png}
 \caption{If}
 \label{fig:rr_if}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.4]{kepek/rr_switch.png}
+\includegraphics[scale=0.6]{kepek/rr_switch.png}
 \caption{Switch}
 \label{fig:rr_switch}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.4]{kepek/rr_for.png}
+\includegraphics[scale=0.6]{kepek/rr_for.png}
 \caption{For}
 \label{fig:rr_for}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.4]{kepek/rr_while.png}
+\includegraphics[scale=0.6]{kepek/rr_while.png}
 \caption{While}
 \label{fig:rr_while}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.4]{kepek/rr_function.png}
+\includegraphics[scale=0.6]{kepek/rr_function.png}
 \caption{Function}
 \label{fig:rr_function}
 \end{figure}
@@ -804,7 +765,7 @@ Comment  ::= '/*' ( [^*] | '*'+ [^*/] )* '*'* '*/'
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=1]{kepek/rr_program.png}
+\includegraphics[scale=0.6]{kepek/rr_program.png}
 \caption{Program}
 \label{fig:rr_program}
 \end{figure}
@@ -842,3 +803,4 @@ Ember pelda = Ember("teszt", 20, 1542, "Teszteles", 50)
 pelda.setParam1("TesztKetto")
 string ember = pelda.createString()
 \end{verbatim}
+
