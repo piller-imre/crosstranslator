@@ -599,19 +599,22 @@ Ha egy elemre úgy hivatkozunk, hogy nem volt még definiálva, akkor automatiku
 
 \subsection{EBNF}
 
-Az alábbiakban a programozási nyelv nyelvtanának felírása történik meg Extended Backus-Naur From és szintaxis diagram segítségével.
+Az alábbiakban a programozási nyelv nyelvtanának felírása történik meg Kibővített Backus-Naur Forma és szintaxis diagram segítségével.
 
 \begin{verbatim}
 Program  ::= Class+
-Class ::= "Create" Identifier LParen Identifier+ RParen ("ex" Identifier)? (Assignment | Function)+ "End"
-Function ::= "Funct" LParen Identifier+ RParen (Assignment | Instruction | Selection | (For | While))+ "End"
+Class ::= "Create" Identifier LParen Identifier+ RParen
+          ("ex" Identifier)? (Assignment | Function)+ "End"
+Function ::= "Funct" LParen Identifier+ RParen (Assignment |
+             Instruction | Selection | (For | While))+ "End"
 For ::= "For" Condition Block+ "End"
 While ::= "While" Condition Block+ "End"
 If ::= "If" Condition Block ("EIf" Block)* ("Else" Block)? "End"
 Switch ::= "Switch" (Identifier ":" Block)+ "Def" ":" Block "End"
 Block ::= Expression+
 Expression ::= (Instruction | Assignment)
-Condition ::= Identifier Operator (Identifier | Character | String | Digit)
+Condition ::= Identifier Operator
+              (Identifier | Character | String | Digit)
 Instruction ::= Identifier "=" BinaryOperator+
 Assignment ::= Identifier "=" (Character | String | Digit)+
 Identifier ::= Character (Character | Digit)+
@@ -620,7 +623,8 @@ String ::= '"' Character+ '"'
 Character ::= [a-zA-Z]+
 Digit ::= [0-9]+
 Whitespace ::= " " | "\n" | "\r" | "\r\n" | "\t"
-Operator ::= "+" | "-" | "*" | "/" | ">" | "<" | "<=" | ">=" | "==" | "&&" | "||" | "+=" | "-=" | "*=" | "/="
+Operator ::= "+" | "-" | "*" | "/" | ">" | "<" | "<=" | ">=" | "==" |
+             "&&" | "||" | "+=" | "-=" | "*=" | "/="
 LParen ::= "("
 RParen ::= ")"
 Comment  ::= '/*' ( [^*] | '*'+ [^*/] )* '*'* '*/'
