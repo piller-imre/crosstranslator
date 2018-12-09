@@ -32,7 +32,7 @@ Ezt az \texttt{if} kulcsszó vezeti be, ami után \texttt{(} és \texttt{)} köz
 Itt a rendszer azt vizsgálja, hogy a megadott feltételek igaz vagy hamis értékűek-e, és a szerint fut le az adott ágban megírt kód. A szelekció többi ágat az \textit{else if}, illetve az \texttt{else} kulcsszó vezeti be.
 A C nyelv is ismerni a \texttt{switch} szelekciót, itt is meg kell adni egy kifejezést és a \texttt{case}-en belül megadni azon kifejezéseket melyekre az illeszkedést a program vizsgálni fogja.
 
-Emellett a programban megadható iteráció is. Ciklusból a nyelvben 3 különböző van, a \texttt{while}, \texttt{for} és \texttt{do while}. Ezek mindegyikéhez kell egy ciklusváltozó, egy feltétel, melyet minden egy ciklusban ellenőriz a rendszer. A \texttt{for} és a \texttt{while} elöl tesztelő ciklus, míg a \texttt{do while} hátul tesztelő, azaz az egyszer biztos le fog futni a cilkusmag, míg az előző kettőben nem biztos. A C nyelvben nincs külön hibakezelés, minden ilyen feladatot a programozónak kell feltételvizsgálattal megoldania, illetve klasszikus esetben nincs automatikus szemétgyűjtő algoritmus sem, vagyis a memória felszabadításáról is a programozónak kell kezeskednie.
+Emellett a programban megadható iteráció is. Ciklusból a nyelvben 3 különböző van, a \texttt{while}, \texttt{for} és \texttt{do while}. Ezek mindegyikéhez kell egy ciklusváltozó, egy feltétel, melyet minden egy ciklusban ellenőriz a rendszer. A \texttt{for} és a \texttt{while} elöl tesztelő ciklus, míg a \texttt{do while} hátul tesztelő, azaz az egyszer biztos le fog futni a cilkusmag, míg az előző kettőben nem biztos. A C nyelvben nincs külön hibakezelés, minden ilyen feladatot a programozónak kell feltételvizsgálattal megoldania, illetve klasszikus esetben nincs automatikus szemétgyűjtő algoritmus sem, vagyis a memória felszabadításáról is a programozónak kell kezeskednie \cite{c}.
 
 \SubSection{JavaScript}
 
@@ -46,7 +46,7 @@ Külön meg kell említeni a láthatóságot a JavaScript esetében. Itt a vált
 
 A nyelvben a függvények létrehozására a \texttt{function} kulcsszót használhatjuk. A nyelv megengedi a függvények értékként való átadását.
 
-A JavaScript esetében minden utasítássort \texttt{;}-vel kell lezárni a C jellegű szintaxisa miatt, és többi formai jellegzetességében is sok hasonlóságot mutat a C nyelvvel.
+A JavaScript esetében minden utasítássort \texttt{;}-vel kell lezárni a C jellegű szintaxisa miatt, és többi formai jellegzetességében is sok hasonlóságot mutat a C nyelvvel \cite{javascript}.
 
 \SubSection{Python}
 
@@ -60,7 +60,7 @@ A nyelv az olvashatóságot is segítendő behúzásokkal jelzi az egyes blokkok
 
 Általánosságban egy adott metódus, osztálydefiníció, elágazás, megírásakor a sor végére \texttt{:}-ot teszünk, ezután a következő sortól behúzással történik az adott feltétel vagy osztály magjának leírása.
 
-A nyelv támogatja az objektum orientált programozást. A \texttt{class} kulcsszóval bevezetve osztályokat lehet megírni, melyben definiálhatunk adattagokat, metódusokat majd példányosíthatjuk azokat.
+A nyelv támogatja az objektum orientált programozást. A \texttt{class} kulcsszóval bevezetve osztályokat lehet megírni, melyben definiálhatunk adattagokat, metódusokat majd példányosíthatjuk azokat \cite{python}.
 
 \SubSection{PHP}
 
@@ -84,7 +84,7 @@ Azonban ez nyilvánvalóan nem a helyes működés lenne (kivéve természetesen
 
 Általánosságban a PHP megvalósítása miatt, ha ilyen hibákat vétünk (és ha nincs hiba kijelzés) a PHP mindig megpróbálja megoldani, kísérletet tesz a program lefuttatására.
 
-A PHP alapvetően nem objektum orientált nyelv. Eredetileg ez szerveroldali scriptnyelv volt, csak a 2004-ben kiadott 5-ös verzióval került be az objektum orientáltság. Mivel a PHP akkoriban a legnépszerűbb szerveroldali scriptnyelv volt, nagyon sok olyan kód készült, melyben objektum orientált leírás nem volt, így ezeket először át kellene alakítani objektum orientálttá.
+A PHP alapvetően nem objektum orientált nyelv. Eredetileg ez szerveroldali scriptnyelv volt, csak a 2004-ben kiadott 5-ös verzióval került be az objektum orientáltság. Mivel a PHP akkoriban a legnépszerűbb szerveroldali scriptnyelv volt, nagyon sok olyan kód készült, melyben objektum orientált leírás nem volt, így ezeket először át kellene alakítani objektum orientálttá \cite{php}.
 
 \SubSection{Java}
 
@@ -111,7 +111,7 @@ public class Test {
 }
 \end{java}
 
-Ez a kód már fordításkor hibát fog jelezni, hiszen a konstruktorban zárójelpárban megadtuk, hogy várunk egy integer értéket, viszont a main függvényben az osztály inicializálásakor nem adtunk azt meg. 
+Ez a kód már fordításkor hibát fog jelezni, hiszen a konstruktorban zárójelpárban megadtuk, hogy várunk egy integer értéket, viszont a main függvényben az osztály inicializálásakor nem adtunk azt meg \cite{java}. 
 
 \Section{Célnyelvek összehasonlítása}
 

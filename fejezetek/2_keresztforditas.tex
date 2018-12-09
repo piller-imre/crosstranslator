@@ -10,7 +10,6 @@ Ennek áttekintéséhez először be kell vezetni, az ábécé, a nyelv és nyel
 Az ábécé elemszámát és a szavak hosszát is általában végesnek tekintjük.
 \item Azt a leírást, amellyel egy konkrét formális nyelvet megadhatunk, nyelvtannak nevezzük.
 \end{itemize}
-\cite{formalis}
 
 A nyelvtanokat két nagy csoportba sorolhatjuk, úgy mint generatív és analítikus nyelvtanok.
 Egy generatív nyelvtan azt írja le, hogyan lehet előállítani az adott nyelvet egy adott szabályhalmazból.
@@ -98,7 +97,7 @@ Reguláris nyelvek esetében a kibővített Backus-Naur formát (\textit{Extende
 
 \SubSection{Kibővített Backus-Naur forma}
 
-A Backus-Naur forma egy formális nyelvek leírására használható metanyelv, melyet John Backus hozott létre és mutatott be. Maga a metanyelv valójában szabályok halmaza, melyben terminális és nemterminális elemek találhatók meg adott összerendelésben, azaz kifejezésben melynek bal és jobb oldalán egy-egy elem áll általában \texttt{::=} vagy \texttt{:} jellel összekapcsolva \texttt{;}-vel lezárva a kifejezést.
+A Backus-Naur forma egy formális nyelvek leírására használható metanyelv, melyet John Backus hozott létre és mutatott be. Maga a metanyelv valójában szabályok halmaza, melyben terminális és nemterminális elemek találhatók meg adott összerendelésben, azaz kifejezésben melynek bal és jobb oldalán egy-egy elem áll általában \texttt{::=} vagy \texttt{:} jellel összekapcsolva \texttt{;}-vel lezárva a kifejezést \cite{ebnf}.
 
 A terminális elemek olyan nyelvi elemek, melyek előre definiáltak, mint például a literálok (például szöveg- és szám literál).
 A terminális elemeket a fentebb említett kifejezések bal oldalán nem jelennek meg.
@@ -145,7 +144,8 @@ A szintaxis diagramok a véges állapotú automaták leírásának egy, a nyelve
 \caption{A keresztfordítás lépései}
 \label{fig:process}
 \end{figure}
-A következő szakaszokban ezen lépéseknek a részletes bemutatására kerül majd sor.
+A fordítók és értelmezők működéséről, azok megvalósítási módjáról teljeskörű útmutatásokat találhatunk a fellelhető irodalmakban \cite{compilers}.
+A következő szakaszokban az általános lépéseknek a részletes bemutatására kerül majd sor.
 
 \SubSection{Tokenizálás}
 
