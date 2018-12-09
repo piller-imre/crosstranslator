@@ -1,3 +1,79 @@
 \Chapter{Célnyelvre fordítás}
 
+A keresztfordítás eredményeképpen a feldolgozott forráskódból szintén egy forrásnyelvi leírásnak kell létrejönnie. Ehhez a közbülső reprezentációt valahogyan vissza kell tudnunk alakítani ismét egy szöveges reprezentációra. Tulajdonképpen egyfajta szerializálásról beszélhetünk, mely esetében a célnyelveknek megfelelően kell az objektumstruktúrát szöveges formában megadni. Ahhoz, hogy ez elvégezhető legyen, az objektumfát fel kell tudnunk építeni, majd azt vissza kell tudnunk alakítani szöveges formára. A következő szakaszok azt részletezik, hogy ez milyen módon végezhető el.
 
+\Section{Objektumfa felépítése}
+
+A közbülső reprezentáció objektumfájának létrehozása szintén egy nyelvi feldolgozási lépés. A tokenizálás esetében a forrásnyelvű programkód karaktereinek szekvenciájából kellett egy már magasabb szintű, tokenekből álló folyamot létrehozni. A következő absztrakciós szinten már ezekből a tokenekből kell tudnunk megállapítani, hogy a nyelvi leírás megfelel-e a definiált nyelvtannak, illetve, hogy az abban szereplő adatok segítségével hogyan építhetők fel az objektumok. Végeredményül mindenképpen egy objektumfát kapunk majd, mivel objektumok szintjén nem lehetnek körök, a fának egyetlen gyökérelemeként pedig maga a \texttt{Program} osztály fog megjelenni. (Fontos azt észrevenni, hogy a nyelvi elemek definíciója rekurzív több szempontból is. Az általános kifejezések közvetlenül, vagy közvetve tartalmazhatnak más kifejezéseket is, illetve kódblokkokon belül szerepelhetnek közvetve más kódblokkok is. Ez viszont csak típusokra vonatkozó rekurzíót jelent, példányok szintjén nem alakulhatnak ki így körök.)
+
+A fa felépítéséhez több lehetőség is adott, melyek megközelítési módját, és a használatukra vonatkozó tapasztalatokat az alábbi szakaszokban szerepel.
+
+\SubSection{CUPS parzer generátor}
+
+A nyelvi feldolgozás kapcsán felmerült, hogy rendelkezésre állnak olyan, kész nyelvi feldolgozók, melyek a feldolgozási folyamatot egyszerűbbé tehetik azzal, hogy a parzert tulajdonképpen csak az EBNF (vagy ahhoz hasonló) nyelvi definícióból generálhatjuk ki. Ezzel az alábbi lépések szükségesek ahhoz, hogy egy olyan programot kapjunk, amely már képes előállítani az objektumfát.
+\begin{itemize}
+\item Definiálnunk kell a nyelvtant. Ez jellemzően egy EBNF-hez konkretizált nyelv leíró reguláris nyelvtannak történik.
+\item A nyelvtan alapján generálnunk kell egy parzer osztályt, amely már tartalmazza a nyelvi feldolgozás elvégzéséhez szükséges implementációt.
+\item Az így kapott kódban csak részben szerepelnek azok a műveletek, amelyek a fa felépítéséhez szükségesek. Ahhoz, hogy lehetővé váljon ebből az objektumfa felépítése, további kiegészítő kódrészekre van szükség. Tulajdonképpen a nyelvtanból generált nyelvi feldolgozót kell személyre szabnunk.
+\end{itemize}
+
+A Java nyelvhez a CUPS a leginkább elterjedt parzer generátor. Ennek használatához rendelkezésre állt több példa. A nyelvi feldolgozó viszont az alábbi okok miatt nehezen tudott naprakész maradni.
+\begin{itemize}
+\item A nyelvi feldolgozás relatíve kevésbé gyakori probléma. (Az adott programozási és leíró nyelvekhez rendelkezésre állnak feldolgozók, de azokat tipikusan már készen szokták használni.)
+\item A Java nyelv egy erőteljesen fejlődő programozási nyelv, amelynek rendszeresen jelennek meg új változatai, új nyelvi elemekkel és használati módra vonatkozó ajánlásokkal.
+\item Egy nyílt forráskódú, ingyenes projektről van szó, amelyet néhányan fejlesztenek csak.
+\end{itemize}
+Ebből kifolyólag számos olyan probléma felmerült a függvénykönyvtár használata során, amely miatt célszerűnek tünt alternatív megoldások irányában is szétnézni.
+
+\SubSection{Saját rekurzív leereszkedő parzer létrehozása}
+
+Amennyiben egy teljesen saját nyelvi feldolgozót szeretnénk készíteni, és egy balról olvasva értelmezhető nyelvről van szó, úgy egy rekurzív leereszkedő parzer (\textit{Recursive Descent Parser}) formájában megoldhatjuk a problémát. A leereszkedő parzer jellemzője, hogy az adott nyelvi elemekhez kötötten végezhető el a nyelvi feldolgozás. A rekurzió tulajdonképpen arra utal a nevében, hogy egy nyelvi elem az abban tartalmazott nyelvi elemek feldolgozóit hívja meg. Példaként tekinthetjük az alábbi kapcsolatokat az egyes nyelvi elemek között.
+\begin{itemize}
+\item Egy program beolvasásakor az abban szereplő, tetszőleges számú osztály beolvasására van szükség. A program feldolgozása iylenkor tehát abból áll, hogy az egyes osztálydefiníciókra meghívjuk az osztály saját feldolgozó metódusát.
+\item Egy osztály esetében az osztály nevének beolvasását követően az abban lévő adattagok és metódusok feldolgozóit kell meghívnunk.
+\item Egy tetszőleges vezérlési szerkezet esetében annak kódblokkjára a \texttt{Blokk} osztály feldolgozó metódusát kell csak alkalmanunk.
+\end{itemize}
+Az egyes feldolgozó metódusok már a visszaadott, nyelvi típusnak megfelelő objektumokkal térhetnek vissza, amelyekből így rekurzív módon felépíthető az objektumfa.
+
+\Section{Nyelvi integritás ellenőrzése}
+
+Az objektumfa létrejötte még továbbra is csak egy szintaktikai jellegű ellenőrzés meglétét feltételezi. Ahhoz, hogy valóban egy érvényes programról beszélhessünk, szükségünk van további ellenőrzésekre is, amellyel garantálhatjuk a programunk integritását szemantika tekintetében is. A szemantikai ellenőrzés a szintaktikai ellenőrzéssel összemérhető bonyolultságú probléma. A következőkben felsorolás szintjén szerepelnek olyan megkötések, amelyet garantálnunk kell ahhoz, hogy a programunk érvényes legyen, azt a célnyelvi forráskódra le lehessen fordítani úgy, hogy a kimenetként kapott programkód is érvényes legyen.
+\begin{itemize}
+\item Garantálnunk kell, hogy a programunkon belül minden osztály neve egyedi.
+\item Az osztálydefiníción belül az adattagok és a metódusok közös névtérben vannak, tehát itt is garantálnunk kell az egyediséget.
+\item A metódusok kódblokkjában szereplő változóknak érvényeseknek kell lenniük, tehát vagy paraméter vagy az adattag definíciókban szerepelniük kell.
+\item Egy osztály példányosítása csak úgy lehet lehetséges, ha az adott osztály az adott névtérből elérhető.
+\item A metódushívás esetében figyelni kell a megfelelő számú paraméterre. Érvénytelen hívásnak tekinthető, ha túl kevés vagy túl sok argumentum van megadva.
+\item Főleg a statikus típusos célnyelvek miatt érdemes a típusokra, azok konverzióira vonatkozó ellenőrzéseket is elvégezni már a keresztfordítás közben.
+\end{itemize}
+
+Az említett ellenőrzések elvégzéséhez elegendő már csak a belső reprezentációt figyelembe vennünk. Az integritás ellenőrzését végző program szempontjából kedvező, hogy az ellenőrzések többsége egymástól, és sorrendtől függetlenül elvégezhető.
+
+\Section{Nyelvi elemek szerializációja}
+
+A szerializáció ebben a lépésben azt jelenti, hogy az adott programnyelvi elem képes önmagát szöveges formában visszaadni az adott célnyelvnek megfelelően. Adott célnyelv esetén tehát minden elemhez készítenünk kell egy olyan metódust, amely az elemet szöveges formában visszadja. Java nyelv esetében ezt a célt a \texttt{toString} nevű metódus szokota ellátni. Ennek az elsődleges implementációjához az eredeti nyelv szerializációját adhatjuk meg, amivel tulajdonképpen egy kód formázó eszközt (\textit{pretty printer}) kapunk. (Amennyiben a szemantikai ellenőrzést is végrehajtuk a visszaírás előtt, úgy egy \textit{lint} eszközről beszélhetünk.)
+
+Tekintsük példaként egy osztály kiíratását. Egy osztály a \texttt{Create} kulcsszóval kerül bevezetésre. A kiírásnál tehát ezt a kulcsszót kell először visszaadnunk. Ezt követően az adattagokat kell felsorolnunk, amelynél viszont már feltételezhetjük, hogy azoknak a saját kiírató metódusa már rendelkezésre áll. Logikailag tehát egy szintaktikai keret és a beágyazott nyelvi elemek visszaírására van szükségünk. Így tehát a saját nyelvű visszaírás az alábbi metódussal oldható meg.
+\begin{java}
+public String toString() {
+    String sourceCode = "";
+    sourceCode += "Create " + this.name + "\n";
+    for (VarExpression member : members) {
+        sourceCode += member.toString() + "\n";
+    }
+    for (FunctExpression method : methods) {
+        sourceCode += method.toString();
+    }
+    sourceCode += "End\n";
+    return sourceCode;
+}
+\end{java}
+A további nyelvi elemekre való szöveges konverzió hasonló módon végezhető el.
+
+A tervezett keresztfordító célja, hogy különböző programozási nyelveken adhasson fordítható, végrehajtható kódokat. Ahhoz, hogy ez elvégezhető legyen minden célnyelvhez el kell készíteni a megfelelő konverziós metódust. Ez a nyelvi elemek, és a célnyelvek száma miatt is egy olyan problémának tekinthető, melyben megfontolást igényel, hogy hogyan építsük fel hozzá megfelelően a kódunkat. Erre például az alábbi megoldásokat adhatjuk.
+\begin{itemize}
+\item Az adott célnyelvű kiíratásnak megfelelően külön nevű metódusokat definiálhatunk, de ez a program szerkezete szempontjából nem lenne előnyös.
+\item A kiíratás során paraméterként átadhatjuk, hogy milyen célnyelvre lesz szükségünk. A visszatérési érték típusa minden esetben szöveg, tehát az objektum fában történő közvetett hívásoknak köszönhetően a kimenetet így elő tudjuk állítani. Mivel a nyelvek típusa fordítási időben ismert, ezért a paraméter célszerűen valamilyen felsorolás típus lehet.
+\item Az egyes nyelveknek megfelelően származtathatjuk a nyelvi elemekhez tartozó osztályokat, hogy azoknak a kiíratása mindig az adott nyelven történhessen. Ez a definiált osztályok számát jelentősen megnöveli, és mindössze az adott kiírató metódus implementációjában lesz majd különbség.
+\end{itemize}
+Az alternatívák közül az utolsó az, amely a program szerkezete szempontjából a leginkább előnyös. Ahhoz, hogy a használati módja során garantálni tudjuk, hogy adott célnyelvű elemekhez csak szintén azonos célnyelvű származtatásból létrehozott példány lehet használható, az absztrakt gyár (\textit{Abstract Factory}) nevű tervezési mintát célszerű alkalmazni.
