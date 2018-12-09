@@ -1,82 +1,111 @@
 \Chapter{Közbülső reprezentáció}
 
-A keresztfordító működése szerint beolvassa a nyelvi fájlt, melyet a programozó a definiált nyelven megírt, majd szekvenciálisan feldolgozza azt. A szinkatkikai elemzés után egy belső szerkezet jön létre, mely leírja a beolvasott programkódot.
+A keresztfordítók bemenete a hagyományos fordítókhoz hasonlóan egy forráskód. Ezt szekvenciálisan, az előző fejezetben említett parzer dolgoz fel. Ez egy közbülső reprezentációt (\textit{intermediate representation}) eredményez. Ez egy olyan szerkezeti leírás, amely objektumstruktúra formájában ábrázolja a kódot, de szorosan már nem kötődik annak szintaktikai elemeihez.
 
-\section{Nyelvi elemeket reprezentáló osztályok}
+Ahhoz, hogy ez a reprezentáció létrehozható legyen, definiálnunk kell azokat az osztályokat, amelyek képesek lesznek majd tárolni a nyelvi elemekhez tartozó adatokat.
 
-A kód a belső szerkezetben osztályokba lesz szervezve, ezekről az alábbiakban kerül említésre néhány információ.
+\Section{Nyelvi elemeket reprezentáló osztályok}
 
+A Java nyelv esetében elsődlegesen annak objektum orientált jellemzőit szokták használni, hangsúlyozni. Ennek megfelelően a közbülső reprezentáció esetében a nyelvi elemeknek egy-egy Java nyelvbeli osztály fog megfelelni. Az osztályok viszonyait \aref{fig:internal}. ábrán láthatjuk. A következő szakaszokban ezen osztályok részleteit láthatjuk. A sorrendjük olyan tekintetben tetszőleges, hogy jellemzően csak az általános kifejezés (\texttt{Expression} osztály) vannak függőségek.
+
+% TODO: Ebből egy olyan ábrát kellene készíteni, amelyben csak az osztályok neve látszik, mert egyébként nem férne ki egy lapra!
 \begin{figure}
 \centering
-\includegraphics[scale=0.2]{kepek/rr_uml.png}
-\caption{Osztálydiagram}
-\label{fig:process}
+\includegraphics[scale=0.25]{kepek/rr_uml.png}
+\caption{A közbülső reprezentációhoz tartozó osztályok és kapcsolataik}
+\label{fig:internal}
 \end{figure}
 
-\subsection{Függvény}
+\SubSection{Kifejezések}
 
-\begin{figure}
+A lehető legáltalánosabb nyelvi kifejezést az \texttt{Expression} osztály írja le. Ennek a definíciónak elsősorban azért van nagyon fontos szerepe, mert ez a közös, általános osztály szükséges ahhoz, hogy kompozit minta jelleggel a közbülső reprezentáció felépíthető legyen. A közbülső nyelv kifejezőerejét az adja, hogy a nyelvi elemeken belül így közel tetszőleges más nyelvi elemek szerepelhetnk.
+
+\SubSection{Függvény és függvényhívás}
+
+A függvények és a függvényhívások valamilyen formában minden elterjedt programozási nyelvben megjelennek. Az ábrázolási módjuk nagyon hasonló. Alapvetően minden függvénynek van egy neve, formális paraméterlistája, illetve egy definíciós rész, amely az elvégzendő műveleteket tartalmazza. A függvény neve programozási nyelvtől függően lehet egyedi. Főként a polimorfikus nyelvekben a függvény a szignatúrájával együtt lehet egyedi.
+
+Fontos megkülönböztetni a paraméter és az argumentum közötti fogalombeli különbséget. A függvény definíciójában típusos nyelvek esetében a paramétereknél szerepel azok típusa, esetlegesen a paraméter átadási módjára vonatkozó megkötések. Az argumentumlista elsődlegesen már csak az átadandó értékek felsorolását tartalmazza a paraméterátadás módjának megfelelően.
+
+\Aref{fig:funccall}. ábrán láthatjuk a függvényhíváshoz tartozó osztály adattagjainak és metódusainak felsorolását. Ebben az \texttt{args} az említett argumentumlistát tartalmazza, melynek elemei általános kifejezések lehetnek. Az osztály metódusai a név és az argumentumok lekérdezését és megadását teszik lehetővé.
+
+\begin{figure}[h!]
 \centering
-\includegraphics[scale=0.2]{kepek/rr_funccallexpr_dia.png}
+\includegraphics[scale=0.8]{kepek/rr_funccallexpr_dia.png}
 \caption{Függvényhívás}
-\label{fig:process}
+\label{fig:funccall}
 \end{figure}
 
-\subsection{Változó}
+\SubSection{Változó}
 
-\begin{figure}
+A változók megadásához a \texttt{Variable} nevű osztályt használhatjuk. Az osztály részeit \aref{fig:variable}. ábrán láthatjuk. Ebben az osztály neve, illetve a típusának a megadása szerepel. Mivel egy konkrét célnyelvről van szó, ezért a típust egy enumerációs típussal célszerű megadni. A metódusok ebben az esetben is az adatok ellenőrzött lekérdezését és beállítását szolgálják.
+
+\begin{figure}[h!]
 \centering
-\includegraphics[scale=0.2]{kepek/rr_var_dia.png}
-\caption{Változó osztály}
-\label{fig:process}
+\includegraphics[scale=0.8]{kepek/rr_var_dia.png}
+\caption{Osztály a változók definíciójának leírásához}
+\label{fig:variable}
 \end{figure}
 
-\subsection{For ciklus}
+\SubSection{Elágazás}
 
-\begin{figure}
+Az elágazás az egyik leggyakrabban előforduló programozási nyelvi szerkezet. A bemutatásra kerülő közbülső reprezentációban az elágazásnál csak az igaz ág szerepel. Ez az egyszerűsítés ezen az ábrázolási szinten azért lehetséges, mert az \texttt{else} ágra vonatkozó blokkot egy negált feltétel formájában fogalmazhatjuk meg. A feltétel megadásánál jelen változatban egy bináris operátor formájában adható meg a feltétel. Az osztály adattagjait és metódusait \aref{fig:if}. ábrán láthatjuk.
+
+\begin{figure}[h!]
 \centering
-\includegraphics[scale=0.2]{kepek/rr_for_dia.png}
-\caption{For ciklus osztálya}
-\label{fig:process}
+\includegraphics[scale=0.8]{kepek/rr_if_dia.png}
+\caption{Az elágazás leírásához szükséges \texttt{If} osztály részei}
+\label{fig:if}
 \end{figure}
 
-\subsection{Elágazás}
+\SubSection{Ciklusok}
 
-\begin{figure}
+A definiált nyelvben az elöltesztelő (\texttt{While}) és a tartomány alapú (\texttt{For}) ciklusok definiálására került sor. Egyszerűen belátható, hogy általánosságban az elöltesztelő ciklus is elegendő lenne, mivel annak segítségével a tartomány alapú ciklust is megadhatjuk.
+
+A \texttt{For} ciklushoz tartozó osztály részei \aref{fig:for}. ábrán láthatók. Ebben a tartomány kezdetére, léptetésre és a tartomány végére vonatkozó adatok a \texttt{startValue}, \texttt{cycleValue} és az \texttt{endGoal} kifejezésekben szerepelnek. A \texttt{blokk} az általános kódblokkot jelöli.
+
+\begin{figure}[h!]
 \centering
-\includegraphics[scale=0.2]{kepek/rr_if_dia.png}
-\caption{Feltételes elágazás, If osztálya}
-\label{fig:process}
+\includegraphics[scale=0.7]{kepek/rr_for_dia.png}
+\caption{\texttt{For} ciklus osztálya}
+\label{fig:for}
 \end{figure}
 
-\subsection{Osztály}
+\SubSection{Osztály}
 
-\begin{figure}
+A definiált saját programozási nyelv egy osztály alapú objektum orientáltságot megvalósító nyelv. Ennek megfelelően szükséges az osztályok és azok egyes részeinek a megadására. Az ehhez definiált (Java) osztály részeit \aref{fig:class}. ábrán láthatjuk.
+
+\begin{figure}[h!]
 \centering
-\includegraphics[scale=0.2]{kepek/rr_class_dia.png}
+\includegraphics[scale=0.8]{kepek/rr_class_dia.png}
 \caption{Osztály leírása osztályban}
-\label{fig:process}
+\label{fig:class}
 \end{figure}
 
-\subsection{Program, modul, csomag}
+Ahogy az osztálydiagramnak, úgy az ábrázolt osztálynak is három fő része van. Egyrészt az osztálynak a nevét tárolni kell, amely az egész programra nézve egyedi kell, hogy legyen. Ezen kívül az adattagok és a metódusok listájára is szükségünk van. A \texttt{ClassExpression} nevű osztályban utóbbiakra vonatkozó szerepelnek a tipikus listára jellemző műveletek, tehát amelyekkel új adattagokat vagy metódusokat tudunk létrehozni, azokat módosíthatjuk vagy törölhetjük.
 
-\begin{figure}
+\SubSection{Kódblokk}
+
+A kódblokk, mint nyelvi elem egyaránt megjelenik a vezérlési szerkezetek és a függvény definíció esetében is. Tulajdonképpen egy egyszerű listáról van szó, mely általános kifejezéseket tartalmazhat. Más (nem Java nyelvű) implementáció esetében elegendő lehetne egy típus aliast megadni hozzá, viszont az egységes tárgyalásmód miatt célszerűbb ezt is egy külön osztályban definiálni. Az osztály egyes részeit \aref{fig:blokk}. ábrán láthatjuk.
+
+\begin{figure}[h!]
 \centering
-\includegraphics[scale=0.2]{kepek/rr_prog_dia.png}
-\caption{Program osztály}
-\label{fig:process}
-\end{figure}
-
-\subsection{Kód blokk}
-
-\begin{figure}
-\centering
-\includegraphics[scale=0.2]{kepek/rr_block_dia.png}
+\includegraphics[scale=0.8]{kepek/rr_block_dia.png}
 \caption{A keresztfordítás lépései}
-\label{fig:process}
+\label{fig:blokk}
 \end{figure}
 
-\subsection{Kifejezés}
+\SubSection{Program, modul, csomag}
+
+Az eddigiekben szereplő nyelvi elemek az egyszerűbb, alacsonyabb szintűektől haladtak az egyre átfogóbbak felé. Ennek megfelelően az utolsó nyelvi elem maga a program. Ez szükséges ahhoz, hogy a programunkat modulokba és csomagokba tudjuk majd szervezni.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.8]{kepek/rr_prog_dia.png}
+\caption{A \texttt{Program} osztály részei}
+\label{fig:program}
+\end{figure}
+
+A \texttt{Program} osztály részeit \aref{fig:program}. ábrán láthatjuk. Ez egy kifejezetten egyszerű definíció, mivel a saját nyelv esetében a programot az azt alkotó osztályok listájának tekinthetjük, amelyet egy névvel látunk el.
 
 % TODO: Jó sok UML diagram
 

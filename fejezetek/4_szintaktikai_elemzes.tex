@@ -4,16 +4,17 @@
 
 % http://www.informatik.uni-bremen.de/agbkb/lehre/ccfl/Material/ALSUdragonbook.pdf
 
-\section{Java parser generátorok}
+\Section{Java parser generátorok}
 
 Az Interneten különféle parser generátorokat találhatunk, amelyek segítségével könnyebben megoldható a szintaktikai elemzés.
 A feladat megoldásához olyan parser generátorra van szükség, mely Java nyelvű, mivel a fordítóprogram ezen a nyelven kerül megírása.
-Továbbá, a parser generátorok feldolgozás szempontjából is különböznek, és jelen feladathoz olyan generátort kellett keresni, mely reguláris nyelvvel képes működni.
+Továbbá, a parser generátorok feldolgozás szempontjából is különbségeket mutatnak.
+Jelen feladathoz olyan generátort kellett keresni, mely el tudja végezni egy reguláris nyelv feldolgozását.
 Az alábbiakban néhány, elterjedt generátort vizsgálunk meg.
 
-\subsection{AnnoFlex}
+\SubSection{AnnoFlex}
 
-Az \textit{Annoflex} egy Java alapú generátor, mely szabadon letölthető és használható, sőt módosítható is.
+Az \textit{Annoflex} egy Java alapú generátor, mely szabadon letölthető, használható és módosítható \cite{annoflex}.
 Az AnnoFlex tervezésekor törekedtek az egyszerűségre. A következő kódrészletben láthatunk egy példát a használati módjára.
 \begin{java}
 /**
@@ -85,9 +86,9 @@ identifier:string
 
 Látható, hogy \texttt{identifier}-nek jelezte a szövegeket, a számot numberként jelenítette meg és megtalálta a fehér karaktereket is, azaz a szóközöket.
 
-\subsection{JFlex}
+\SubSection{JFlex}
 
-A \textit{JFlex} szigorú értelembe véve egy lexikai elemző, azaz lexer generátor, mely Java nyelvhez Java nyelven írt generátor. Itt is a megadott inputot próbálja meg illeszteni a különféle előre definiált nyelvtani elemekre és az annak megfelelő utasításokat hajtja végre.
+A \textit{JFlex} szigorú értelembe véve egy lexikai elemző, azaz lexer generátor, mely Java nyelvhez Java nyelven írt generátor \cite{jflex}. Itt is a megadott inputot próbálja meg illeszteni a különféle előre definiált nyelvtani elemekre és az annak megfelelő utasításokat hajtja végre.
 
 A JFlex a \textit{JLex} átírt változata, melynek átírásakor a cél a teljes unicode támogatás és platformfüggetlenség volt, illetve a gyors szkenner generálás, kényelmes szintaktika és az is, hogy kompatibilis legyen a JLex-el. Önállóan is használható, de mivel főképp lexer generátor, így más parser generátorokkal történő együttműködésre tervezték, leginkább a CUP parserrel kompatibilis.
 
@@ -95,12 +96,13 @@ Felépítése alapján a nyelvtani specifikáció három részre osztható, mely
 
 % TODO: Itt is csak említeni kellene a példával kapcsolatban néhány észrevételt!
 
-\subsection{AustenX}
+\SubSection{AustenX}
 
-Az \textit{AustenX} (vagy röviden csak \textit{Austen}) szinten egy parser generátor. Az Austen jelenleg csak Java nyelvet támogatja, és az előzőekhez hasonlóan ez is reguláris nyelv alapján dolgozza fel a kódot.
+Az \textit{AustenX} (vagy röviden csak \textit{Austen}) szinten egy parser generátor \cite{austen}. Az Austen jelenleg csak Java nyelvet támogatja, és az előzőekhez hasonlóan ez is reguláris nyelv alapján dolgozza fel a kódot.
 
-Az Austin egy \texttt{jar} fájlként tölthető le és futtatható, aminek futtatásakor paraméterként kell megadni a célfájlt. Az Austen futtatható a jar fájlra kattintva duplán, ilyenkor egy egyszerű felhasználói kezelőfelület nyílik meg. Itt meg kell adni a forrásfájlok helyét, amiben a feldolgozáshoz szükséges adatok vannak, illetve a célfájl helyét, ahova a feldolgozott fájlok kerülnek. A forrásfájlok .austen vagy .austenx kiterjesztéssel kell, hogy rendelkezzenek. Az alábbiakban egy egyszerűbb példa látható a forrásfájlokra.
+Az Austen egy \texttt{jar} fájlként tölthető le és futtatható, aminek futtatásakor paraméterként kell megadni a célfájlt. Az Austen futtatható a \texttt{jar} fájlra kattintva duplán, ilyenkor egy egyszerű felhasználói kezelőfelület nyílik meg. Itt meg kell adni a forrásfájlok helyét, amiben a feldolgozáshoz szükséges adatok vannak, illetve a célfájl helyét, ahova a feldolgozott fájlok kerülnek. A forrásfájloknak \texttt{.austen} vagy \texttt{.austenx} kiterjesztéssel kell szerepelniük.
+
+% Az alábbiakban egy egyszerűbb példa látható a forrásfájlokra.
+% A generált kód egy általános leírást tartalmaz, library-k szerint szervezve melyet felhasznál az alábbi kód, ami a parser generator pontos leírását tartalmazza.
 
 % TODO: Tömören össze kellene foglalni a generált kódot.
-
-A generált kód egy általános leírást tartalmaz, library-k szerint szervezve melyet felhasznál az alábbi kód, ami a parser generator pontos leírását tartalmazza.

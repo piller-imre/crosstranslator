@@ -2,13 +2,13 @@
 \Chapter{Célnyelvek áttekintése}
 % ==============================
 
-\section{A célnyelvek általános jellemzői}
+\Section{A célnyelvek általános jellemzői}
 
 A dolgozat szempontjából célnyelvnek azon magasszintű programozási nyelveket tekintjük, melyekre a felhasználó által, a definiált nyelven írt kód a program futtatásának végén lefordul. A program jelenleg nem minden magasszintű programozási nyelvre képes fordítani, tehát nem minden magasszintű programozási nyelv tekinthető célnyelvnek, valamint jelenleg a célnyelvként tekintett magasszintű nyelvek nem minden nyelvi elemét támogatja a program.
 A további programozási nyelvek támogatása, illetve a nyelvek összes elemének a támogatására vonatkozó tervek már későbbi fejlesztési lehetőségként szerepelnek csak.
 A következő szakaszokban a dolgozat szempontjából kiemelt fontosságú célnyelveket vizsgáljuk meg röviden.
 
-\subsection{C}
+\SubSection{C}
 
 A C nyelv magasszintű, általános célú programozási nyelv, mely az egyik legelterjedtebb programozási nyelv.
 A ma fellelhető számítógép architektúrák szinte mindegyikére készült C fordító.
@@ -34,7 +34,7 @@ A C nyelv is ismerni a \texttt{switch} szelekciót, itt is meg kell adni egy kif
 
 Emellett a programban megadható iteráció is. Ciklusból a nyelvben 3 különböző van, a \texttt{while}, \texttt{for} és \texttt{do while}. Ezek mindegyikéhez kell egy ciklusváltozó, egy feltétel, melyet minden egy ciklusban ellenőriz a rendszer. A \texttt{for} és a \texttt{while} elöl tesztelő ciklus, míg a \texttt{do while} hátul tesztelő, azaz az egyszer biztos le fog futni a cilkusmag, míg az előző kettőben nem biztos. A C nyelvben nincs külön hibakezelés, minden ilyen feladatot a programozónak kell feltételvizsgálattal megoldania, illetve klasszikus esetben nincs automatikus szemétgyűjtő algoritmus sem, vagyis a memória felszabadításáról is a programozónak kell kezeskednie.
 
-\subsection{JavaScript}
+\SubSection{JavaScript}
 
 A JavaScript egy scriptnyelv, mely leggyakrabban a böngészőkben jelenik meg, és kliens oldalon is látható a kódja. A nyelv először \textit{MochaScript} néven került definiálásra, majd később a szintaxisa a Java nyelvhez lett hasonló. Ezt követően lett a neve JavaScript.
 
@@ -48,7 +48,7 @@ A nyelvben a függvények létrehozására a \texttt{function} kulcsszót haszn�
 
 A JavaScript esetében minden utasítássort \texttt{;}-vel kell lezárni a C jellegű szintaxisa miatt, és többi formai jellegzetességében is sok hasonlóságot mutat a C nyelvvel.
 
-\subsection{Python}
+\SubSection{Python}
 
 A Pyhton egy objektum orientált programozási nyelv, mely egyre nagyobb teret hódít egyszerű kezelhetősége és rugalmassága miatt. Guido van Rossum a nyelv megalkotásakor a fent emlíett egyszerűséget tartotta a legfontosabbnak.
 
@@ -62,7 +62,7 @@ A nyelv az olvashatóságot is segítendő behúzásokkal jelzi az egyes blokkok
 
 A nyelv támogatja az objektum orientált programozást. A \texttt{class} kulcsszóval bevezetve osztályokat lehet megírni, melyben definiálhatunk adattagokat, metódusokat majd példányosíthatjuk azokat.
 
-\subsection{PHP}
+\SubSection{PHP}
 
 A PHP egy szerveroldali nyelv, tulajdonképpen scriptnyelv. Az így megírt fájlok futtatásához PHP fordítót kell telepíteni és konfigurálni.
 
@@ -86,7 +86,7 @@ Azonban ez nyilvánvalóan nem a helyes működés lenne (kivéve természetesen
 
 A PHP alapvetően nem objektum orientált nyelv. Eredetileg ez szerveroldali scriptnyelv volt, csak a 2004-ben kiadott 5-ös verzióval került be az objektum orientáltság. Mivel a PHP akkoriban a legnépszerűbb szerveroldali scriptnyelv volt, nagyon sok olyan kód készült, melyben objektum orientált leírás nem volt, így ezeket először át kellene alakítani objektum orientálttá.
 
-\subsection{Java}
+\SubSection{Java}
 
 A Java nyelven megírt kódok futtatásához is saját környezet kell. A java futtatókörnyezet elérhető minden elterjedt operációs rendszerre. Az egyik leginkább elterjedt programozási nyelv, amelynek egyaránt ok az, hogy szerver oldalon szivesen használják, illetve hogy a mobil alkalmazások esetében az Android platform is támogatja.
 
@@ -113,11 +113,11 @@ public class Test {
 
 Ez a kód már fordításkor hibát fog jelezni, hiszen a konstruktorban zárójelpárban megadtuk, hogy várunk egy integer értéket, viszont a main függvényben az osztály inicializálásakor nem adtunk azt meg. 
 
-\section{Célnyelvek összehasonlítása}
+\Section{Célnyelvek összehasonlítása}
 
 Az alábbi részben a tervezett célnyelvek szintaxisának, elemeinek áttekintése történik meg a hangsúlyt az egyes célnyelvek különbözőségeire fektetve.
 
-\subsection{Nyelvi típusok}
+\SubSection{Nyelvi típusok}
 
 Az alábbiakban egy összefoglaló látható a különböző nyelvi típusokról (\ref{tab:lang_types}. táblázat), hogy az egyes célnyelvekben megjelenik-e az adott típus és ha igen akkor milyen formában. Ez alapján egy áttekintést kaphatunk arról, hogy a megírt kód lefordítása után az egyes nyelveket a típusok hogyan jelennek meg.
 A kapott táblázat alapján meg tudjuk majd állapítani, hogy mely típusok jelennek meg a nyelvek nagy többségében, azaz a fordítás során mely típusokat kell mindenképpen figyelembe venni, megvalósítani.
@@ -161,7 +161,7 @@ A fenti táblázat alapján a fordítóprogram a szám és szöveg típusú vál
 A szám típusok közül jelenleg az integer típus támogatott, mivel ez a leggyakrabban használt az általunk vizsgált témakörben, a szöveg string típusú lesz, mivel ez a megszokott a programozási nyelvek tekintetében, csakúgy mint a boolean típus. A definiált programozási nyelv típusosság tekintetében a Python nyelvre hasonlít, így a típus megjelölése itt sem szükséges.
 A tömb típust itt dictionary néven fogjuk kezelni, a struktúra pedig a modern, objektum-orientált nyelvekhez hasonlóan osztályokból fog állni, melyek a változókat illetve függvényeket foglalhatnak magukba.
 
-\subsection{Változók deklarálása}
+\SubSection{Változók deklarálása}
 
 Az alábbi részben áttekintjük, hogy az egyes célnyelvként tekintett magas szintű programozási nyelvekben a változó deklarálásában milyen különbségeket tapasztalhatunk. Az egyes célnyelvek függően attól, hogy a típusmegjelölést ki kell-e írni, illetve, hogy milyen kulcsszóval vagy kulcsszó nélkül adjuk meg az egyes változókat nagyban különböznek. Ezt a különbséget a fordítóprogramnak kezelnie kell, és el kell fednie a felhasználó elől.
 
@@ -235,7 +235,7 @@ A PHP nyelv ebből a szempontban nagyon egyszerű, itt sem kell típust kiírni,
 	\$valtozo = 8;	
 \end{cpp}
 
-\subsection{Szekvenciális típusok kezelése}
+\SubSection{Szekvenciális típusok kezelése}
 
 A tömböket általánosságban hasonlóan kell definiálni az egyes célnyelveken, de itt is okozhatnak nehézséget a fordítóprogram megvalósítása szempontjából a kisebb különbségek is.
 
@@ -292,7 +292,7 @@ Végül a kezelés PHP alatt az alábbi lesz:
 % array_push($tomb, "harom"); //A tömb végére illeszti az elemet
 % echo count($tomb); //Tömb méretének lekérdezése
 
-\subsection{Ciklusok}
+\SubSection{Ciklusok}
 
 A célnyelvként tekintett programozás nyelvekben a ciklusok megvalósítása nagyon hasonlóan működik, minden tekintett célnyelvben van elöltesztelő és hátultesztelő ciklus is. A ciklusokban minden esetben van egy feltétel, egy ciklusváltozó, melynek változása lesz a feltétellel összehasonlítva és egy ciklusmag, mely minden iterációban lefut.
 
@@ -320,7 +320,7 @@ A Python while ciklusa azonos a fenti kódban írtakkal, természetesen a nyelvi
 
 JavaScript és PHP alatt a ciklusok majdnem teljesen megegyeznek a Java kódban látható ciklusokkal, természetesen itt is meg kell említeni a nyelvi sajátosságokat (például a PHP változók előtt itt is szerepelnie kell a \textdollar szimbólum), melyek eltéréseket okoznak és melyeket figyelembe kell venni a kimeneti kód megalkotásakor.
 
-\subsection{Függvények}
+\SubSection{Függvények}
 
 A függvények kezelése a célnyelvekben szintén hasonlóan működnek. A függvényeknek kell legyen egy fejlécük, melyben megadjuk a nevüket, visszatérési értékük típusát (statikus típusos nyelvek esetében), és a paraméter listát, illetve szükséges egy függvénytörzs is.
 
@@ -354,7 +354,7 @@ A JavaScript a ECMAScript 2015-től kezdődően támogatja az alapértelmezett p
 
 Minthogy két nyelv is van a célnyelvként választott nyelvek között mely ezt nem támogatja, ezért a rugalmasságot és egyszerűséget alapul véve a definiált nyelvben sem lesz egyenlőre ez a funkció benne, így alapértelmezett paramétereket nem tudnak a felhasználók megadni. A fordítóprogram további fejlesztésekor, a felhasználói visszajelzéseket figyelembe véve lehet kibővíteni ezzel a rendszert.
 
-\subsection{Struktúra és osztály definiálása}
+\SubSection{Struktúra és osztály definiálása}
 
 Általánosságban a kódot a célnyelvek valamilyen struktúrába szervezik. A magas szintű, modern programozási nyelvek az osztályokba szervezést követik, azaz a kódot valamilyen szempont alapján különböző osztályokba szervezik és ezek együttműködnek a program futása során.
 
@@ -426,7 +426,7 @@ Az alábbiakban látható egy példa a C nyelven megírt osztályhoz hasonló pr
 \Chapter{A nyelv definíciója}
 % ===========================
 
-\section{Általános szempontok}
+\Section{Általános szempontok}
 
 A saját nyelv kialakításánál az elsődleges szempont a könnyű kezelhetőség volt, hogy bár több nyelvre, több platformra kerülhet lefordításra a kód, a felhasználó, programozó egyszerűen, könnyen tudja megírni a kódot a definiált nyelven, így nem kell minden célnyelvi szintaktikai és szemantikai szabállyal tisztába lennie, azokat külön-külön alkalmaznia.
 
@@ -434,7 +434,7 @@ Ezek alapján a nyelv a Python nyelv szintaktikájához hasonló megoldásokat �
 
 Ahhoz, hogy a nyelvet definiálni lehessen az alábbiakban áttekintjük a feladat során célnyelvként tekintett nyelveket általánosan, azok megvalósítását, tulajdonságait, fő elemeit. Majd ezután a saját definiált nyelv tervezett nyelvi elemeit vesszük sorra.
 
-\section{Saját nyelvi elemek}
+\Section{Saját nyelvi elemek}
 
 A saját nyelv definiálásakor a fentiek alapján az alábbi nyelvi szintaktika kerül kialakításra.
 A definiált nyelvben is a megadott konstrukciók végrehajtási sorrendjét a vezérlési szerkezetekkel szabályozhatjuk, melyek az értékadásokon kívül a szekvencia, szelekció és iteráció.
@@ -595,9 +595,9 @@ Egy osztály és azon elemei a memóriában addig maradnak míg arra hivatkozás
 
 Ha egy elemre úgy hivatkozunk, hogy nem volt még definiálva, akkor automatikusan létrejön a változó 0 értékkel, ha előtte már volt definiálva és kitöröltük, majd úgy hivatkozunk rá, akkor is 0 értékkel jön létre, bármilyen típusú értéke is volt előzőleg, erre figyelni kell.
 
-\section{Nyelv definiálása}
+\Section{Nyelv definiálása}
 
-\subsection{EBNF}
+\SubSection{EBNF}
 
 Az alábbiakban a programozási nyelv nyelvtanának felírása történik meg Kibővített Backus-Naur Forma és szintaxis diagram segítségével.
 
@@ -630,7 +630,7 @@ RParen ::= ")"
 Comment  ::= '/*' ( [^*] | '*'+ [^*/] )* '*'* '*/'
 \end{verbatim}
 
-\subsection{Szintaxis diagramok}
+\SubSection{Szintaxis diagramok}
 
 A következő ábrákon az egyes nyelvi elemek szintaxis diagram megfelelői láthatók. (Az operátorok nem szerepelnek benne, mivel azok egyszerű felsorolásként megadható, hasonlóképp a \texttt{Whitespace} karakterekhez.)
 
@@ -774,7 +774,7 @@ A következő ábrákon az egyes nyelvi elemek szintaxis diagram megfelelői lá
 \label{fig:rr_program}
 \end{figure}
 
-\section{Példák}
+\Section{Példák}
 
 Az alábbiakban egy egyszerűbb példa forráskód részletet, melyben egy osztály és a benne lévő elemek láthatók.
 

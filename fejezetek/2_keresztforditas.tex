@@ -1,6 +1,6 @@
 \Chapter{Keresztfordítás}
 
-\section{Formális nyelvek}
+\Section{Formális nyelvek}
 
 A keresztfordítás elméleti hátterét a formális nyelvek témaköre adja.
 Ennek áttekintéséhez először be kell vezetni, az ábécé, a nyelv és nyelvtan fogalmát \cite{formalis}.
@@ -18,7 +18,7 @@ Analítikus nyelvtanoknál az adott nyelv olvasási módját írjuk le, ugyancsa
 
 A generatív nyelvek osztályozása Noam Chomsky nyelvészhez köthető, aki az 1950-es években adta meg a nyelvek és nyelvtanok alapvető osztályait. Ezt az osztályozási módot nevezzük Chomsky-hierarchiának. Az egyes nyelvosztályokat 0-tól kezdődően egész számokkal jelölte. A 4 szintű hierarchiában a 0-ás a legáltalánosabb osztály, míg a 3-as a leginkább speciális. Ezek a következők.
 
-\subsection*{0. nyelvosztály}
+\SubSection*{0. nyelvosztály}
 
 \begin{tabular}{ll}
 \textbf{nyelvtan/nyelv} & Rekurzívan megszámlálható \\
@@ -26,7 +26,7 @@ A generatív nyelvek osztályozása Noam Chomsky nyelvészhez köthető, aki az 
 \textbf{produkciós szabály} & Nincs megkötés \\
 \end{tabular}
 
-\subsection*{1. nyelvosztály}
+\SubSection*{1. nyelvosztály}
 
 \begin{tabular}{ll}
 \textbf{nyelvtan/nyelv} & Környezetfüggő \\
@@ -39,7 +39,7 @@ A generatív nyelvek osztályozása Noam Chomsky nyelvészhez köthető, aki az 
 Az 1. nyelvosztályt a környezetfüggő nyelvek osztályának nevezzük, ezt mutatja a produkciós szabály formája is.
 Az $\alpha A \beta \rightarrow \alpha \gamma \beta$, azaz a leírás szabálya a $A \rightarrow \gamma$, de ez csak az $\alpha \rightarrow \beta$ környezetben alkalmazható.
 
-\subsection*{2. nyelvosztály}
+\SubSection*{2. nyelvosztály}
 
 \begin{tabular}{ll}
 \textbf{nyelvtan/nyelv} & Környezetfüggetlen \\
@@ -51,7 +51,7 @@ Az $\alpha A \beta \rightarrow \alpha \gamma \beta$, azaz a leírás szabálya a
 
 A 2 nyelvosztályban található nyelvtanok szabály szerint az A -> $\gamma$, ahol a $\gamma$ tetszőleges jelsorozat, mely terminális és nemterminális szimbólumokat is tartalmazhat. Az A pedig egy itt is egy nemterminális szimbólum lesz.
 
-\subsection*{3. nyelvosztály}
+\SubSection*{3. nyelvosztály}
 
 \begin{tabular}{ll}
 \textbf{nyelvtan/nyelv} & Reguláris \\
@@ -63,7 +63,7 @@ A 2 nyelvosztályban található nyelvtanok szabály szerint az A -> $\gamma$, a
 
 A hierarchia 3. nyelvosztályába tehát olyan nyelvtanok tartoznak, melyek bal oldala mindig egy nemterminális szimbólum, a jobb oldala pedig vagy egy nemterminális szimbólum, vagy egy terminális és nemterminális szimbólum által alkotott sor.
 
-\subsection{Véges automaták és reguláris nyelvek}
+\SubSection{Véges automaták és reguláris nyelvek}
 
 Fontos szót ejteni a véges automatákról (\textit{Final State Machine}, FSM). A véges automaták olyan automaták, melyek meghatározott véges állapothalmaz, bemeneti ábécé, kezdő- és végállapot valamint átmeneti függvény megadása után egy rendszert képez. Ez felírható egy irányított gráffal, amelyben az egyes állapotok a gráf csúcspontjai. Mivel véges automatáról van szó, az automata az egyik állapotból egy input hatására egy másik állapotba kerül. Minden pillanatban pontosan egy adott állapot van érvényben.
 
@@ -72,7 +72,7 @@ A determinisztikus automaták esetében adott input és adott állapot esetében
 
 A keresztfordítás, és úgy általában a programozási nyelvek szempontjából azért érdemes a véges automatákkal foglalkoznunk, mert ezeknek a nyelvei tipikusan reguláris nyelvek, amelyek véges állapotú automatákkal reprezentálhatók.
 
-\section{Nyelvtanok definiálási módjai}
+\Section{Nyelvtanok definiálási módjai}
 
 Az előző szakaszokban az egyes nyelvtanok osztályozási módját, azok fő jellemzőit tekinthettük át.
 Most azt vizsgáljuk meg, hogy hogyan definiálhatunk egy konkrét reguláris nyelvet.
@@ -80,7 +80,7 @@ A programok leírásához hasonlóan ehhez is rendelkezésre állnak szöveges, 
 Ez nyilvánvalóan a véges automaták és a reguláris nyelvek közötti szoros kapcsolatnak tudható be.
 Reguláris nyelvek esetében a kibővített Backus-Naur formát (\textit{Extended Backus-Naur Form}, EBNF) a leginkább elterjedt leírási mód, míg ha véges állapotú automataként tekintünk a nyelvtanra, akkor például szintaxis diagram formájában is definiálhatjuk a nyelvtan. (Ez utóbbit szokták \textit{railroad} diagramna is nevezni.)
 
-\subsection{Kibővített Backus-Naur forma}
+\SubSection{Kibővített Backus-Naur forma}
 
 A Backus-Naur forma egy formális nyelvek leírására használható metanyelv, melyet John Backus hozott létre és mutatott be. Maga a metanyelv valójában szabályok halmaza, melyben terminális és nemterminális elemek találhatók meg adott összerendelésben, azaz kifejezésben melynek bal és jobb oldalán egy-egy elem áll általában \texttt{::=} vagy \texttt{:} jellel összekapcsolva \texttt{;}-vel lezárva a kifejezést.
 
@@ -116,11 +116,11 @@ math ::= integer ("+" | "-" | "*" | "/" ) integer
 \end{cpp}
 A fenti példában tehát a szabály olyan esetekre illeszkedik amikor két integer jelenik meg, viszont a közöttük lévő jel a \texttt{+}, a \texttt{-}, a \texttt{*} és a \texttt{/} bármelyike lehet.
 
-\subsection{Szintaxis diagramok}
+\SubSection{Szintaxis diagramok}
 
 A szintaxis diagramok a véges állapotú automaták leírásának egy, a nyelvek leírása szempontjából kedvezőbb leírási módját jelentik. Gyakran hivatkoznak rá \textit{railroad} diagramként is, mivel a gráf éleinek csatlakozási módja a sínekhez hasonlóan nyíl nélkül is képes jelezni azt, hogy mely irányba lehetséges átmenet, és mely irányba nem. A jelölési mód könnyen olvasható, külön formális definíciót nem igényel. A későbbiekben, a saját programozási nyelv definiálásánál majd láthatunk példát a használatára.
 
-\section{A feldolgozás lépései}
+\Section{A feldolgozás lépései}
 
 \Aref{fig:process}. ábrán láthatóak a fordítás főbb lépései.
 \begin{figure}
@@ -131,7 +131,7 @@ A szintaxis diagramok a véges állapotú automaták leírásának egy, a nyelve
 \end{figure}
 A következő szakaszokban ezen lépéseknek a részletes bemutatására kerül majd sor.
 
-\subsection{Tokenizálás}
+\SubSection{Tokenizálás}
 
 Az tokenizálás a fordítás első fő fázisa. A felhasználó által megadott programkód beolvasását követően a nyelvi feldolgozó azt tokenek sorozatára bontja.
 A token egy, a karakternél magasabb szintű logikai egységet jelöl.
@@ -157,7 +157,7 @@ A generátoroknak meg kell adni egy szintaktikai leírást, mely alapján a lexe
 
 A fellelhető generátorok közül azok használata tünt szerencsésebbnek, amelyek a reguláris kifejezések segítségével adják meg a feldolgozási elemeket. Ilyenek például az \textit{AnnoFlex}, \textit{JFlex} programok, ezekről részletesebben a szintaktikai elemzéssel foglalkozó fejezetben esik szó.
 
-\subsection{Nyelvi feldolgozás, parzolás}
+\SubSection{Nyelvi feldolgozás, parzolás}
 
 A tokenek sorozata átkerül a feldolgozás következő lépéseként a parserhez.
 A parzer és a tokenizer között a különbség elsősorban a feldolgozás absztrakciós szintjében van.
@@ -172,6 +172,6 @@ Ez elsősorban a generátor programok verzióinak egyeztetéséből, és a nem t
 
 A nyelvi feldolgozás eredményeképpen egy objektum-hierarchia jön létre.
 
-\subsection{Kód generálás}
+\SubSection{Kód generálás}
 
 A keresztfordítás utolsó lépése az, hogy az objektum-hierarchierarchiából ismét egy szöveges leírási mód jöjjön létre (már a cél programozási nyelven). A konvertálás tulajdonképpen abból áll, hogy a hierarchiában szereplő objektumok az adott programozási nyelvnek megfelelően tudják visszaadni magukat szöveges formában.
